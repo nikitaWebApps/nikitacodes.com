@@ -1,0 +1,36 @@
+---
+const date = new Date()
+	.toLocaleString('ru-RU', { year: 'numeric', month: 'long', localeMatcher: 'best fit' })
+	.replace('г.', '')
+---
+
+<footer class='container max-w-screen-lg px-4 sm:px-8 mx-auto mb-4'>
+	<div class='py-6 border-t border-slate-200'>
+		<h2 class='text-2xl mb-4'>Мои контакты</h2>
+		<div class='flex flex-row flex-wrap gap-2'>
+			<a
+				class='px-4 py-2 text-center rounded-full border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition'
+				href='https://t.me/n_golovlev'
+				target='_blank'>Telegram</a
+			>
+			<a
+				class='px-4 py-2 text-center rounded-full border border-red-600 text-red-600 hover:bg-red-600 hover:text-white transition'
+				href='mailto:nikitagolovlev.design@gmail.com'
+				target='_blank'>Email</a
+			>
+			<a
+				class='px-4 py-2 text-center rounded-full border border-sky-800 text-sky-800 hover:bg-sky-800 hover:text-white transition'
+				href='https://www.linkedin.com/in/nikita-golovlev-3b7673237'
+				target='_blank'>LinkedIn</a
+			>
+			<a
+				class='px-4 py-2 text-center rounded-full border border-gray-800 text-gray-800 hover:bg-gray-900 hover:text-white transition'
+				href='https://github.com/nikitaWebApps'
+				target='_blank'>GitHub</a
+			>
+		</div>
+	</div>
+	<p class='text-slate-400 text-sm lg:text-right'>Последнее обновление: <span class='capitalize'>{date}</span></p>
+</footer>
+
+<script></script>

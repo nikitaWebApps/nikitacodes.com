@@ -1,0 +1,49 @@
+---
+import Image from 'astro/components/Image.astro'
+import { getCollection } from 'astro:content'
+
+const casesQuery = await getCollection('cases')
+
+const cases = casesQuery.sort((a, b) => {
+	if (!a.data.priority && !b.data.priority) {
+		return 0
+	}
+	if (!a.data.priority) {
+		return 1
+	}
+	if (!b.data.priority) {
+		return -1
+	}
+	return a.data.priority - b.data.priority
+})
+
+const pathname = Astro.url.pathname.replaceAll('/', '')
+---
+
+<section
+	id='cases__front-page'
+	class={pathname == 'cases'
+		? 'container mx-auto px-4 sm:px-8 mt-28 lg:mt-32'
+		: 'container mx-auto px-4 sm:px-8 scroll-mt-24'}>
+	<h2 class={pathname == 'cases' ? 'text-3xl mb-6 lg:text-4xl' : 'text-2xl mb-6 lg:text-3xl'}>Портфолио</h2>
+	<div class='flex flex-col gap-8 lg:gap-16'>
+		{
+			cases.map(item => (
+				<div id={item.slug} class='group'>
+					<a href={`/cases/${item.slug}`}>
+						<div class='overflow-hidden mb-4'>
+							<Image
+								loading='lazy'
+								class='object-cover rounded-t-md w-full max-h-96 md:aspect-video aspect-photo group-hover:scale-110 transition duration-300'
+								src={item.data.cover}
+								alt={item.data.tabTitle ? item.data.tabTitle : ''}
+							/>
+						</div>
+						<p class='text-slate-500'>{item.data.role}</p>
+						<h3 class='text-xl group-hover:text-blue-600 transition duration-300'>{item.data.title}</h3>
+					</a>
+				</div>
+			))
+		}
+	</div>
+</section>

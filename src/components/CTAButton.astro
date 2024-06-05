@@ -1,0 +1,37 @@
+---
+interface Props {
+	link: string
+	type: 'primary' | 'secondary'
+	text: string
+	icon: boolean
+	target: '_blank' | '_self'
+}
+const { link, type, text, icon, target } = Astro.props
+---
+
+<a href={link} target={target} rel='nofollow'
+	><div
+		class:list={type == 'primary'
+			? 'bg-blue-600 hover:bg-blue-800 text-white'
+			: 'border border-blue-500 hover:bg-blue-100 text-blue-600'}
+		class='flex group flex-row text-nowrap justify-center gap-2 items-center px-6 py-2 text-center sm:max-w-max transition rounded'
+		>{text}
+		{
+			icon ? (
+				<span>
+					<svg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'>
+						<path
+							class={type == 'primary' ? 'stroke-white' : 'stroke-blue-500'}
+							d='M15.5055 9.19591V15.8034C15.507 16.055 15.4585 16.3044 15.3625 16.537C15.2666 16.7696 15.1253 16.9807 14.9469 17.1581C14.7684 17.3355 14.5564 17.4755 14.3232 17.57C14.0901 17.6645 13.8404 17.7115 13.5888 17.7084H4.20797C3.95547 17.7114 3.70492 17.6639 3.47106 17.5687C3.2372 17.4734 3.02476 17.3323 2.84625 17.1537C2.66773 16.9751 2.52674 16.7626 2.43158 16.5287C2.33642 16.2948 2.28901 16.0442 2.29214 15.7917V6.41091C2.28912 6.15838 2.33663 5.90779 2.43189 5.67388C2.52714 5.43998 2.66821 5.22749 2.84679 5.0489C3.02537 4.87032 3.23787 4.72925 3.47177 4.634C3.70568 4.53874 3.95627 4.49123 4.2088 4.49425H10.8155M17.708 2.29175L8.8988 11.1009M17.708 2.29175H13.303M17.708 2.29175V6.69675'
+							stroke-width='1.5'
+							stroke-linecap='round'
+							stroke-linejoin='round'
+						/>
+					</svg>
+				</span>
+			) : (
+				''
+			)
+		}
+	</div></a
+>
