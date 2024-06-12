@@ -7,6 +7,9 @@ import mdx from '@astrojs/mdx'
 export default defineConfig({
 	integrations: [vue(), tailwind(), mdx()],
 	prefetch: true,
+	redirects: {
+		'/': '/ru',
+	},
 	markdown: {
 		shikiConfig: {
 			// Add custom languages
