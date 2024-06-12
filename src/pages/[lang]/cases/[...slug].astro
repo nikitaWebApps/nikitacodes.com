@@ -9,9 +9,17 @@ import Image from 'astro/components/Image.astro'
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
 	const cases = await getCollection('cases')
+	let lang = ''
+	let corrSlug = ''
 	const paths = cases.map(item => {
-		const [lang, ...slug] = item.slug.split('/')
-		return { params: { lang, slug: slug.join('/') || undefined }, props: item }
+		if (item.slug.startsWith('en')) {
+			lang = 'en'
+			corrSlug = item.slug.replace('en/', '')
+		} else {
+			lang = 'ru'
+			corrSlug = item.slug
+		}
+		return { params: { lang, slug: corrSlug || undefined }, props: item }
 	})
 	return paths
 }
@@ -62,7 +70,7 @@ const currentLocale = Astro.currentLocale
 				target='_self'
 				text={currentLocale == 'ru' ? 'Все проекты' : 'All projects'}
 				type='secondary'
-				link={'/#cases__front-page'}
+				link={currentLocale == 'ru' ? '/#cases__front-page' : '/' + currentLocale + '/#cases__front-page'}
 				icon={false}
 			/>
 			<CTAButton

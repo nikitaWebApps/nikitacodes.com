@@ -1,5 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro'
+import MainPortfolio from '../components/mainPortfolio.astro'
+import RUhead from '../components/ru/RUhead.astro'
 ---
 
-<Layout indexHead={(<meta http-equiv='refresh' content='0; url=/' />)} />
+<Layout title='Никита Головлёв, frontend разработчик'>
+	<RUhead transition:persist />
+	<MainPortfolio />
+</Layout>

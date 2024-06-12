@@ -4,64 +4,60 @@ import { ref, onMounted, computed, watchEffect, watch } from 'vue'
 import { currentSiteLanguage } from '../langStore';
 import { useStore } from '@nanostores/vue';
 
-const pathname = ref()
-const scrollY = ref(0)
-const isMobile = ref()
 
 const props = defineProps(['currentLocale'])
-currentSiteLanguage.set(props.currentLocale)
+const pathname = ref()
+
 
 function isCurrentPath(object) {
 	if (pathname.value) {
-		return pathname.value == Object.values(object)[0]
+		return pathname.value == Object.values(object)[0].url
 	}
 }
 
-function setIsMobile() {
-	if (window.innerWidth > 1024) {
-		isMobile.value = false
-	} else {
-		isMobile.value = true
-	}
-}
+const paths = [
+	{
+		resume: {
+			en: 'Resume',
+			ru: "Резюме",
+			url: '/resume'
+		}
+	},
+	{
+		potfolio: {
+			en: 'Portfolio',
+			ru: "Портфолио",
+			url: '/#cases__front-page',
+		}
+	},
+]
 
-const paths = computed(() =>
-	[
-		{
-			resume: {
-				en: 'Resume',
-				ru: "Резюме",
-				url: currentSiteLanguage.get() + '/resume'
-			}
-		},
-		{
-			potfolio: {
-				en: 'Portfolio',
-				ru: "Портфолио",
-				url: currentSiteLanguage.get() + '/#cases__front-page',
-			}
-		},
-	]
-)
 const $currentSiteLanguage = useStore(currentSiteLanguage)
+currentSiteLanguage.set(props.currentLocale)
+const setLocaleUrl = (path) => {
+	return $currentSiteLanguage.value == 'ru' ? path : '/en' + path
+}
+
 function selectSiteLang() {
-	if (currentSiteLanguage.get() == 'ru') {
-		window.location.href = new String(window.location).replace('ru', 'en')
+	let newLocation
+	if (currentSiteLanguage.get() == 'ru' && window.location.pathname.includes('cases/')) {
+		newLocation = new String(window.location.pathname).replace('ru/', 'en/')
+		currentSiteLanguage.set('en')
+	} else if (currentSiteLanguage.get() == 'en' && window.location.pathname.includes('cases/')) {
+		newLocation = new String(window.location.pathname).replace('en/', 'ru/')
+		currentSiteLanguage.set('ru')
+	} else if (currentSiteLanguage.get() == 'en') {
+		newLocation = new String(window.location.pathname).replace('en/', '')
+		currentSiteLanguage.set('ru')
 	} else {
-		window.location.href = new String(window.location).replace('en', 'ru')
+		newLocation = '/en' + window.location.pathname
+		currentSiteLanguage.set('en')
 	}
+	window.location.assign(newLocation)
 }
 
 onMounted(() => {
-	pathname.value = window.location.pathname.replaceAll('/', '')
-	scrollY.value = window.scrollY
-	window.addEventListener('scroll', () => {
-		scrollY.value = window.scrollY
-	})
-	setIsMobile()
-	window.addEventListener('resize', () => {
-		setIsMobile()
-	})
+	pathname.value = window.location.pathname.replaceAll('/en', '')
 });
 
 </script>
@@ -72,7 +68,7 @@ onMounted(() => {
 		<nav
 			class="container max-w-screen-lg mx-auto h-12 flex flex-row justify-between items-center text-base">
 			<div class="">
-				<a :href="'/' + $currentSiteLanguage"
+				<a :href="setLocaleUrl('/')"
 					aria-label="Home Page"
 					class="transition duration-500 translate-x-0"><svg width="48" height="48"
 						viewBox="0 0 48 48" fill="none"
@@ -87,14 +83,14 @@ onMounted(() => {
 				<div class="flex flex-row items-center lg:gap-6 gap-4">
 					<a :class="isCurrentPath(path) ? 'text-blue-600 font-medium' : ''" v-for="(path, index) in paths"
 						:key="index"
-						:href='"/" + Object.values(path)[0].url'>{{ $currentSiteLanguage == 'ru' ?
+						:href="setLocaleUrl(Object.values(path)[0].url)">{{ $currentSiteLanguage == 'ru' ?
 							Object.values(path)[0].ru : Object.values(path)[0].en }}</a>
 				</div>
 				<select @change="selectSiteLang()"
 					class="border border-slate-300 rounded p-1 w-max">
 					<option :value="$currentSiteLanguage">{{ $currentSiteLanguage == 'ru' ? '🇷🇺' : '🇺🇸' }}</option>
-					<option :value="$currentSiteLanguage == 'ru' ? 'en' : 'ru'">
-						{{ $currentSiteLanguage == 'ru' ? '🇺🇸' : '🇷🇺' }}</option>
+					<option :value="$currentSiteLanguage == 'en' ? 'ru' : 'en'">
+						{{ $currentSiteLanguage == 'en' ? '🇷🇺' : '🇺🇸' }}</option>
 				</select>
 			</div>
 		</nav>
