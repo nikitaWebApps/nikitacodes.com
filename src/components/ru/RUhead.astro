@@ -1,6 +1,6 @@
 ---
 import Image from 'astro/components/Image.astro'
-import myPic from '../img/myPic_square.jpg'
+import myPic from '../../img/myPic_square.jpg'
 
 //Fix for netlify's trailing slash
 const pathName = Astro.url.pathname.replaceAll('/', '')
@@ -11,7 +11,7 @@ const pathName = Astro.url.pathname.replaceAll('/', '')
 	<Image class='w-36 rounded-full lg:w-56' src={myPic} alt={'Никита Головлёв, фронтенд-разработчик'} />
 	<div>
 		<p class='text-slate-500'>Привет! Меня зовут</p>
-		<h1 class='text-3xl lg:text-4xl text-slate-900 mb-3'>Никита Головлёв</h1>
+		<h1 class='text-3xl lg:text-5xl text-slate-900 mb-3'>Никита Головлёв</h1>
 		<p class='text-slate-900'
 			>Фронтенд-разработчик с экспертизой в UX/UI дизайне.<br />Я работаю c экосистемой Vue.js и Nuxt.</p
 		>

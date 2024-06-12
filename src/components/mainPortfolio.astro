@@ -4,6 +4,16 @@ import { getCollection } from 'astro:content'
 
 const casesQuery = await getCollection('cases')
 
+const currentLocale = Astro.currentLocale
+
+/* Content slug fix to keep site structure */
+function itemUrl(item: (typeof cases)[number]) {
+	const splittedSlug = item.slug.split('/')
+	splittedSlug.splice(1, 0, '/cases/')
+	splittedSlug.unshift('/')
+	return splittedSlug.join('')
+}
+
 const cases = casesQuery.sort((a, b) => {
 	if (!a.data.priority && !b.data.priority) {
 		return 0
@@ -16,7 +26,12 @@ const cases = casesQuery.sort((a, b) => {
 	}
 	return a.data.priority - b.data.priority
 })
-
+function filterLanguage(item: (typeof cases)[number]) {
+	if (currentLocale) {
+		return item.slug.startsWith(currentLocale)
+	}
+}
+let filteredCases = cases.filter(filterLanguage)
 const pathname = Astro.url.pathname.replaceAll('/', '')
 ---
 
@@ -25,12 +40,19 @@ const pathname = Astro.url.pathname.replaceAll('/', '')
 	class={pathname == 'cases'
 		? 'container mx-auto px-4 sm:px-8 mt-28 lg:mt-32'
 		: 'container mx-auto px-4 sm:px-8 scroll-mt-24'}>
-	<h2 class={pathname == 'cases' ? 'text-3xl mb-6 lg:text-4xl' : 'text-2xl mb-6 lg:text-3xl'}>Портфолио</h2>
+	{
+		currentLocale == 'ru' ? (
+			<h2 class={pathname == 'cases' ? 'text-3xl mb-6 lg:text-4xl' : 'text-2xl mb-6 lg:text-3xl'}>Портфолио</h2>
+		) : (
+			<h2 class={pathname == 'cases' ? 'text-3xl mb-6 lg:text-4xl' : 'text-2xl mb-6 lg:text-3xl'}>Portfolio</h2>
+		)
+	}
+
 	<div class='flex flex-col gap-8 lg:gap-16'>
 		{
-			cases.map(item => (
+			filteredCases.map(item => (
 				<div id={item.slug} class='group'>
-					<a href={`/cases/${item.slug}`}>
+					<a href={itemUrl(item)}>
 						<div class='overflow-hidden mb-4'>
 							<Image
 								loading='lazy'

@@ -7,7 +7,6 @@ import mdx from '@astrojs/mdx'
 export default defineConfig({
 	integrations: [vue(), tailwind(), mdx()],
 	prefetch: true,
-
 	markdown: {
 		shikiConfig: {
 			// Add custom languages
@@ -19,6 +18,13 @@ export default defineConfig({
 			// Add custom transformers: https://shiki.style/guide/transformers
 			// Find common transformers: https://shiki.style/packages/transformers
 			transformers: [],
+		},
+	},
+	i18n: {
+		defaultLocale: 'ru',
+		locales: ['en', 'ru'],
+		routing: {
+			prefixDefaultLocale: true,
 		},
 	},
 })

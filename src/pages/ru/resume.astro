@@ -1,0 +1,21 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import ResumeTabs from '../../components/resumeTabs.vue'
+import RUworkExpTab from '../../components/ru/RUworkExpTab.astro'
+import RUskillsTab from '../../components/ru/RUskillsTab.astro'
+import RUeducationTab from '../../components/ru/RUeducationTab.astro'
+import RUaboutTab from '../../components/ru/RUaboutTab.astro'
+import RUhead from '../../components/ru/RUhead.astro'
+---
+
+<Layout title="Резюме | Никита Головлёв, фронтенд-разработчик'">
+	<RUhead transition:persist />
+	<section>
+		<ResumeTabs client:load>
+			<RUworkExpTab slot='ru-work-exp-tab' />
+			<RUskillsTab slot='ru-skills-tab' />
+			<RUeducationTab slot='ru-education-tab' />
+			<RUaboutTab slot='ru-about-tab' />
+		</ResumeTabs>
+	</section></Layout
+>

@@ -1,12 +1,20 @@
 ---
-const date = new Date()
-	.toLocaleString('ru-RU', { year: 'numeric', month: 'long', localeMatcher: 'best fit' })
-	.replace('г.', '')
+const currentLocale = Astro.currentLocale
+let date
+if (currentLocale == 'ru') {
+	date = new Date()
+		.toLocaleString('ru-RU', { year: 'numeric', month: 'long', localeMatcher: 'best fit' })
+		.replace('г.', '')
+} else {
+	date = new Date()
+		.toLocaleString('en-EN', { year: 'numeric', month: 'long', localeMatcher: 'best fit' })
+		.replace('г.', '')
+}
 ---
 
 <footer class='container max-w-screen-lg px-4 sm:px-8 mx-auto mb-4'>
 	<div class='py-6 border-t border-slate-200'>
-		<h2 class='text-2xl mb-4'>Мои контакты</h2>
+		{currentLocale == 'ru' ? <h2 class='text-2xl mb-4'>Мои контакты</h2> : <h2 class='text-2xl mb-4'>My contacts</h2>}
 		<div class='flex flex-row flex-wrap gap-2'>
 			<a
 				class='px-4 py-2 text-center rounded-full border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition'
@@ -30,7 +38,19 @@ const date = new Date()
 			>
 		</div>
 	</div>
-	<p class='text-slate-400 text-sm lg:text-right'>Последнее обновление: <span class='capitalize'>{date}</span></p>
+	{
+		currentLocale == 'ru' ? (
+			<h2 class='text-2xl mb-4'>
+				<p class='text-slate-400 text-sm lg:text-right'>
+					Последнее обновление: <span class='capitalize'>{date}</span>
+				</p>
+			</h2>
+		) : (
+			<p class='text-slate-400 text-sm lg:text-right'>
+				Last updated: <span class='capitalize'>{date}</span>
+			</p>
+		)
+	}
 </footer>
 
 <script></script>

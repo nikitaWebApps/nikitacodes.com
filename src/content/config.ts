@@ -12,7 +12,7 @@ const blogposts = defineCollection({
 		}),
 })
 
-const project = defineCollection({
+const cases = defineCollection({
 	type: 'content',
 	schema: ({ image }) =>
 		z.object({
@@ -29,6 +29,6 @@ const project = defineCollection({
 //    This key should match your collection directory name in "src/content"
 export const collections = {
 	blogposts: blogposts,
-	cases: project,
+	cases: cases,
 }
 

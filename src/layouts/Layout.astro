@@ -1,16 +1,17 @@
 ---
-import { defineProps } from 'vue'
 import Header from '../components/Header.vue'
 import Footer from '../components/Footer.astro'
-
+import {getLangFromUrl} from '../i18n/utils'
+import { ViewTransitions } from 'astro:transitions'
 const { title } = Astro.props
 const isDev = import.meta.env.DEV
+const lang = getLangFromUrl(Astro.url)
 ---
 
-<html lang='en' class='font-body scroll-smooth'>
+<html lang={lang} class='font-body scroll-smooth'>
 	<head>
 		<meta charset='utf-8' />
-		<meta name='viewport' content='width=device-width, initial-scale=1' />
+		<meta name='viewport' content='width=device-width, initial-scale=1' />		
 		<link rel='icon' type='image/svg+xml' href='/favicon.png' />
 		<link rel='preconnect' href='https://fonts.googleapis.com' />
 		<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
@@ -41,18 +42,10 @@ const isDev = import.meta.env.DEV
 		
 	</head>
 	<body>
-		<Header client:load />
+		<Header client:load currentLocale={Astro.currentLocale} />
 		<main class='max-w-screen-lg mx-auto mb-16'>
 			<slot />
 		</main>
-		<Footer />
-		<script>
-			document.addEventListener('astro:page-load', () => {
-				const menuIcon = document.querySelector('#menu-icon')
-				menuIcon?.addEventListener('click', e => {
-					document.body.classList.toggle('overflow-hidden')
-				})
-			})
-		</script>
+		<Footer/>
 	</body></html
 >

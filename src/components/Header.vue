@@ -1,15 +1,15 @@
 <script setup>
 
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, watchEffect, watch } from 'vue'
+import { currentSiteLanguage } from '../langStore';
+import { useStore } from '@nanostores/vue';
 
 const pathname = ref()
 const scrollY = ref(0)
 const isMobile = ref()
-const paths = ref([
-	{ Резюме: 'resume' },
-	/* { Блог: 'blog' }, */
-	{ Портфолио: '#cases__front-page' },
-])
+
+const props = defineProps(['currentLocale'])
+currentSiteLanguage.set(props.currentLocale)
 
 function isCurrentPath(object) {
 	if (pathname.value) {
@@ -18,11 +18,37 @@ function isCurrentPath(object) {
 }
 
 function setIsMobile() {
-
 	if (window.innerWidth > 1024) {
 		isMobile.value = false
 	} else {
 		isMobile.value = true
+	}
+}
+
+const paths = computed(() =>
+	[
+		{
+			resume: {
+				en: 'Resume',
+				ru: "Резюме",
+				url: currentSiteLanguage.get() + '/resume'
+			}
+		},
+		{
+			potfolio: {
+				en: 'Portfolio',
+				ru: "Портфолио",
+				url: currentSiteLanguage.get() + '/#cases__front-page',
+			}
+		},
+	]
+)
+const $currentSiteLanguage = useStore(currentSiteLanguage)
+function selectSiteLang() {
+	if (currentSiteLanguage.get() == 'ru') {
+		window.location.href = new String(window.location).replace('ru', 'en')
+	} else {
+		window.location.href = new String(window.location).replace('en', 'ru')
 	}
 }
 
@@ -36,8 +62,8 @@ onMounted(() => {
 	window.addEventListener('resize', () => {
 		setIsMobile()
 	})
-
 });
+
 </script>
 
 <template>
@@ -46,8 +72,8 @@ onMounted(() => {
 		<nav
 			class="container max-w-screen-lg mx-auto h-12 flex flex-row justify-between items-center text-base">
 			<div class="">
-				<a href="/"
-					aria-label="Главная страница"
+				<a :href="'/' + $currentSiteLanguage"
+					aria-label="Home Page"
 					class="transition duration-500 translate-x-0"><svg width="48" height="48"
 						viewBox="0 0 48 48" fill="none"
 						xmlns="http://www.w3.org/2000/svg">
@@ -57,10 +83,19 @@ onMounted(() => {
 					</svg>
 				</a>
 			</div>
-			<div class="flex flex-row items-center lg:gap-6 gap-4">
-				<a :class="isCurrentPath(path) ? 'text-blue-600 font-medium' : ''" v-for="(path, index) in paths"
-					:key="index"
-					:href='"/" + Object.values(path).toString()'>{{ Object.keys(path).toString() }}</a>
+			<div class="flex flex-row gap-4">
+				<div class="flex flex-row items-center lg:gap-6 gap-4">
+					<a :class="isCurrentPath(path) ? 'text-blue-600 font-medium' : ''" v-for="(path, index) in paths"
+						:key="index"
+						:href='"/" + Object.values(path)[0].url'>{{ $currentSiteLanguage == 'ru' ?
+							Object.values(path)[0].ru : Object.values(path)[0].en }}</a>
+				</div>
+				<select @change="selectSiteLang()"
+					class="border border-slate-300 rounded p-1 w-max">
+					<option :value="$currentSiteLanguage">{{ $currentSiteLanguage == 'ru' ? '🇷🇺' : '🇺🇸' }}</option>
+					<option :value="$currentSiteLanguage == 'ru' ? 'en' : 'ru'">
+						{{ $currentSiteLanguage == 'ru' ? '🇺🇸' : '🇷🇺' }}</option>
+				</select>
 			</div>
 		</nav>
 	</header>

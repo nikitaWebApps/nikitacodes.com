@@ -1,0 +1,22 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import Head from '../../components/ru/RUhead.astro'
+import ResumeTabs from '../../components/resumeTabs.vue'
+import ENworkExpTab from '../../components/en/ENworkExpTab.astro'
+import ENskillsTab from '../../components/en/ENskillsTab.astro'
+import ENeducationTab from '../../components/en/ENeducationTab.astro'
+import ENaboutTab from '../../components/en/ENaboutTab.astro'
+import ENhead from '../../components/en/ENhead.astro'
+---
+
+<Layout title='Resume | Nikita Golovlev, frontend-developer'>
+	<ENhead transition:persist />
+	<section class='w-full'>
+		<ResumeTabs client:load>
+			<ENworkExpTab slot='en-work-exp-tab' />
+			<ENskillsTab slot='en-skills-tab' />
+			<ENeducationTab slot='en-education-tab' />
+			<ENaboutTab slot='en-about-tab' />
+		</ResumeTabs>
+	</section></Layout
+>

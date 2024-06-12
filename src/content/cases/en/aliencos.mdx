@@ -1,0 +1,55 @@
+---
+title: "Official website for a skincare cometics brand on WordPress"
+tabTitle: "Website for a skincare cometics brand"
+cover: '../../../img/thumbnails/case-aliencos.jpg'
+role: 'UX/UI Design, Frontend-development'
+priority: 3
+link: 'https://aliencos.ru'
+
+tech: [JavaScript, Sass, BEM, GSAP, Scroll Trigger, Figma]
+---
+import pic1 from '../../../img/aliencos-pic-1.png'
+import pic2 from '../../../img/aliencos-pic-2.png'
+import pic3 from '../../../img/aliencos-pic-3.jpg'
+import { Image } from 'astro:assets'
+
+
+## Task
+
+Develop and launch a website for a new skincare brand. The cosmetics are sold exclusively on marketplaces. Through the website, the company aims to build trust with customers, highlight the value of their products, and provide usage recommendations.
+
+## How I Worked on the Design
+
+I considered possible user interaction scenarios with the website and entry points. We approved the site structure, and I started selecting references for each page. I like to separate references into functional and visual categories: often, unattractive sites are user-friendly, and vice versa.
+
+<Image src={pic3} alt={''} />
+
+We decided to focus on product cards—instead of simple descriptions, I suggested creating small presentations with detailed explanations of key features and active ingredients.
+
+<Image src={pic1} alt={''} />
+
+I designed all the mockups in **Figma** in two versions: for desktop and mobile. To make changes easier and ensure a more consistent design, I created a custom UI kit using components and variants.
+
+## Technologies
+
+The CMS for the site is WordPress. This accelerated the development of the planned functionality: linking products and ingredients, and easy post addition.
+
+While laying out the pages, I used **Sass.** This allowed me to isolate reusable components: article cards, ingredient cards, etc. I adhered to the **BEM methodology** during the layout process, making it easier to work with styles.
+
+I wrote interactive elements in pure **JavaScript** and used the **GSAP** library for animations. To facilitate the addition of videos to the product gallery, I explored the YouTube Player API.
+
+For ongoing project support and the addition of new pages, I set up auto-deployment from a private repository using **GitHub Actions.**
+
+## What I Learned
+
+**WordPress REST API:** I wrote several custom REST endpoints, reducing the data transfer volume for some pages by three times compared to the standard API.
+
+**GSAP and Scroll Trigger:** Despite its relatively small size, the library helped create scroll-driven animations more quickly and efficiently.
+
+
+
+
+
+
+
+
