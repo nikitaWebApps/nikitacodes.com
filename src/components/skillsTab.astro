@@ -1,4 +1,6 @@
 ---
+import useIsLangRu from '../composables/useIsLangRu'
+const isLangRu = useIsLangRu(Astro.props.lang)
 const mySkills: string[] = [
 	'JavaScript',
 	'TypeScript',
@@ -25,7 +27,7 @@ const mySkills: string[] = [
 ---
 
 <section class='container'>
-	<h2 class='hidden lg:block mb-6 text-3xl'>Навыки</h2>
+	<h2 class='hidden lg:block mb-6 text-3xl'>{isLangRu ? 'Навыки' : 'Skills'}</h2>
 	<div class='flex flex-col gap-8'>
 		<div>
 			<ul class='flex flex-row gap-3 flex-wrap'>
@@ -37,10 +39,14 @@ const mySkills: string[] = [
 			</ul>
 		</div>
 		<div>
-			<h3 class='text-xl text-slate-900 mb-4'>Иностранные языки</h3>
+			<h3 class='text-xl text-slate-900 mb-4'>{isLangRu ? 'Иностранные языки' : 'Languages'}</h3>
 			<ul class='flex flex-row gap-3 flex-wrap'>
-				<li class='text-center text-sm px-3 py-2 bg-blue-50 rounded text-slate-900'>Английский язык — B2</li>
-				<li class='text-center text-sm px-3 py-2 bg-blue-50 rounded text-slate-900'>Немецкий язык — B2</li>
+				<li class='text-center text-sm px-3 py-2 bg-blue-50 rounded text-slate-900'
+					>{isLangRu ? 'Английский язык — B2' : 'English — B2'}</li
+				>
+				<li class='text-center text-sm px-3 py-2 bg-blue-50 rounded text-slate-900'>
+					{isLangRu ? 'Немецкий язык — B2' : 'German — B2'}</li
+				>
 			</ul>
 		</div>
 	</div>

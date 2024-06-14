@@ -1,21 +1,22 @@
 ---
 import Layout from '../layouts/Layout.astro'
 import ResumeTabs from '../components/resumeTabs.vue'
-import RUworkExpTab from '../components/ru/RUworkExpTab.astro'
-import RUskillsTab from '../components/ru/RUskillsTab.astro'
-import RUeducationTab from '../components/ru/RUeducationTab.astro'
-import RUaboutTab from '../components/ru/RUaboutTab.astro'
-import RUhead from '../components/ru/RUhead.astro'
+import AboutTab from '../components/aboutTab.astro'
+import EducationTab from '../components/educationTab.astro'
+import Head from '../components/Head.astro'
+import SkillsTab from '../components/skillsTab.astro'
+import WorkExpTab from '../components/workExpTab.astro'
+const currentLang = Astro.currentLocale as 'ru' | 'en'
 ---
 
 <Layout title="Резюме | Никита Головлёв, фронтенд-разработчик'">
-	<RUhead transition:persist />
+	<Head lang={currentLang} transition:persist />
 	<section>
 		<ResumeTabs client:load>
-			<RUworkExpTab slot='ru-work-exp-tab' />
-			<RUskillsTab slot='ru-skills-tab' />
-			<RUeducationTab slot='ru-education-tab' />
-			<RUaboutTab slot='ru-about-tab' />
+			<WorkExpTab lang={currentLang} slot='work-exp-tab' />
+			<SkillsTab lang={currentLang} slot='skills-tab' />
+			<EducationTab lang={currentLang} slot='education-tab' />
+			<AboutTab lang={currentLang} slot='about-tab' />
 		</ResumeTabs>
 	</section></Layout
 >

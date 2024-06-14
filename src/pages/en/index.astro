@@ -1,10 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro'
 import MainPortfolio from '../../components/mainPortfolio.astro'
-import ENhead from '../../components/en/ENhead.astro'
+import Head from '../../components/Head.astro'
+const currentLang = Astro.currentLocale as 'ru' | 'en'
 ---
 
 <Layout title='Nikita Golovlev, frontend-developer'>
-	<ENhead transition:persist />
+	<Head lang={currentLang} transition:persist />
 	<MainPortfolio />
 </Layout>

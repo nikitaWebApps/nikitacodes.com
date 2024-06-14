@@ -2,7 +2,9 @@
 import Image from 'astro/components/Image.astro'
 import { getCollection } from 'astro:content'
 
-const currentSiteLanguage = Astro.currentLocale
+import useIsLangRu from '../composables/useIsLangRu'
+const isLangRu = useIsLangRu(Astro.currentLocale as 'ru' | 'en')
+const currentSiteLanguage = Astro.currentLocale as 'ru' | 'en'
 const casesQuery = await getCollection('cases')
 
 /* Content slug fix to keep site structure */
@@ -23,11 +25,12 @@ const cases = casesQuery.sort((a, b) => {
 	return a.data.priority - b.data.priority
 })
 function filterLanguage(item: (typeof cases)[number]) {
-	if (currentSiteLanguage == 'en') {
-		return item.slug.startsWith(currentSiteLanguage)
+	if (isLangRu) {
+		return !item.slug.startsWith('en')
 	}
-	return !item.slug.startsWith('en')
+	return item.slug.startsWith(currentSiteLanguage)
 }
+
 let filteredCases = cases.filter(filterLanguage)
 const pathname = Astro.url.pathname.replaceAll('/', '')
 ---

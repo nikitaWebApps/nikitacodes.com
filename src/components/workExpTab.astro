@@ -1,0 +1,68 @@
+---
+import useIsLangRu from '../composables/useIsLangRu'
+const isLangRu = useIsLangRu(Astro.props.lang)
+const lang = Astro.props.lang as 'ru' | 'en'
+const myWorkExp = {
+	ru: [
+		{
+			position: 'Frontend-разработчик',
+			company: 'Фармацевтикал Косметик',
+			date: 'апрель 2023 — н.в',
+			resp: [
+				'Адаптивная и кроссбраузерная вёрстка с использованием <strong>CSS, Sass, Tailwind</strong>',
+				'Разработка сайтов и веб-приложений на <strong>JavaScript/TypeScript, Vue и Nuxt</strong>',
+				'UX/UI дизайн лендинговых страниц, интернет-магазинов и приложений в Figma',
+				'Написание кастомных тем для Wordpress на PHP',
+				'Работа в команде с PM, маркетологом и SMM-менеджером',
+			],
+		},
+		{
+			position: 'UX/UI дизайнер',
+			company: 'Freelance',
+			date: 'февраль 2023 — апрель 2023',
+			resp: ['Разработка дизайна лендинг-страницы для SaaS продукта', 'Дизайн и вёрстка интернет-магазина'],
+		},
+	],
+	en: [
+		{
+			position: 'Frontend-developer',
+			company: 'Pharmaceutical Cosmetic LLC',
+			date: 'Apr 2023 — present',
+			resp: [
+				'Responsive and cross-browser layout using <strong>CSS, Sass, Tailwind CSS</strong>',
+				'Development of websites and web applications using <strong>JavaScript/TypeScript, Vue, and Nuxt</strong>',
+				'UX/UI design of landing pages, online stores, and applications in Figma',
+				'Writing custom themes for WordPress in PHP',
+				'Worked in team with PM, marketer, and SMM manager',
+			],
+		},
+		{
+			position: 'UX/UI Designer',
+			company: 'Freelance',
+			date: 'Feb 2023 — Apr 2023',
+			resp: ['Developed the landing page design for the SaaS product', 'Designed and built an online store'],
+		},
+	],
+}
+---
+
+<section class='container lg:p-6 lg:border-2 lg:rounded-lg border-blue-200'>
+	<h2 class='hidden lg:block mb-6 text-3xl'>{isLangRu ? `Опыт работы` : `Work experience`}</h2>
+	<div class='flex flex-col gap-8'>
+		{
+			myWorkExp[lang].map(workItem => (
+				<>
+					<div class=''>
+						<h3 class='text-xl text-slate-900'>{workItem.position}</h3>
+						<p class='text-slate-500 mb-4 text-sm lg:text-base'>{workItem.company + ' • ' + workItem.date}</p>
+						<ul class='list-disc pl-4 flex flex-col gap-2'>
+							{workItem.resp.map(respItem => (
+								<li set:html={respItem} />
+							))}
+						</ul>
+					</div>
+				</>
+			))
+		}
+	</div>
+</section>
