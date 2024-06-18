@@ -88,9 +88,9 @@ onMounted(() => {
 				</div>
 				<select @change="selectSiteLang()"
 					class="border border-slate-300 rounded p-1 w-max">
-					<option :value="$currentSiteLanguage">{{ $currentSiteLanguage == 'ru' ? '🇷🇺' : '🇺🇸' }}</option>
+					<option :value="$currentSiteLanguage">{{ $currentSiteLanguage == 'ru' ? 'RU' : 'EN' }}</option>
 					<option :value="$currentSiteLanguage == 'en' ? 'ru' : 'en'">
-						{{ $currentSiteLanguage == 'en' ? '🇷🇺' : '🇺🇸' }}</option>
+						{{ $currentSiteLanguage == 'en' ? 'RU' : 'EN' }}</option>
 				</select>
 			</div>
 		</nav>
