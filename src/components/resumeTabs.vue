@@ -43,7 +43,7 @@ function handleTabClick(tabIndex: number, event: Event) {
 
 <template>
     <nav v-if="screenWidth! < 1024"
-        class='flex flex-row gap-3 px-4 sm:px-8 overflow-auto snap-x snap-proximity mb-6'>
+        class='flex flex-row gap-3 overflow-auto snap-x snap-proximity mb-6'>
         <button v-for="(tab, index) in tabs[$currentSiteLanguage]"
             :class="activeTab[tab] ? ['transition-colors duration-500 text-blue-600 border-blue-600 border-b-2'] : [' border-slate-500 text-slate-500']"
             :data-tab="index + 1"
@@ -52,7 +52,7 @@ function handleTabClick(tabIndex: number, event: Event) {
             @click="handleTabClick(index, $event)"
             :key="tab">{{ tab }}</button>
     </nav>
-    <div :class="screenWidth! >= 1024 ? ['grid grid-cols-2 gap-x-8 gap-y-16'] : ''" class="px-4 sm:px-8">
+    <div :class="screenWidth! >= 1024 ? ['grid grid-cols-2 gap-x-8 gap-y-16'] : ''">
         <slot v-if="activeTab[tabs[$currentSiteLanguage][0]] || screenWidth >= 1024" name="work-exp-tab"> </slot>
         <slot v-if="activeTab[tabs[$currentSiteLanguage][1]] || screenWidth >= 1024" name="skills-tab"> </slot>
         <slot v-if="activeTab[tabs[$currentSiteLanguage][2]] || screenWidth >= 1024" name="education-tab"> </slot>

@@ -54,6 +54,7 @@ const currentLocale = Astro.currentLocale
 					}
 				</div>
 				<CTAButton
+					linkClass='w-full'
 					target='_blank'
 					text={currentLocale == 'ru' ? 'Посмотреть сайт' : 'Go to website'}
 					type='secondary'
@@ -67,6 +68,7 @@ const currentLocale = Astro.currentLocale
 		</Prose>
 		<div class='flex flex-row gap-2 lg:gap-6 mt-8 flex-wrap'>
 			<CTAButton
+				linkClass='max-sm:flex-grow'
 				target='_self'
 				text={currentLocale == 'ru' ? 'Все проекты' : 'All projects'}
 				type='secondary'
@@ -74,6 +76,7 @@ const currentLocale = Astro.currentLocale
 				icon={false}
 			/>
 			<CTAButton
+				linkClass='max-sm:flex-grow'
 				target='_blank'
 				text={currentLocale == 'ru' ? 'Посмотреть сайт' : 'Go to website'}
 				type='primary'
