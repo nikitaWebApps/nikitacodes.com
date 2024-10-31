@@ -8,20 +8,20 @@ import Image from 'astro/components/Image.astro'
 
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
-	const cases = await getCollection('cases')
-	let lang = ''
-	let corrSlug = ''
-	const paths = cases.map(item => {
-		if (item.slug.startsWith('en')) {
-			lang = 'en'
-			corrSlug = item.slug.replace('en/', '')
-		} else {
-			lang = 'ru'
-			corrSlug = item.slug
-		}
-		return { params: { lang, slug: corrSlug || undefined }, props: item }
-	})
-	return paths
+  const cases = await getCollection('cases')
+  let lang = ''
+  let corrSlug = ''
+  const paths = cases.map(item => {
+    if (item.slug.startsWith('en')) {
+      lang = 'en'
+      corrSlug = item.slug.replace('en/', '')
+    } else {
+      lang = 'ru'
+      corrSlug = item.slug
+    }
+    return { params: { lang, slug: corrSlug || undefined }, props: item }
+  })
+  return paths
 }
 
 // 2. For your template, you can get the entry directly from the prop
@@ -33,64 +33,63 @@ const currentLocale = Astro.currentLocale
 ---
 
 <Layout title={item.data.tabTitle}>
-	<section class='container mt-24 max-w-screen-md mx-auto p-4 md:p-8'>
-		<div class='mx-auto mb-12'>
-			<Image class={'mb-6'} src={item.data.cover} alt={''} />
-			<h1 class='text-3xl lg:text-4xl text-slate-800 mb-4'>{item.data.title}</h1>
-			<div class='flex flex-row items-center flex-wrap gap-6 mb-6'>
-				<div class='flex
+  <section class='container mt-24 max-w-screen-xl mx-auto p-4 md:p-8'>
+    <div class='mx-auto mb-12'>
+      <Image class={'mb-6'} src={item.data.cover} alt={''} />
+      <h1 class='text-3xl lg:text-4xl text-slate-800 mb-4 lg:leading-snug'>{item.data.title}</h1>
+      <div class='flex flex-row flex-wrap items-center gap-6 mb-6'>
+        <div class='flex
 				flex-row
 				flex-wrap
 				gap-2
-				
-				text-blue-800'
-					>{
-						tech.map((techItem: {}, index: number) => (
-							<>
-								<p class=''>{techItem}</p>
-								{index != tech.length - 1 ? <span>•</span> : ''}
-							</>
-						))
-					}
-				</div>
-				<CTAButton
-					linkClass='w-full'
-					target='_blank'
-					text={currentLocale == 'ru' ? 'Посмотреть сайт' : 'Go to website'}
-					type='secondary'
-					link={item.data.link}
-					icon={true}
-				/>
-			</div>
-		</div>
-		<Prose itemLink={item.data.link}>
-			<Content />
-		</Prose>
-		<div class='flex flex-row gap-2 lg:gap-6 mt-8 flex-wrap'>
-			<CTAButton
-				linkClass='max-sm:flex-grow'
-				target='_self'
-				text={currentLocale == 'ru' ? 'Все проекты' : 'All projects'}
-				type='secondary'
-				link={currentLocale == 'ru' ? '/#cases__front-page' : '/' + currentLocale + '/#cases__front-page'}
-				icon={false}
-			/>
-			<CTAButton
-				linkClass='max-sm:flex-grow'
-				target='_blank'
-				text={currentLocale == 'ru' ? 'Посмотреть сайт' : 'Go to website'}
-				type='primary'
-				link={item.data.link}
-				icon={true}
-			/>
-		</div>
-	</section>
+				text-blue-800'>
+          {
+            tech.map((techItem: {}, index: number) => (
+              <>
+                <p class=''>{techItem}</p>
+                {index != tech.length - 1 ? <span>•</span> : ''}
+              </>
+            ))
+          }
+        </div>
+        <CTAButton
+          linkClass='w-max'
+          target='_blank'
+          text={currentLocale == 'ru' ? 'Посмотреть сайт' : 'Go to website'}
+          type='secondary'
+          link={item.data.link}
+          icon={true}
+        />
+      </div>
+    </div>
+    <Prose itemLink={item.data.link}>
+      <Content />
+    </Prose>
+    <div class='flex flex-row gap-2 lg:gap-6 mt-8 flex-wrap'>
+      <CTAButton
+        linkClass='max-sm:flex-grow'
+        target='_self'
+        text={currentLocale == 'ru' ? 'Все проекты' : 'All projects'}
+        type='secondary'
+        link={currentLocale == 'ru' ? '/#cases__front-page' : '/' + currentLocale + '/#cases__front-page'}
+        icon={false}
+      />
+      <CTAButton
+        linkClass='max-sm:flex-grow'
+        target='_blank'
+        text={currentLocale == 'ru' ? 'Посмотреть сайт' : 'Go to website'}
+        type='primary'
+        link={item.data.link}
+        icon={true}
+      />
+    </div>
+  </section>
 </Layout>
 
 <script>
-	const prose = document.querySelector('.prose')
-	prose?.querySelectorAll('a:not(.all-cases)').forEach(link => {
-		link.setAttribute('target', '_blank')
-		link.setAttribute('rel', 'nofollow')
-	})
+  const prose = document.querySelector('.prose')
+  prose?.querySelectorAll('a:not(.all-cases)').forEach(link => {
+    link.setAttribute('target', '_blank')
+    link.setAttribute('rel', 'nofollow')
+  })
 </script>

@@ -8,13 +8,6 @@ import { useStore } from '@nanostores/vue';
 const props = defineProps(['currentLocale'])
 const pathname = ref()
 
-
-function isCurrentPath(object) {
-	if (pathname.value) {
-		return pathname.value == Object.values(object)[0].url
-	}
-}
-
 const paths = [
 	{
 		resume: {
@@ -64,13 +57,14 @@ onMounted(() => {
 
 <template>
 	<header
-		class="bg-white grid grid-rows-1 max-h-screen fixed w-full top-0 z-10 overflow-hidden py-2 px-4 md:px-8 border-b border-slate-200">
+		class="bg-white grid grid-rows-1 max-h-screen fixed w-full top-0 z-10 overflow-hidden border-b border-slate-200">
 		<nav
-			class="container max-w-screen-lg mx-auto h-12 flex flex-row justify-between items-center text-base">
-			<div class="">
+			class="container max-w-screen-lg mx-auto py-2 px-4 md:px-8 flex flex-row justify-between items-center text-base">
+			<div class="relative -left-3">
 				<a :href="setLocaleUrl('/')"
 					aria-label="Home Page"
-					class="transition duration-500 translate-x-0"><svg width="48" height="48"
+					class="transition duration-500 translate-x-0">
+					<svg width="48" height="48"
 						viewBox="0 0 48 48" fill="none"
 						xmlns="http://www.w3.org/2000/svg">
 						<path class="fill-slate-900"
@@ -79,10 +73,11 @@ onMounted(() => {
 					</svg>
 				</a>
 			</div>
-			<div class="flex flex-row gap-4">
-				<div class="flex flex-row items-center lg:gap-6 gap-4">
-					<a :class="isCurrentPath(path) ? 'text-blue-600 font-medium' : ''" v-for="(path, index) in paths"
+			<div class="flex flex-row gap-2">
+				<div class="flex flex-row items-center lg:gap-4 gap-2">
+					<a v-for="(path, index) in paths"
 						:key="index"
+						class="text-sm md:text-base"
 						:href="setLocaleUrl(Object.values(path)[0].url)">{{ $currentSiteLanguage == 'ru' ?
 							Object.values(path)[0].ru : Object.values(path)[0].en }}</a>
 				</div>
