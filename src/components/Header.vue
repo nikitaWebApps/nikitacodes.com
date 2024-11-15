@@ -80,13 +80,14 @@ onMounted(() => {
 						class="text-sm md:text-base"
 						:href="setLocaleUrl(Object.values(path)[0].url)">{{ $currentSiteLanguage == 'ru' ?
 							Object.values(path)[0].ru : Object.values(path)[0].en }}</a>
+					<select @change="selectSiteLang()"
+						class="border border-slate-300 rounded p-1 w-max">
+						<option :value="$currentSiteLanguage">{{ $currentSiteLanguage == 'ru' ? 'RU' : 'EN' }}</option>
+						<option :value="$currentSiteLanguage == 'en' ? 'ru' : 'en'">
+							{{ $currentSiteLanguage == 'en' ? 'RU' : 'EN' }}</option>
+					</select>
 				</div>
-				<select @change="selectSiteLang()"
-					class="border border-slate-300 rounded p-1 w-max">
-					<option :value="$currentSiteLanguage">{{ $currentSiteLanguage == 'ru' ? 'RU' : 'EN' }}</option>
-					<option :value="$currentSiteLanguage == 'en' ? 'ru' : 'en'">
-						{{ $currentSiteLanguage == 'en' ? 'RU' : 'EN' }}</option>
-				</select>
+
 			</div>
 		</nav>
 	</header>
