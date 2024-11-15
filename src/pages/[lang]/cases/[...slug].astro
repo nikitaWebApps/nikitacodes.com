@@ -33,7 +33,7 @@ const currentLocale = Astro.currentLocale
 ---
 
 <Layout title={item.data.tabTitle}>
-  <section class='container mt-24 max-w-screen-xl mx-auto p-4 md:p-8'>
+  <section class='mt-24 max-w-screen-xl mx-auto p-4 md:p-8'>
     <div class='mx-auto mb-12'>
       <Image class={'mb-6'} src={item.data.cover} alt={''} />
       <h1 class='text-3xl lg:text-4xl text-slate-800 mb-4 lg:leading-snug'>{item.data.title}</h1>
@@ -64,28 +64,27 @@ const currentLocale = Astro.currentLocale
     </div>
     <Prose itemLink={item.data.link}>
       <Content />
+      <div class='flex flex-row gap-2 lg:gap-6 mt-8 flex-wrap'>
+        <CTAButton
+          linkClass='max-sm:flex-grow'
+          target='_self'
+          text={currentLocale == 'ru' ? 'Все проекты' : 'All projects'}
+          type='secondary'
+          link={currentLocale == 'ru' ? '/#cases__front-page' : '/' + currentLocale + '/#cases__front-page'}
+          icon={false}
+        />
+        <CTAButton
+          linkClass='max-sm:flex-grow'
+          target='_blank'
+          text={currentLocale == 'ru' ? 'Посмотреть сайт' : 'Go to website'}
+          type='primary'
+          link={item.data.link}
+          icon={true}
+        />
+      </div>
     </Prose>
-    <div class='flex flex-row gap-2 lg:gap-6 mt-8 flex-wrap'>
-      <CTAButton
-        linkClass='max-sm:flex-grow'
-        target='_self'
-        text={currentLocale == 'ru' ? 'Все проекты' : 'All projects'}
-        type='secondary'
-        link={currentLocale == 'ru' ? '/#cases__front-page' : '/' + currentLocale + '/#cases__front-page'}
-        icon={false}
-      />
-      <CTAButton
-        linkClass='max-sm:flex-grow'
-        target='_blank'
-        text={currentLocale == 'ru' ? 'Посмотреть сайт' : 'Go to website'}
-        type='primary'
-        link={item.data.link}
-        icon={true}
-      />
-    </div>
   </section>
 </Layout>
-
 <script>
   const prose = document.querySelector('.prose')
   prose?.querySelectorAll('a:not(.all-cases)').forEach(link => {

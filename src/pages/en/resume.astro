@@ -11,13 +11,11 @@ const currentLang = Astro.currentLocale as 'en' | 'ru'
 ---
 
 <Layout title='Resume | Nikita Golovlev, frontend-developer'>
-	<Head lang={currentLang} />
-	<section class='w-full'>
-		<ResumeTabs client:load>
-			<WorkExpTab lang={currentLang} slot='work-exp-tab' />
-			<SkillsTab lang={currentLang} slot='skills-tab' />
-			<EducationTab lang={currentLang} slot='education-tab' />
-			<AboutTab lang={currentLang} slot='about-tab' />
-		</ResumeTabs>
-	</section></Layout
->
+  <Head lang={currentLang} />
+  <ResumeTabs client:load>
+    <WorkExpTab lang={currentLang} slot='work-exp-tab' />
+    <SkillsTab lang={currentLang} slot='skills-tab' />
+    <EducationTab lang={currentLang} slot='education-tab' />
+    <AboutTab lang={currentLang} slot='about-tab' />
+  </ResumeTabs>
+</Layout>

@@ -9,8 +9,7 @@ const isLangRu = useIsLangRu(Astro.props.lang)
 const isPathResume = Astro.url.pathname.includes('resume')
 ---
 
-<section
-  class='container px-4 mx-auto sm:px-8 mt-28 lg:mt-32 mb-12 md:mb-16 flex flex-row flex-wrap gap-6 items-center'>
+<section class='px-4 mx-auto sm:px-8 mt-28 lg:mt-32 mb-12 md:mb-16 flex flex-row flex-wrap gap-6 items-center'>
   <Image
     class='w-36 rounded-full lg:w-56'
     src={myPic}
