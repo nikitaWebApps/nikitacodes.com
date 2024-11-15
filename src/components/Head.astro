@@ -10,67 +10,67 @@ const isPathResume = Astro.url.pathname.includes('resume')
 ---
 
 <section
-	class='container px-4 mx-auto sm:px-8 mt-28 lg:mt-32 mb-12 md:mb-16 flex flex-row flex-wrap gap-6 items-center'>
-	<Image
-		class='w-36 rounded-full lg:w-56'
-		src={myPic}
-		alt={isLangRu ? 'Никита Головлёв, фронтенд-разработчик' : 'Nikita Golovlev, Frontend-developer'}
-	/>
-	<div>
-		<p class='text-slate-500'>
-			{isLangRu ? 'Привет! Меня зовут' : 'Hello! My name is'}
-		</p>
-		<h1 class='text-3xl lg:text-5xl text-slate-900 mb-3'>{isLangRu ? 'Никита Головлёв' : 'Nikita Golovlev'}</h1>
-		<p
-			class='text-slate-900'
-			set:html={isLangRu
-				? 'Фронтенд-разработчик с экспертизой в UX/UI дизайне.<br>Я работаю c экосистемой Vue.js и Nuxt.'
-				: 'Frontend-developer with expertise in UX/UI design.<br>I work with the Vue.js and Nuxt ecosystem.'}
-		/>
-		<div class='grid grid-cols-2 w-full gap-x-2 mt-6 animate-slideDown'>
-			{
-				isPathResume ? (
-					isLangRu ? (
-						<>
-							<div class='flex flex-col w-full'>
-								<a
-									class='flex flex-row items-center justify-center text-center max-w-full bg-hh-red hover:bg-red-700 transition py-2 px-4 text-white rounded'
-									target='_blank'
-									href='https://hh.ru/applicant/resumes/view?resume=d6ff65adff0bb6f7260039ed1f4c4465385443'>
-									Резюме на hh.ru
-								</a>
-							</div>
-							<a
-								class='flex flex-row grow items-center justify-center border sm:max-w-full text-center rounded border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition py-2 px-4 max-h-min'
-								target='_blank'
-								href='/RU_Nikita_Golovlev_Frontend_Resume.pdf'>
-								<p class='w-full'>Скачать PDF</p>
-							</a>
-							<p class='mt-2 row-start-2 text-xs text-gray-500 w-max'>Требуется авторизация</p>
-						</>
-					) : (
-						<a
-							class='flex flex-row items-center justify-center border max-w-max sm:max-w-full text-center rounded border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition py-2 px-4 max-h-min'
-							target='_blank'
-							href='/EN_Nikita_Golovlev_Frontend_Resume.pdf'>
-							Download PDF
-						</a>
-					)
-				) : (
-					<>
-						<a
-							class='flex flex-row items-center justify-center border grow w-full text-center rounded bg-hh-red hover:bg-red-700 text-white transition py-2 px-4'
-							href={isLangRu ? '/resume' : '/en/resume'}>
-							{isLangRu ? 'Посмотреть резюме' : 'Check my resume'}
-						</a>
-						<a
-							class='flex flex-row items-center justify-center border grow w-full text-center rounded border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition py-2 px-4'
-							href='#cases__front-page'>
-							{isLangRu ? 'Перейти к портфолио' : 'Go to portfolio'}
-						</a>
-					</>
-				)
-			}
-		</div>
-	</div>
+  class='container px-4 mx-auto sm:px-8 mt-28 lg:mt-32 mb-12 md:mb-16 flex flex-row flex-wrap gap-6 items-center'>
+  <Image
+    class='w-36 rounded-full lg:w-56'
+    src={myPic}
+    alt={isLangRu ? 'Никита Головлёв, фронтенд-разработчик' : 'Nikita Golovlev, Frontend-developer'}
+  />
+  <div>
+    <p class='text-slate-500'>
+      {isLangRu ? 'Привет! Меня зовут' : 'Hello! My name is'}
+    </p>
+    <h1 class='text-3xl lg:text-5xl text-slate-900 mb-3'>{isLangRu ? 'Никита Головлёв' : 'Nikita Golovlev'}</h1>
+    <p
+      class='text-slate-900'
+      set:html={isLangRu
+        ? 'Фронтенд-разработчик с экспертизой в UX/UI дизайне.<br>Я работаю c экосистемой Vue.js и Nuxt.'
+        : 'Frontend-developer with expertise in UX/UI design.<br>I work with the Vue.js and Nuxt ecosystem.'}
+    />
+    <div class='grid grid-cols-2 w-full gap-x-2 mt-6 animate-slideDown'>
+      {
+        isPathResume ? (
+          isLangRu ? (
+            <>
+              <div class='flex flex-col w-full'>
+                <a
+                  class='flex flex-row items-center justify-center text-center max-w-full bg-hh-red hover:bg-red-700 transition py-2 px-4 text-white rounded'
+                  target='_blank'
+                  href='https://hh.ru/applicant/resumes/view?resume=d6ff65adff0bb6f7260039ed1f4c4465385443'>
+                  Резюме на hh.ru
+                </a>
+              </div>
+              <a
+                class='flex flex-row grow items-center justify-center border sm:max-w-full text-center rounded border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition py-2 px-4 max-h-min'
+                target='_blank'
+                href='/Никита_Головлев_Frontend-разработчик.pdf'>
+                <p class='w-full'>Открыть PDF</p>
+              </a>
+              <p class='mt-2 row-start-2 text-xs text-gray-500 w-max'>Требуется авторизация</p>
+            </>
+          ) : (
+            <a
+              class='flex flex-row items-center justify-center border max-w-max sm:max-w-full text-center rounded border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition py-2 px-4 max-h-min'
+              target='_blank'
+              href='/Nikita_Golovlev_Front-End_Developer.pdf'>
+              Open PDF
+            </a>
+          )
+        ) : (
+          <>
+            <a
+              class='flex flex-row items-center justify-center border grow w-full text-center rounded bg-hh-red hover:bg-red-700 text-white transition py-2 px-4'
+              href={isLangRu ? '/resume' : '/en/resume'}>
+              {isLangRu ? 'Посмотреть резюме' : 'Check my resume'}
+            </a>
+            <a
+              class='flex flex-row items-center justify-center border grow w-full text-center rounded border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition py-2 px-4'
+              href='#cases__front-page'>
+              {isLangRu ? 'Перейти к портфолио' : 'Go to portfolio'}
+            </a>
+          </>
+        )
+      }
+    </div>
+  </div>
 </section>
