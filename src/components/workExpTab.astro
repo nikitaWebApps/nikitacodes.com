@@ -3,66 +3,72 @@ import useIsLangRu from '../composables/useIsLangRu'
 const isLangRu = useIsLangRu(Astro.props.lang)
 const lang = Astro.props.lang as 'ru' | 'en'
 const myWorkExp = {
-	ru: [
-		{
-			position: 'Frontend-разработчик',
-			company: 'Фармацевтикал Косметик',
-			date: 'апрель 2023 — н.в',
-			resp: [
-				'Адаптивная и кроссбраузерная вёрстка с использованием <strong>CSS, Sass, Tailwind</strong>',
-				'Разработка сайтов и веб-приложений на <strong>JavaScript/TypeScript, Vue и Nuxt</strong>',
-				'UX/UI дизайн лендинговых страниц, интернет-магазинов и приложений в Figma',
-				'Написание кастомных тем для Wordpress на PHP',
-				'Работа в команде с PM, маркетологом и SMM-менеджером',
-			],
-		},
-		{
-			position: 'UX/UI дизайнер',
-			company: 'Freelance',
-			date: 'февраль 2023 — апрель 2023',
-			resp: ['Разработка дизайна лендинг-страницы для SaaS продукта', 'Дизайн и вёрстка интернет-магазина'],
-		},
-	],
-	en: [
-		{
-			position: 'Frontend-developer',
-			company: 'Pharmaceutical Cosmetic LLC',
-			date: 'Apr 2023 — present',
-			resp: [
-				'Responsive and cross-browser layout using <strong>CSS, Sass, Tailwind CSS</strong>',
-				'Development of websites and web applications using <strong>JavaScript/TypeScript, Vue, and Nuxt</strong>',
-				'UX/UI design of landing pages, online stores, and applications in Figma',
-				'Writing custom themes for WordPress in PHP',
-				'Worked in team with PM, marketer, and SMM manager',
-			],
-		},
-		{
-			position: 'UX/UI Designer',
-			company: 'Freelance',
-			date: 'Feb 2023 — Apr 2023',
-			resp: ['Developed the landing page design for the SaaS product', 'Designed and built an online store'],
-		},
-	],
+  ru: [
+    {
+      position: 'Frontend-разработчик',
+      company: 'ООО «Фармацевтикал Косметик»',
+      date: 'Полная занятость, Февраль 2023 — н.в.',
+      resp: [
+        'Полное техническое сопровождение разработки WEB-проектов компании (анализ бизнес-задач, поиск оптимально стека, составление ТЗ, декомпозиция, разработка, внедрение, документирование).',
+        'Поддержка, рефакторинг и добавление новых функций в текущие проекты компании.',
+        'Интеграции проектов с внешними системами: Битрикс24, 1С, ЮКасса и другими.',
+        'UX/UI-дизайн, продумывание и улучшение пользовательского опыта основываясь на данных аналитики.',
+        'Взаимодействие с командой маркетинга: PM, SMM-менеджер, маркетолог, контент-менеджер.',
+      ],
+    },
+    {
+      position: 'Frontend-разработчик',
+      company: 'ООО «АЧЕ-РУ»',
+      date: 'Проектная работа, Апрель 2024 — Июнь 2024',
+      resp: [
+        'Полное ведение проекта: интервью с заказчиком, понимание задачи, брифинг UX/UI-дизайнера и составление ТЗ, презентация дизайна и финального сайта.',
+        'Адаптивная кроссбраузерная вёрстка сайта с исспользованием WordPress в качестве CMS.',
+      ],
+    },
+  ],
+  en: [
+    {
+      position: 'Front-end Developer',
+      company: 'Pharmaceutical Cosmetic LLC',
+      date: 'Full-time, Feb 2023 — Present',
+      resp: [
+        `Full technical support for the company's web project development (analyzing business tasks, selecting the optimal tech stack, creating technical specifications, decomposition, development, implementation, and documentation).`,
+        `Support, refactoring, and adding new features to the company's existing projects.`,
+        `Integration of projects with external systems such as Bitrix24, 1C, YooMoney, and others.`,
+        `UX/UI design, including planning and enhancing user experience based on web analytics data.`,
+        `Collaboration with the marketing team: PM, SMM manager, marketer, and content manager.`,
+      ],
+    },
+    {
+      position: 'Front-end Developer',
+      company: 'ACE-RU LLC',
+      date: 'Contract, Apr 2024 — Jun 2024',
+      resp: [
+        'Full project management: client interviews, understanding the requirements, briefing the UX/UI designer and creating technical specifications, presenting the design and the final website.',
+        'Responsive, cross-browser website layout using WordPress as the CMS.',
+      ],
+    },
+  ],
 }
 ---
 
-<section class='container lg:p-6 lg:border-2 lg:rounded-lg border-blue-200'>
-	<h2 class='hidden lg:block mb-6 text-3xl'>{isLangRu ? `Опыт работы` : `Work experience`}</h2>
-	<div class='flex flex-col gap-8'>
-		{
-			myWorkExp[lang].map(workItem => (
-				<>
-					<div class=''>
-						<h3 class='text-xl text-slate-900'>{workItem.position}</h3>
-						<p class='text-slate-500 mb-4 text-sm lg:text-base'>{workItem.company + ' • ' + workItem.date}</p>
-						<ul class='list-disc pl-4 flex flex-col gap-2'>
-							{workItem.resp.map(respItem => (
-								<li set:html={respItem} />
-							))}
-						</ul>
-					</div>
-				</>
-			))
-		}
-	</div>
+<section class=''>
+  <h2 class='lg:mb-6 mb-3 text-2xl'>{isLangRu ? 'Опыт работы' : 'Work experience'}</h2>
+  <div class='flex flex-col gap-6 lg:gap-8'>
+    {
+      myWorkExp[lang].map(workItem => (
+        <>
+          <div class=''>
+            <h3 class='text-xl'>{workItem.company}</h3>
+            <p class='text-slate-500 mb-4 text-sm lg:text-base'>{workItem.position + ' | ' + workItem.date}</p>
+            <ul class='list-disc pl-4 flex flex-col gap-2'>
+              {workItem.resp.map(respItem => (
+                <li set:html={respItem} />
+              ))}
+            </ul>
+          </div>
+        </>
+      ))
+    }
+  </div>
 </section>

@@ -3,37 +3,32 @@ import useIsLangRu from '../composables/useIsLangRu'
 const isLangRu = useIsLangRu(Astro.props.lang)
 ---
 
-<section class='container'>
-	<h2 class='hidden lg:block mb-6 text-3xl'>
-		{isLangRu ? `Образование` : `Education`}
-	</h2>
-	<div class='flex flex-col gap-6 mb-6'>
-		<div class=''>
-			<h3 class='text-xl text-slate-900'>{isLangRu ? `Дизайнер Интерфейсов` : `Interface Designer`}</h3>
-			<p class='text-slate-700 text-sm lg:text-base'
-				>{isLangRu ? `Яндекс Практикум • июнь 2022 — февраль 2023` : `Yandex Prakticum • June 2022 — February 2023`}</p
-			>
-		</div>
-		<div class=''>
-			<h3 class='text-lg text-slate-500'>{isLangRu ? `Creative Audio Director` : `Creative Audio Director`}</h3>
-			<p class='text-slate-500 text-sm lg:text-base'
-				>{
-					isLangRu
-						? `Fachhochshule Dortmund • апрель 2019 — июль 2021`
-						: `Fachhochshule Dortmund • April 2019 — July 2021`
-				}</p
-			>
-		</div>
-		<div class=''>
-			<h3 class='text-lg text-slate-500'>{isLangRu ? `Звукорежиссёр` : `Sound designer`}</h3>
-			<p class='text-slate-500 text-sm lg:text-base'>
-				{
-					isLangRu
-						? `Гуманитарный институт телевидения и радиовещания • сентябрь 2012
-				— июль 2017`
-						: `The Humanities Institute of Television and Radio • September 2012 — July 2017`
-				}</p
-			>
-		</div>
-	</div>
+<section class=''>
+  <h2 class='lg:mb-6 mb-3 text-2xl'>
+    {isLangRu ? `Образование` : `Education`}
+  </h2>
+  <div class='flex flex-col gap-6 mb-6'>
+    <div class=''>
+      <h3 class='text-lg'>{isLangRu ? `Дизайнер Интерфейсов` : `Interface Designer`}</h3>
+      <p class='text-slate-700 text-sm lg:text-base'>
+        {isLangRu ? `Июнь 2022 — Февраль 2023 | Яндекс Практикум` : `Jun 2022 — Feb 2023 | Yandex Practicum`}
+      </p>
+    </div>
+    <div class=''>
+      <h3 class='text-lg'>{isLangRu ? `Creative Audio Director` : `Creative Audio Director`}</h3>
+      <p class='text-sm lg:text-base'>
+        {isLangRu ? `2020 – 2022 | Fachochschule Dortmund` : `2020 – 2022 | Fachochschule Dortmund`}
+      </p>
+    </div>
+    <div class=''>
+      <h3 class='text-lg'>{isLangRu ? `Звукорежиссёр` : `Sound designer`}</h3>
+      <p class='text-sm lg:text-base'>
+        {
+          isLangRu
+            ? `2012 – 2017 | Гуманитарный Институт Телевидения и Радиовещания (ГИТР)`
+            : `2012 – 2017 | Litovchin Institute of Film and TV`
+        }
+      </p>
+    </div>
+  </div>
 </section>

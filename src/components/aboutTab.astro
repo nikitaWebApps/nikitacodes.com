@@ -1,33 +1,19 @@
 ---
 import useIsLangRu from '../composables/useIsLangRu'
 interface Props {
-	lang: 'ru' | 'en'
+  lang: 'ru' | 'en'
 }
 const isLangRu = useIsLangRu(Astro.props.lang)
 ---
 
-<section class='container'>
-	<h2 class='hidden lg:block mb-6 text-3xl'>{isLangRu ? 'О себе' : 'About me'}</h2>
-	<div class='flex flex-col gap-4'>
-		<p class='text-slate-800 mb-2'>
-			{
-				isLangRu
-					? `Привет! Я фронтенд-разработчик, работающий с Vue / Nuxt и обладающий экспертизой в UX/UI дизайне.`
-					: `Hello! I am a front-end developer working with Vue / Nuxt with expertise in UX/UI design.`
-			}
-		</p>
-		<p class='text-slate-800 mb-4'>
-			{
-				isLangRu
-					? `В своей работе я использую продуктовый подход и всегда начинаю с понимания задачи. Задаю уточняющие вопросы, а если
-			вижу, что можно сделать лучше — предлагаю варианты. Я постоянно развиваюсь в профессии: пробую новые технологии, вникаю
-			в документацию, слежу за экспертами на YouTube, читаю Reddit. В свободное время я делаю хобби-проекты чтобы изучить
-			Laravel и играю на барабанах.`
-					: `In my work, I use a product-oriented approach and always start by understanding the task. I ask clarifying
-			questions, and if I see that something can be improved, I suggest options. I constantly develop in my profession:
-			I try new technologies, delve into documentation, follow experts on YouTube, and read Reddit. In my free time, I
-			make hobby projects to learn Laravel and play drums.`
-			}
-		</p>
-	</div>
+<section class=''>
+  <h2 class='lg:mb-4 mb-2 text-2xl'>{isLangRu ? 'Коротко обо мне' : 'Summary'}</h2>
+  <p class='text-slate-800'>
+    {
+      isLangRu
+        ? `Frontend-разработчик с опытом работы 2 года. Основной стек: Vue, Nuxt, Astro и WordPress. Обладаю экспертизой в UX\UI-дизайне: понимаю, где пользовательский опыт может принести максимальную выгоду бизнесу, и чему стоит уделить особое внимание.`
+        : `Frontend developer with 2 years of experience. Main stack: Vue, Nuxt, Astro, and WordPress.
+I have expertise in UX/UI design, with an understanding of areas where improved user experience can benefit the business and where to focus my efforts.`
+    }
+  </p>
 </section>
