@@ -2,33 +2,18 @@
 
 import { ref, computed } from 'vue'
 import { store } from '../langStore';
+import { translation } from '../i18n/translations';
 
 
 const props = defineProps<{
 	currentLocale: 'en' | 'ru',
 	currentPath: string
-	origin: string
 }>()
 const pathname = ref(props.currentPath)
 
-const paths = {
-	resume: {
-		en: 'Resume',
-		ru: "Резюме",
-		slug: 'resume'
-	},
-	potfolio: {
-		en: 'Portfolio',
-		ru: "Портфолио",
-		slug: '#cases__front-page',
-	}
-}
+
 
 store.lang = props.currentLocale
-
-const setLocaleUrl = (slug: string) => {
-	return `${props.origin}/${store.lang}/${slug}`
-}
 
 const homepageUrl = computed(() => `/${selectedLanguage.value}`)
 const selectedLanguage = ref(store.lang)
@@ -46,6 +31,9 @@ function changeSiteLanguage(event: Event) {
 		return
 	}
 }
+
+const resumeLink = `/${store.lang}/resume`
+const portfolioLink = `/${store.lang}#cases__front-page`
 </script>
 
 <template>
@@ -68,10 +56,12 @@ function changeSiteLanguage(event: Event) {
 			</div>
 			<div class="flex flex-row gap-2">
 				<div class="flex flex-row items-center lg:gap-4 gap-2">
-					<a v-for="(path, index) in paths"
-						:key="index"
+					<a
 						class="text-sm md:text-base"
-						:href="setLocaleUrl(path.slug)">{{ path[store.lang] }}</a>
+						:href="portfolioLink">{{ translation[store.lang].portfolio }}</a>
+					<a
+						class="text-sm md:text-base"
+						:href="resumeLink">{{ translation[store.lang].resume }}</a>
 					<select @change="changeSiteLanguage" v-model="selectedLanguage"
 						class="border border-slate-300 rounded p-1 w-max">
 						<option :value="store.lang">{{ store.lang == 'ru' ? 'RU' : 'EN' }}</option>

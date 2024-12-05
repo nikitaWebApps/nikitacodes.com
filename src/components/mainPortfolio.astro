@@ -9,10 +9,9 @@ const casesQuery = await getCollection('cases')
 
 /* Content slug fix to keep site structure */
 function itemAbsolutePath(item: (typeof cases)[number]) {
-  const href = Astro.url.origin
   const locale = item.slug.split('/')[0]
   const slug = item.slug.split('/')[1]
-  return `${href}/${locale}/cases/${slug}` //use slug without locale
+  return `/${locale}/cases/${slug}` //use slug without locale
 }
 
 const cases = casesQuery.sort((a, b) => {

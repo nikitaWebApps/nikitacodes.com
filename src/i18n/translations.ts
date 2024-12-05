@@ -8,9 +8,9 @@ export const defaultLang = 'ru'
 export const translation = {
   en: {
     index_title: 'Nikita Golovlev, frontend-developer',
-    header_resume: 'CV',
-    header_portfolio: 'Portfolio',
-    header_homepage: 'Homepage',
+    resume: 'CV',
+    portfolio: 'Portfolio',
+    homepage: 'Homepage',
     tab_workexp: 'Work Experience',
     tab_skills: 'Skills',
     tab_education: 'Education',
@@ -18,9 +18,9 @@ export const translation = {
   },
   ru: {
     index_title: 'Никита Головлев, фронтенд-разработчик',
-    header_resume: 'Резюме',
-    header_portfolio: 'Портфолио',
-    header_homepage: 'Главная страница',
+    resume: 'Резюме',
+    portfolio: 'Портфолио',
+    homepage: 'Главная страница',
     tab_workexp: 'Опыт работы',
     tab_skills: 'Навыки',
     tab_education: 'Образование',

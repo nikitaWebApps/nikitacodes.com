@@ -1,7 +1,8 @@
 ---
 import useIsLangRu from '../composables/useIsLangRu'
+import type { translation } from '../i18n/translations'
 const isLangRu = useIsLangRu(Astro.props.lang)
-const lang = Astro.props.lang as 'ru' | 'en'
+const lang = (Astro.currentLocale as keyof typeof translation) || 'en'
 const myWorkExp = {
   ru: [
     {

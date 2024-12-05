@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro'
 import Head from '../../components/Head.astro'
 import AstroResumeTabs from '../../components/AstroResumeTabs.astro'
 import { getCollection } from 'astro:content'
+import { translation } from '../../i18n/translations'
 const currentLang = Astro.currentLocale as 'ru' | 'en'
 export async function getStaticPaths() {
   const pages = await getCollection('cases')
@@ -15,7 +16,7 @@ export async function getStaticPaths() {
 }
 ---
 
-<Layout>
+<Layout pageTitle={translation[currentLang].resume}>
   <Head lang={currentLang} transition:persist />
   <AstroResumeTabs />
 </Layout>
