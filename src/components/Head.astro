@@ -4,7 +4,7 @@ import Image from 'astro/components/Image.astro'
 import myPic from '../img/myPic_square.jpg'
 
 const isLangRu = useIsLangRu(Astro.props.lang)
-
+const currentLocale = Astro.currentLocale
 //Fix for netlify's trailing slash
 const isPathResume = Astro.url.pathname.includes('resume')
 ---
@@ -31,21 +31,12 @@ const isPathResume = Astro.url.pathname.includes('resume')
         isPathResume ? (
           isLangRu ? (
             <>
-              <div class='flex flex-col w-full'>
-                <a
-                  class='flex flex-row items-center justify-center text-center max-w-full bg-hh-red hover:bg-red-700 transition py-2 px-4 text-white rounded'
-                  target='_blank'
-                  href='https://hh.ru/applicant/resumes/view?resume=d6ff65adff0bb6f7260039ed1f4c4465385443'>
-                  Резюме на hh.ru
-                </a>
-              </div>
               <a
                 class='flex flex-row grow items-center justify-center border sm:max-w-full text-center rounded border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition py-2 px-4 max-h-min'
                 target='_blank'
                 href='/Никита_Головлев_Frontend-разработчик.pdf'>
                 <p class='w-full'>Открыть PDF</p>
               </a>
-              <p class='mt-2 row-start-2 text-xs text-gray-500 w-max'>Требуется авторизация</p>
             </>
           ) : (
             <a
@@ -59,12 +50,12 @@ const isPathResume = Astro.url.pathname.includes('resume')
           <>
             <a
               class='flex flex-row items-center justify-center border grow w-full text-center rounded bg-hh-red hover:bg-red-700 text-white transition py-2 px-4'
-              href={isLangRu ? '/resume' : '/en/resume'}>
+              href={`/${currentLocale}/resume`}>
               {isLangRu ? 'Посмотреть резюме' : 'Check my resume'}
             </a>
             <a
               class='flex flex-row items-center justify-center border grow w-full text-center rounded border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition py-2 px-4'
-              href='#cases__front-page'>
+              href={`/${currentLocale}#cases__front-page`}>
               {isLangRu ? 'Перейти к портфолио' : 'Go to portfolio'}
             </a>
           </>
