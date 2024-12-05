@@ -1,20 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import ResumeTabs from '../components/resumeTabs.vue'
-import AboutTab from '../components/aboutTab.astro'
-import EducationTab from '../components/educationTab.astro'
 import Head from '../components/Head.astro'
-import SkillsTab from '../components/skillsTab.astro'
-import WorkExpTab from '../components/workExpTab.astro'
+import AstroResumeTabs from '../components/AstroResumeTabs.astro'
 const currentLang = Astro.currentLocale as 'ru' | 'en'
 ---
 
 <Layout title="Резюме | Никита Головлёв, фронтенд-разработчик'">
   <Head lang={currentLang} transition:persist />
-  <ResumeTabs client:load>
-    <WorkExpTab lang={currentLang} slot='work-exp-tab' />
-    <SkillsTab lang={currentLang} slot='skills-tab' />
-    <EducationTab lang={currentLang} slot='education-tab' />
-    <AboutTab lang={currentLang} slot='about-tab' />
-  </ResumeTabs>
+  <AstroResumeTabs currentLang={currentLang} />
 </Layout>

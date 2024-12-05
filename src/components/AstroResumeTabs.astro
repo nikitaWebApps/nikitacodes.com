@@ -1,0 +1,15 @@
+---
+import ResumeTabs from './resumeTabs.vue'
+import WorkExpTab from './workExpTab.astro'
+import EducationTab from './educationTab.astro'
+import SkillsTab from './skillsTab.astro'
+import AboutTab from './aboutTab.astro'
+const { currentLang } = Astro.props
+---
+
+<ResumeTabs client:load currentLocale={currentLang}>
+  <WorkExpTab lang={currentLang} slot='work-exp-tab' />
+  <SkillsTab lang={currentLang} slot='skills-tab' />
+  <EducationTab lang={currentLang} slot='education-tab' />
+  <AboutTab lang={currentLang} slot='about-tab' />
+</ResumeTabs>
