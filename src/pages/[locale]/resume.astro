@@ -1,0 +1,21 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import Head from '../../components/Head.astro'
+import AstroResumeTabs from '../../components/AstroResumeTabs.astro'
+import { getCollection } from 'astro:content'
+const currentLang = Astro.currentLocale as 'ru' | 'en'
+export async function getStaticPaths() {
+  const pages = await getCollection('cases')
+  return pages.map(page => {
+    const locale = page.id.split('/')[0]
+    return {
+      params: { locale },
+    }
+  })
+}
+---
+
+<Layout>
+  <Head lang={currentLang} transition:persist />
+  <AstroResumeTabs />
+</Layout>

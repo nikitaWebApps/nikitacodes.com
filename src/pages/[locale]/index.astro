@@ -1,0 +1,22 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import MainPortfolio from '../../components/mainPortfolio.astro'
+import Head from '../../components/Head.astro'
+import { getCollection } from 'astro:content'
+
+export async function getStaticPaths() {
+  const pages = await getCollection('cases')
+  return pages.map(page => {
+    const locale = page.id.split('/')[0]
+
+    return {
+      params: { locale },
+    }
+  })
+}
+---
+
+<Layout>
+  <Head lang={Astro.currentLocale} transition:persist />
+  <MainPortfolio />
+</Layout>

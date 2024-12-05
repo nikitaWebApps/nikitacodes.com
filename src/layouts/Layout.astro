@@ -1,10 +1,10 @@
 ---
 import Header from '../components/Header.vue'
 import Footer from '../components/Footer.astro'
-import {getLangFromUrl} from '../i18n/utils'
-const { title } = Astro.props
+import {translation} from '../i18n/translations'
 const isDev = import.meta.env.DEV
-const lang = getLangFromUrl(Astro.url)
+const lang = Astro.currentLocale as keyof typeof translation
+const currentPath = Astro.url.pathname
 ---
 
 <html lang={lang} class='font-body scroll-smooth'>
@@ -37,11 +37,11 @@ const lang = getLangFromUrl(Astro.url)
 				: ''
 		}
 		<!-- /Yandex.Metrika counter -->
-		<title>{title}</title>
+		<title>{translation[lang].index_title}</title>
 		
 	</head>
 	<body>
-		<Header client:load currentLocale={Astro.currentLocale} />
+		<Header client:load currentLocale={lang} currentPath={currentPath} origin={Astro.url.origin} />
 		<main class='max-w-screen-lg mx-auto mb-16'>
 			<slot />
 		</main>

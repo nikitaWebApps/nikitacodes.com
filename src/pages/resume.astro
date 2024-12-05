@@ -2,10 +2,11 @@
 import Layout from '../layouts/Layout.astro'
 import Head from '../components/Head.astro'
 import AstroResumeTabs from '../components/AstroResumeTabs.astro'
-const currentLang = Astro.currentLocale as 'ru' | 'en'
+import { translation } from '../i18n/translations'
+const currentLang = Astro.currentLocale as keyof typeof translation
 ---
 
-<Layout title="Резюме | Никита Головлёв, фронтенд-разработчик'">
-  <Head lang={currentLang} transition:persist />
-  <AstroResumeTabs currentLang={currentLang} />
+<Layout title='Resume | Nikita Golovlev, frontend-developer'>
+  <Head />
+  <AstroResumeTabs />
 </Layout>

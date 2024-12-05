@@ -1,56 +1,51 @@
-<script setup>
+<script setup lang="ts">
 
-import { ref, onMounted } from 'vue'
+import { ref, computed } from 'vue'
 import { store } from '../langStore';
 
 
-const props = defineProps(['currentLocale'])
-const pathname = ref()
+const props = defineProps<{
+	currentLocale: 'en' | 'ru',
+	currentPath: string
+	origin: string
+}>()
+const pathname = ref(props.currentPath)
 
-const paths = [
-	{
-		resume: {
-			en: 'Resume',
-			ru: "Резюме",
-			url: '/resume'
-		}
+const paths = {
+	resume: {
+		en: 'Resume',
+		ru: "Резюме",
+		slug: 'resume'
 	},
-	{
-		potfolio: {
-			en: 'Portfolio',
-			ru: "Портфолио",
-			url: '/#cases__front-page',
-		}
-	},
-]
+	potfolio: {
+		en: 'Portfolio',
+		ru: "Портфолио",
+		slug: '#cases__front-page',
+	}
+}
 
 store.lang = props.currentLocale
-const setLocaleUrl = (path) => {
-	return store.lang == 'ru' ? path : '/en' + path
-}
-function selectSiteLang() {
-	let newLocation
 
-	if (store.lang == 'ru' && window.location.pathname.includes('cases/')) {
-		newLocation = new String(window.location.pathname).replace('ru/', 'en/')
-		store.lang = 'en'
-	} else if (store.lang == 'en' && window.location.pathname.includes('cases/')) {
-		newLocation = new String(window.location.pathname).replace('en/', 'ru/')
-		store.lang = 'ru'
-	} else if (store.lang == 'en') {
-		newLocation = new String(window.location.pathname).replace('en/', '')
-		store.lang = 'ru'
-	} else {
-		newLocation = '/en' + window.location.pathname
-		store.lang = 'en'
+const setLocaleUrl = (slug: string) => {
+	return `${props.origin}/${store.lang}/${slug}`
+}
+
+const homepageUrl = computed(() => `/${selectedLanguage.value}`)
+const selectedLanguage = ref(store.lang)
+
+function changeSiteLanguage(event: Event) {
+	let newLocation = ''
+	const currentPath = window.location.pathname
+	if (selectedLanguage.value == store.lang) {
+		return
 	}
-	window.location.assign(newLocation)
+	if (store.lang !== selectedLanguage.value) {
+		newLocation = currentPath.replace(store.lang, selectedLanguage.value)
+		store.lang = selectedLanguage.value
+		window.location.assign(newLocation)
+		return
+	}
 }
-
-onMounted(() => {
-	pathname.value = window.location.pathname.replaceAll('/en', '')
-});
-
 </script>
 
 <template>
@@ -59,7 +54,7 @@ onMounted(() => {
 		<nav
 			class="container max-w-screen-lg mx-auto py-2 px-4 md:px-8 flex flex-row justify-between items-center text-base">
 			<div class="relative -left-3">
-				<a :href="setLocaleUrl('/')"
+				<a :href="homepageUrl"
 					aria-label="Home Page"
 					class="transition duration-500 translate-x-0">
 					<svg width="48" height="48"
@@ -76,9 +71,8 @@ onMounted(() => {
 					<a v-for="(path, index) in paths"
 						:key="index"
 						class="text-sm md:text-base"
-						:href="setLocaleUrl(Object.values(path)[0].url)">{{ store.lang == 'ru' ?
-							Object.values(path)[0].ru : Object.values(path)[0].en }}</a>
-					<select @change="selectSiteLang()"
+						:href="setLocaleUrl(path.slug)">{{ path[store.lang] }}</a>
+					<select @change="changeSiteLanguage" v-model="selectedLanguage"
 						class="border border-slate-300 rounded p-1 w-max">
 						<option :value="store.lang">{{ store.lang == 'ru' ? 'RU' : 'EN' }}</option>
 						<option :value="store.lang == 'en' ? 'ru' : 'en'">

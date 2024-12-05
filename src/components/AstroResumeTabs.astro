@@ -4,7 +4,9 @@ import WorkExpTab from './workExpTab.astro'
 import EducationTab from './educationTab.astro'
 import SkillsTab from './skillsTab.astro'
 import AboutTab from './aboutTab.astro'
-const { currentLang } = Astro.props
+import { translation } from '../i18n/translations'
+
+const currentLang = Astro.currentLocale as keyof typeof translation
 ---
 
 <ResumeTabs client:load currentLocale={currentLang}>

@@ -15,14 +15,14 @@ const tabs = [
         en: 'About'
     },
     {
-        slug: 'work-exp-tab',
-        ru: 'Опыт работы',
-        en: 'Work Experience'
-    },
-    {
         slug: 'skills-tab',
         ru: 'Навыки',
         en: 'Skills'
+    },
+    {
+        slug: 'work-exp-tab',
+        ru: 'Опыт работы',
+        en: 'Work Experience'
     },
     {
         slug: 'education-tab',

@@ -8,8 +8,11 @@ const currentSiteLanguage = Astro.currentLocale as 'ru' | 'en'
 const casesQuery = await getCollection('cases')
 
 /* Content slug fix to keep site structure */
-function itemUrl(item: (typeof cases)[number]) {
-  return '/' + currentSiteLanguage + '/cases/' + item.slug.replace('en/', '')
+function itemAbsolutePath(item: (typeof cases)[number]) {
+  const href = Astro.url.origin
+  const locale = item.slug.split('/')[0]
+  const slug = item.slug.split('/')[1]
+  return `${href}/${locale}/cases/${slug}` //use slug without locale
 }
 
 const cases = casesQuery.sort((a, b) => {
@@ -50,7 +53,7 @@ const pathname = Astro.url.pathname.replaceAll('/', '')
     {
       filteredCases.map(item => (
         <div id={item.slug} class='group'>
-          <a href={itemUrl(item)}>
+          <a href={itemAbsolutePath(item)}>
             <div class='overflow-hidden mb-4'>
               <Image
                 loading='lazy'

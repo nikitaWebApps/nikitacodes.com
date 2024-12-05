@@ -9,21 +9,15 @@ import Image from 'astro/components/Image.astro'
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
   const cases = await getCollection('cases')
-  let lang = ''
-  let corrSlug = ''
-  const paths = cases.map(item => {
-    if (item.slug.startsWith('en')) {
-      lang = 'en'
-      corrSlug = item.slug.replace('en/', '')
-    } else {
-      lang = 'ru'
-      corrSlug = item.slug
+  return cases.map(singleCase => {
+    const slug = singleCase.slug.split('/')[1]
+    const locale = singleCase.slug.split('/')[0]
+    return {
+      params: { slug, locale },
+      props: singleCase,
     }
-    return { params: { lang, slug: corrSlug || undefined }, props: item }
   })
-  return paths
 }
-
 // 2. For your template, you can get the entry directly from the prop
 const item = Astro.props
 const tech = item.data.tech
