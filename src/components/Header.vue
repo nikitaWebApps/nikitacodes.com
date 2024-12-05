@@ -1,8 +1,7 @@
 <script setup>
 
-import { ref, onMounted, computed, watchEffect, watch } from 'vue'
-import { currentSiteLanguage } from '../langStore';
-import { useStore } from '@nanostores/vue';
+import { ref, onMounted } from 'vue'
+import { store } from '../langStore';
 
 
 const props = defineProps(['currentLocale'])
@@ -25,26 +24,25 @@ const paths = [
 	},
 ]
 
-const $currentSiteLanguage = useStore(currentSiteLanguage)
-currentSiteLanguage.set(props.currentLocale)
+store.lang = props.currentLocale
 const setLocaleUrl = (path) => {
-	return $currentSiteLanguage.value == 'ru' ? path : '/en' + path
+	return store.lang == 'ru' ? path : '/en' + path
 }
-
 function selectSiteLang() {
 	let newLocation
-	if (currentSiteLanguage.get() == 'ru' && window.location.pathname.includes('cases/')) {
+
+	if (store.lang == 'ru' && window.location.pathname.includes('cases/')) {
 		newLocation = new String(window.location.pathname).replace('ru/', 'en/')
-		currentSiteLanguage.set('en')
-	} else if (currentSiteLanguage.get() == 'en' && window.location.pathname.includes('cases/')) {
+		store.lang = 'en'
+	} else if (store.lang == 'en' && window.location.pathname.includes('cases/')) {
 		newLocation = new String(window.location.pathname).replace('en/', 'ru/')
-		currentSiteLanguage.set('ru')
-	} else if (currentSiteLanguage.get() == 'en') {
+		store.lang = 'ru'
+	} else if (store.lang == 'en') {
 		newLocation = new String(window.location.pathname).replace('en/', '')
-		currentSiteLanguage.set('ru')
+		store.lang = 'ru'
 	} else {
 		newLocation = '/en' + window.location.pathname
-		currentSiteLanguage.set('en')
+		store.lang = 'en'
 	}
 	window.location.assign(newLocation)
 }
@@ -78,13 +76,13 @@ onMounted(() => {
 					<a v-for="(path, index) in paths"
 						:key="index"
 						class="text-sm md:text-base"
-						:href="setLocaleUrl(Object.values(path)[0].url)">{{ $currentSiteLanguage == 'ru' ?
+						:href="setLocaleUrl(Object.values(path)[0].url)">{{ store.lang == 'ru' ?
 							Object.values(path)[0].ru : Object.values(path)[0].en }}</a>
 					<select @change="selectSiteLang()"
 						class="border border-slate-300 rounded p-1 w-max">
-						<option :value="$currentSiteLanguage">{{ $currentSiteLanguage == 'ru' ? 'RU' : 'EN' }}</option>
-						<option :value="$currentSiteLanguage == 'en' ? 'ru' : 'en'">
-							{{ $currentSiteLanguage == 'en' ? 'RU' : 'EN' }}</option>
+						<option :value="store.lang">{{ store.lang == 'ru' ? 'RU' : 'EN' }}</option>
+						<option :value="store.lang == 'en' ? 'ru' : 'en'">
+							{{ store.lang == 'en' ? 'RU' : 'EN' }}</option>
 					</select>
 				</div>
 

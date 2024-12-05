@@ -1,4 +1,8 @@
-import { atom } from 'nanostores'
+import { reactive } from 'vue'
 
-export const currentSiteLanguage = atom<'ru' | 'en'>('ru')
+export const store = reactive<{
+  lang: 'ru' | 'en'
+}>({
+  lang: 'ru',
+})
 
