@@ -11,8 +11,6 @@ const props = defineProps<{
 }>()
 const pathname = ref(props.currentPath)
 
-
-
 store.lang = props.currentLocale
 
 const homepageUrl = computed(() => `/${selectedLanguage.value}`)
@@ -58,7 +56,7 @@ const portfolioLink = `/${store.lang}#cases__front-page`
 				<div class="flex flex-row items-center lg:gap-4 gap-2">
 					<a
 						class="text-sm md:text-base"
-						:href="portfolioLink">{{ translation[store.lang].portfolio }}</a>
+						:href="portfolioLink">{{ translation[store.lang].projects }}</a>
 					<a
 						class="text-sm md:text-base"
 						:href="resumeLink">{{ translation[store.lang].resume }}</a>
@@ -69,7 +67,6 @@ const portfolioLink = `/${store.lang}#cases__front-page`
 							{{ store.lang == 'en' ? 'RU' : 'EN' }}</option>
 					</select>
 				</div>
-
 			</div>
 		</nav>
 	</header>
