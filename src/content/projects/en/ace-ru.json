@@ -1,0 +1,14 @@
+{
+  "imageKey": "ace-ru",
+  "publishedDate": "2023-11-25",
+  "techStack": ["Wordpress", "JavaScript"],
+  "en": {
+    "title": "ACE-RU",
+    "description": "Case Description"
+  },
+  "ru": {
+    "title": "АЧЕ-РУ",
+    "description": "Описание кейса АЧЕ-РУ"
+  }
+}
+
