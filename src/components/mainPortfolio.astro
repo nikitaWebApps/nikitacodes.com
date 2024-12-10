@@ -1,71 +1,23 @@
 ---
 import Image from 'astro/components/Image.astro'
 import { getCollection } from 'astro:content'
-
-import useIsLangRu from '../composables/useIsLangRu'
-const isLangRu = useIsLangRu(Astro.currentLocale as 'ru' | 'en')
-const currentSiteLanguage = Astro.currentLocale as 'ru' | 'en'
-const casesQuery = await getCollection('cases')
-
-/* Content slug fix to keep site structure */
-function itemAbsolutePath(item: (typeof cases)[number]) {
-  const locale = item.slug.split('/')[0]
-  const slug = item.slug.split('/')[1]
-  return `/${locale}/cases/${slug}` //use slug without locale
-}
-
-const cases = casesQuery.sort((a, b) => {
-  if (!a.data.priority && !b.data.priority) {
-    return 0
-  }
-  if (!a.data.priority) {
-    return 1
-  }
-  if (!b.data.priority) {
-    return -1
-  }
-  return a.data.priority - b.data.priority
-})
-function filterLanguage(item: (typeof cases)[number]) {
-  if (isLangRu) {
-    return !item.slug.startsWith('en')
-  }
-  return item.slug.startsWith(currentSiteLanguage)
-}
-
-let filteredCases = cases.filter(filterLanguage)
+import ProjectCard from './ProjectCard.astro'
+import { translation } from '../i18n/translations'
+const currentLang = Astro.currentLocale as 'ru' | 'en'
+const projectsData = await getCollection('projects')
+let projects = projectsData
+  .filter(project => project.id.split('/')[1] == currentLang)
+  .sort((a, b) => {
+    return a.data.publishedDate.getTime() - b.data.publishedDate.getTime()
+  })
 const pathname = Astro.url.pathname.replaceAll('/', '')
 ---
 
-<section
-  id='cases__front-page'
-  class={pathname == 'cases' ? 'mx-auto px-4 sm:px-8 mt-28 lg:mt-32' : 'mx-auto px-4 sm:px-8 scroll-mt-24'}>
-  {
-    currentSiteLanguage == 'ru' ? (
-      <h2 class={pathname == 'cases' ? 'text-3xl mb-6 lg:text-4xl' : 'text-2xl mb-6 lg:text-3xl'}>Портфолио</h2>
-    ) : (
-      <h2 class={pathname == 'cases' ? 'text-3xl mb-6 lg:text-4xl' : 'text-2xl mb-6 lg:text-3xl'}>Portfolio</h2>
-    )
-  }
-
+<section id='cases__front-page' class='mx-auto px-4 sm:px-8 scroll-mt-24'>
+  <h2 class='text-2xl mb-6 md:mb-8 lg:text-3xl'>
+    {translation[currentLang].projects}
+  </h2>
   <div class='flex flex-col gap-8 lg:gap-16'>
-    {
-      filteredCases.map(item => (
-        <div id={item.slug} class='group'>
-          <a href={itemAbsolutePath(item)}>
-            <div class='overflow-hidden mb-4'>
-              <Image
-                loading='lazy'
-                class='object-cover rounded-t-md w-full max-h-96 md:aspect-video aspect-photo group-hover:scale-110 transition duration-300'
-                src={item.data.cover}
-                alt={item.data.tabTitle ? item.data.tabTitle : ''}
-              />
-            </div>
-            <p class='text-slate-500'>{item.data.role}</p>
-            <h3 class='text-xl group-hover:text-blue-600 transition duration-300'>{item.data.title}</h3>
-          </a>
-        </div>
-      ))
-    }
+    {projects.map(project => <ProjectCard project={project} />)}
   </div>
 </section>

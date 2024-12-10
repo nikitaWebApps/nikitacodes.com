@@ -1,14 +1,13 @@
 {
   "imageKey": "ace-ru",
   "publishedDate": "2023-11-25",
-  "techStack": ["Wordpress", "JavaScript"],
-  "en": {
-    "title": "ACE-RU",
-    "description": "Case Description"
-  },
-  "ru": {
-    "title": "АЧЕ-РУ",
-    "description": "Описание кейса АЧЕ-РУ"
-  }
+  "techStack": ["Wordpress", "JavaScript", "Sass", "PHP"],
+  "siteLink": "https://aceconsulting.ru",
+  "title": "Сайт международной консалтинговой комании",
+  "keyFeatures": [
+    "Проджект-менеджмент и презентация готового решения",
+    "Написал кастомную тему с вёрсткой по макетам дизайнера",
+    "Оптимизировал производительность: Google Page Speed (90+)"
+  ]
 }
 

@@ -6,14 +6,9 @@ const projects = defineCollection({
     imageKey: z.string(),
     publishedDate: z.coerce.date(),
     techStack: z.string().array(),
-    en: z.object({
-      title: z.string(),
-      description: z.string(),
-    }),
-    ru: z.object({
-      title: z.string(),
-      description: z.string(),
-    }),
+    siteLink: z.string().optional(),
+    title: z.string(),
+    keyFeatures: z.string().array().optional(),
   }),
 })
 
