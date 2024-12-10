@@ -1,14 +1,19 @@
 ---
 import Layout from '../../layouts/Layout.astro'
 import Head from '../../components/Head.astro'
-import AstroResumeTabs from '../../components/AstroResumeTabs.astro'
 import { getCollection } from 'astro:content'
 import { translation } from '../../i18n/translations'
+import ResumeTabs from '../../components/resumeTabs.vue'
+import WorkExpTab from '../../components/workExpTab.astro'
+import EducationTab from '../../components/educationTab.astro'
+import SkillsTab from '../../components/skillsTab.astro'
+import AboutTab from '../../components/aboutTab.astro'
+import { store } from '../../langStore'
 const currentLang = Astro.currentLocale as 'ru' | 'en'
 export async function getStaticPaths() {
-  const pages = await getCollection('cases')
+  const pages = await getCollection('projects')
   return pages.map(page => {
-    const locale = page.id.split('/')[0]
+    const locale = page.id.split('/')[1]
     return {
       params: { locale },
     }
@@ -18,5 +23,10 @@ export async function getStaticPaths() {
 
 <Layout pageTitle={translation[currentLang].resume}>
   <Head lang={currentLang} transition:persist />
-  <AstroResumeTabs />
+  <ResumeTabs client:load currentLocale={store.lang}>
+    <WorkExpTab lang={currentLang} slot='work-exp-tab' />
+    <SkillsTab lang={currentLang} slot='skills-tab' />
+    <EducationTab lang={currentLang} slot='education-tab' />
+    <AboutTab lang={currentLang} slot='about-tab' />
+  </ResumeTabs>
 </Layout>
