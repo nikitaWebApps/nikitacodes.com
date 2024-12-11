@@ -12,7 +12,26 @@ const projects = defineCollection({
   }),
 })
 
+const head = defineCollection({
+  loader: glob({ pattern: 'head.json', base: './src/content/' }),
+  schema: z.object({
+    name: z.object({
+      en: z.string(),
+      ru: z.string(),
+    }),
+    description: z.object({
+      en: z.string(),
+      ru: z.string(),
+    }),
+    resume_link: z.object({
+      en: z.string(),
+      ru: z.string(),
+    }),
+  }),
+})
+
 export const collections = {
+  head,
   projects,
 }
 

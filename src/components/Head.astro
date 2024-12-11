@@ -1,62 +1,48 @@
 ---
-import useIsLangRu from '../composables/useIsLangRu'
 import Image from 'astro/components/Image.astro'
 import myPic from '../img/myPic_square.jpg'
-
-const isLangRu = useIsLangRu(Astro.props.lang)
-const currentLocale = Astro.currentLocale
-//Fix for netlify's trailing slash
+import { getCollection } from 'astro:content'
+import { translation } from '../i18n/translations'
 const isPathResume = Astro.url.pathname.includes('resume')
+const lang = (Astro.currentLocale as 'en' | 'ru') || 'en'
+const head = await getCollection('head')
 ---
 
-<section class='px-4 mx-auto sm:px-8 mt-28 lg:mt-32 mb-12 md:mb-16 flex flex-row flex-wrap gap-6 items-center'>
+<section
+  class='px-4 mx-auto sm:px-8 mt-28 lg:mt-32 mb-12 md:mb-16 flex flex-col md:grid md:grid-flow-col md:auto-cols-auto gap-6'>
   <Image
-    class='w-36 rounded-full lg:w-56'
+    class='basis-1/3 w-full max-w-36 rounded-full lg:max-w-56 object-contain aspect-square'
     src={myPic}
-    alt={isLangRu ? 'Никита Головлёв, фронтенд-разработчик' : 'Nikita Golovlev, Frontend-developer'}
+    alt={head[0].data.name[lang]}
   />
   <div>
-    <p class='text-slate-500'>
-      {isLangRu ? 'Привет! Меня зовут' : 'Hello! My name is'}
+    <p class='text-gray-500'>
+      {translation[lang].head_hello}
     </p>
-    <h1 class='text-3xl lg:text-5xl text-slate-900 mb-3'>{isLangRu ? 'Никита Головлёв' : 'Nikita Golovlev'}</h1>
-    <p
-      class='text-slate-900'
-      set:html={isLangRu
-        ? 'Фронтенд-разработчик с экспертизой в UX/UI дизайне.<br>Я работаю c экосистемой Vue.js и Nuxt.'
-        : 'Frontend-developer with expertise in UX/UI design.<br>I work with the Vue.js and Nuxt ecosystem.'}
-    />
+    <h1 class='text-3xl lg:text-4xl text-gray-900 mb-3'>{head[0].data.name[lang]}</h1>
+    <p class='text-gray-900'>{head[0].data.description[lang]}</p>
     <div class='grid grid-cols-2 w-full gap-x-2 mt-6 animate-slideDown'>
       {
         isPathResume ? (
-          isLangRu ? (
-            <>
-              <a
-                class='flex flex-row grow items-center justify-center border sm:max-w-full text-center rounded border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition py-2 px-4 max-h-min'
-                target='_blank'
-                href='/Никита_Головлев_Frontend-разработчик.pdf'>
-                <p class='w-full'>Открыть PDF</p>
-              </a>
-            </>
-          ) : (
+          <>
             <a
-              class='flex flex-row items-center justify-center border max-w-max sm:max-w-full text-center rounded border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition py-2 px-4 max-h-min'
+              class='flex flex-row grow items-center justify-center border sm:max-w-full text-center rounded border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition py-2 px-4 max-h-min'
               target='_blank'
-              href='/Nikita_Golovlev_Front-End_Developer.pdf'>
-              Open PDF
+              href={head[0].data.resume_link[lang]}>
+              <p class='w-full'>{translation[lang].open_pdf}</p>
             </a>
-          )
+          </>
         ) : (
           <>
             <a
               class='flex flex-row items-center justify-center border grow w-full text-center rounded bg-hh-red hover:bg-red-700 text-white transition py-2 px-4'
-              href={`/${currentLocale}/resume`}>
-              {isLangRu ? 'Посмотреть резюме' : 'Check my resume'}
+              href={`/${lang}/resume`}>
+              {translation[lang].check_resume}
             </a>
             <a
               class='flex flex-row items-center justify-center border grow w-full text-center rounded border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition py-2 px-4'
-              href={`/${currentLocale}#cases__front-page`}>
-              {isLangRu ? 'Перейти к портфолио' : 'Go to portfolio'}
+              href={`/${lang}#cases__front-page`}>
+              {translation[lang].check_portfolio}
             </a>
           </>
         )
