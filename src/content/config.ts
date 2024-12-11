@@ -1,5 +1,5 @@
 import { defineCollection, z } from 'astro:content'
-import { glob } from 'astro/loaders'
+import { glob, file } from 'astro/loaders'
 const projects = defineCollection({
   loader: glob({ pattern: 'projects/{en,ru}/*.json', base: './src/content/' }),
   schema: z.object({
@@ -30,8 +30,82 @@ const head = defineCollection({
   }),
 })
 
+const jobItem = z.object({
+  position: z.string(),
+  company: z.string(),
+  dates: z.string(),
+  responsibilities: z.string().array(),
+})
+
+const resume = defineCollection({
+  loader: file('src/content/resume/resume.json', { parser: text => JSON.parse(text).resume }),
+  schema: z.object({
+    en: jobItem,
+    ru: jobItem,
+  }),
+})
+
+const competences = defineCollection({
+  loader: file('src/content/resume/resume.json', {
+    parser: text => {
+      return JSON.parse(text).about
+    },
+  }),
+  schema: z.object({
+    en: z.string(),
+    ru: z.string(),
+  }),
+})
+
+const skills = defineCollection({
+  loader: file('src/content/resume/resume.json', {
+    parser: text => {
+      return JSON.parse(text).skills
+    },
+  }),
+  schema: z.object({
+    data: z.string().array(),
+  }),
+})
+
+const educationObject = z.object({
+  ru: z.object({
+    profession: z.string(),
+    place: z.string(),
+    dates: z.string(),
+  }),
+  en: z.object({
+    profession: z.string(),
+    place: z.string(),
+    dates: z.string(),
+  }),
+})
+
+const education = defineCollection({
+  loader: file('src/content/resume/resume.json', {
+    parser: text => {
+      return JSON.parse(text).education
+    },
+  }),
+  schema: educationObject,
+})
+
+const courses = defineCollection({
+  loader: file('src/content/resume/resume.json', {
+    parser: text => {
+      return JSON.parse(text).courses
+    },
+  }),
+  schema: educationObject,
+})
+
 export const collections = {
   head,
   projects,
+  resume,
+  competences,
+  skills,
+  education,
+  courses,
 }
 
