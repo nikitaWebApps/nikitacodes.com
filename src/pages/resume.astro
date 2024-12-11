@@ -5,7 +5,6 @@ import ResumeTabs from '../components/resumeTabs.vue'
 import WorkExpTab from '../components/workExpTab.astro'
 import EducationTab from '../components/educationTab.astro'
 import SkillsTab from '../components/skillsTab.astro'
-import AboutTab from '../components/aboutTab.astro'
 import { translation } from '../i18n/translations'
 const defaultLang = 'en'
 ---
@@ -16,6 +15,5 @@ const defaultLang = 'en'
     <WorkExpTab lang={defaultLang} slot='work-exp-tab' />
     <SkillsTab lang={defaultLang} slot='skills-tab' />
     <EducationTab lang={defaultLang} slot='education-tab' />
-    <AboutTab lang={defaultLang} slot='about-tab' />
   </ResumeTabs>
 </Layout>
