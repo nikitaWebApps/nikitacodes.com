@@ -21,7 +21,7 @@ const head = await getCollection('head')
     </p>
     <h1 class='text-3xl lg:text-4xl text-gray-900 mb-3'>{head[0].data.name[lang]}</h1>
     <p class='text-gray-900'>{head[0].data.description[lang]}</p>
-    <div class='grid grid-cols-2 w-full gap-x-2 mt-6 animate-slideDown'>
+    <div class='grid grid-cols-2 w-full gap-x-2 mt-6'>
       {
         isPathResume ? (
           <>
