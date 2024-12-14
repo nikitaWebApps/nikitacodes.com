@@ -45,18 +45,6 @@ const resume = defineCollection({
   }),
 })
 
-const competences = defineCollection({
-  loader: file('src/content/resume/resume.json', {
-    parser: text => {
-      return JSON.parse(text).about
-    },
-  }),
-  schema: z.object({
-    en: z.string(),
-    ru: z.string(),
-  }),
-})
-
 const skills = defineCollection({
   loader: file('src/content/resume/resume.json', {
     parser: text => {
@@ -103,7 +91,6 @@ export const collections = {
   head,
   projects,
   resume,
-  competences,
   skills,
   education,
   courses,

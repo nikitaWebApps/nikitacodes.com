@@ -1,9 +1,13 @@
 {
   "imageKey": "ace-ru",
   "publishedDate": "2023-11-25",
-  "techStack": ["Wordpress", "JavaScript", "Sass"],
+  "techStack": ["Wordpress", "JavaScript", "Sass", "PHP"],
   "siteLink": "https://aceconsulting.ru",
-  "title": "ACE-RU",
-  "keyFeatures": []
+  "title": "International consulting company's website",
+  "keyFeatures": [
+    "Project management and presentation of the finalized solution",
+    "Developed a custom theme with layout based on designer's mockups",
+    "Optimized performance: Google Page Speed (90+)"
+  ]
 }
 

@@ -1,0 +1,13 @@
+{
+  "imageKey": "events",
+  "publishedDate": "2024-02-10",
+  "techStack": ["Vue", "Nuxt", "TypeScript", "Tailwind CSS"],
+  "siteLink": "https://events.phcos.ru",
+  "title": "SPA для просмотра и регистрации на события компании",
+  "keyFeatures": [
+    "Выполнил адаптивный UX/UI-дизайн",
+    "Интегрировал приложение с REST API",
+    "Интегрировал форму заявок с CRM по API"
+  ]
+}
+
