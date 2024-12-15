@@ -34,30 +34,15 @@ function changeSiteLanguageTo(to: string) {
       <div class='flex flex-row items-center sm:gap-4 gap-2'>
         <a class='text-sm md:text-base' href={portfolioLink}>{translation[currentLang].projects}</a>
         <a class='text-sm md:text-base' href={resumeLink}>{translation[currentLang].resume}</a>
-        <div class='text-sm md:text-base border border-gray-300 rounded py-1 px-2 w-max relative'>
+        <div class='relative'>
           <button
             type='button'
             aria-label='Change Language'
-            class='current-lang w-full flex flex-row items-center gap-1'
-            >{currentLang.toUpperCase()}<span class='block transition-all'
-              ><svg
-                class='w-4 h-4'
-                enable-background='new 0 0 58.026 58.026'
-                height='512'
-                viewBox='0 0 58.026 58.026'
-                width='512'
-                xmlns='http://www.w3.org/2000/svg'
-                ><g
-                  ><path
-                    id='XMLID_467_'
-                    d='m29.013 46.019c-1.1 0-2.1-.4-2.9-1.2l-25-26c-1.5-1.6-1.5-4.1.1-5.7 1.6-1.5 4.1-1.5 5.7.1l22.1 23 22.1-23c1.5-1.6 4.1-1.6 5.7-.1s1.6 4.1.1 5.7l-25 26c-.8.8-1.8 1.2-2.9 1.2z'
-                  ></path></g
-                ></svg
-              ></span
-            ></button
+            class='current-lang text-sm md:text-base border border-gray-400 rounded py-1 px-2 w-max flex flex-row items-center gap-1'
+            >{currentLang.toUpperCase()}</button
           >
           <nav
-            class='change-lang hidden flex flex-col gap-2 absolute -bottom-16 sm:-bottom-20 -right-0 left-0 border border-gray-300 rounded py-1 px-2 bg-white z-20'>
+            class='change-lang hidden flex flex-col gap-2 absolute -bottom-16 sm:-bottom-20 -right-0 left-0 border border-blue-500 rounded py-1 px-2 bg-white shadow z-20'>
             <a href={changeSiteLanguageTo('ru')} class='block w-full'>RU</a>
             <a href={changeSiteLanguageTo('en')} class='block w-full'>EN</a>
           </nav>
@@ -68,12 +53,38 @@ function changeSiteLanguageTo(to: string) {
 </header>
 
 <script>
-  const languageSelect = document.querySelector('.current-lang')
-  const selectorPopup = document.querySelector('.change-lang')
+  const languageSelect = document.querySelector<HTMLElement>('.current-lang')!
+  const selectorPopup = document.querySelector<HTMLElement>('.change-lang')!
 
+  let isSelectorPopupOpened = false
   languageSelect?.addEventListener('click', e => {
-    const chevron: HTMLSpanElement = languageSelect.querySelector('span')!
-    chevron.classList.toggle('rotate-180')
-    selectorPopup?.classList.toggle('hidden')
+    toggleLanguageSelect()
   })
+
+  function toggleLanguageSelect() {
+    languageSelect.classList.toggle('border-gray-400')
+    languageSelect.classList.toggle('bg-blue-100')
+    languageSelect.classList.toggle('border-blue-500')
+    selectorPopup?.classList.toggle('hidden')
+    isSelectorPopupOpened = !isSelectorPopupOpened
+  }
+
+  hideOnClickOutside(selectorPopup)
+
+  function hideOnClickOutside(element: HTMLElement) {
+    //
+    const outsideClickListener = (event: Event) => {
+      const isSelectorButtonClicked = event.target == languageSelect
+
+      if (!element.contains(event.target as Node) && isSelectorPopupOpened && !isSelectorButtonClicked) {
+        toggleLanguageSelect()
+        removeClickListener()
+      }
+    }
+
+    const removeClickListener = () => {
+      document.body.removeEventListener('click', outsideClickListener)
+    }
+    document.body.addEventListener('click', outsideClickListener)
+  }
 </script>
