@@ -6,7 +6,7 @@ const education = await getCollection('education')
 const courses = await getCollection('courses')
 ---
 
-<section class=''>
+<section id='education-tab' class='tab'>
   <h2 class='lg:mb-4 mb-3 text-2xl'>
     {translation[lang].tab_education}
   </h2>
@@ -22,7 +22,7 @@ const courses = await getCollection('courses')
       ))
     }
   </div>
-  <h2 class='lg:mb-4 mb-3 text-xl'>{translation[lang].tab_education_courses}</h2>
+  <h2 class='lg:mb-3 mb-2 text-xl'>{translation[lang].tab_education_courses}</h2>
   <div class='flex flex-col gap-4 mb-8'>
     {
       courses.map(courseItem => (

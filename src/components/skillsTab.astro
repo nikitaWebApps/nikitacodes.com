@@ -5,7 +5,7 @@ const lang = (Astro.currentLocale as 'en' | 'ru') || 'en'
 const skills = await getCollection('skills')
 ---
 
-<section class=''>
+<section id='skills-tab' class='tab'>
   <h2 class='lg:mb-4 mb-2 text-2xl'>{translation[lang].tab_skills}</h2>
   <div class='flex flex-col gap-8'>
     <div>

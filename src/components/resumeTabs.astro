@@ -1,0 +1,131 @@
+---
+import WorkExpTab from '../components/workExpTab.astro'
+import EducationTab from '../components/educationTab.astro'
+import SkillsTab from '../components/skillsTab.astro'
+const tabs = [
+  {
+    slug: 'work-exp-tab',
+    ru: 'Опыт работы',
+    en: 'Work Experience',
+  },
+  {
+    slug: 'skills-tab',
+    ru: 'Навыки',
+    en: 'Skills',
+  },
+  {
+    slug: 'education-tab',
+    ru: 'Образование',
+    en: 'Education',
+  },
+]
+const currentLocale = (Astro.currentLocale as 'ru' | 'en') || 'en'
+---
+
+<div class='px-4 sm:px-8'>
+  <nav class='flex flex-row gap-3 overflow-auto snap-x snap-proximity mb-8 lg:hidden'>
+    {
+      tabs.map(tab => (
+        <button
+          data-tab={tab.slug}
+          class='tab-select flex flex-row grow justify-center text-center text-nowrap py-2 px-2 snap-center transition-colors duration-500'
+          role='button'>
+          {tab[currentLocale]}
+        </button>
+      ))
+    }
+  </nav>
+
+  <div class='lg:grid grid-cols-1 gap-16'>
+    <WorkExpTab />
+    <SkillsTab />
+    <EducationTab />
+  </div>
+</div>
+<script>
+  const tabs = Array.from(document.querySelectorAll<HTMLElement>('.tab'))
+
+  const activeTab = {
+    currentTab: tabs[0],
+    previousTab: tabs[0],
+    init: function () {
+      tabs[0].classList.remove('hidden')
+      tabs.forEach(tab => {
+        if (tab.id !== this.currentTab.id) {
+          tab.classList.add('hidden')
+        } else {
+          tab.classList.remove('hidden')
+        }
+      })
+    },
+    set: function (newTabSlug: string) {
+      this.previousTab = this.currentTab
+      this.currentTab = tabs.find(tab => tab.id == newTabSlug)!
+      tabs.forEach(tab => {
+        if (tab.id !== this.currentTab.id) {
+          tab.classList.add('hidden')
+        } else {
+          tab.classList.remove('hidden')
+        }
+      })
+    },
+    showAll: function () {
+      tabs.forEach(tab => {
+        tab.classList.remove('hidden')
+      })
+    },
+  }
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 1024) {
+      activeTab.showAll()
+    } else {
+      activeTab.init()
+      tabButtonsInit()
+    }
+  })
+
+  if (window.innerWidth < 1024) {
+    activeTab.init()
+    tabButtonsInit()
+  }
+
+  function tabButtonsInit() {
+    const buttons = document.querySelectorAll<HTMLButtonElement>('.tab-select')
+    const activeClasses = ['text-blue-600', 'border-blue-600', 'border-b-2']
+    const inactiveClasses = ['border-b-1', 'border-gray-500', 'text-gray-600']
+
+    const setButtonActive = (button: HTMLButtonElement) => {
+      button.classList.remove(...inactiveClasses)
+      button.classList.add(...activeClasses)
+    }
+    const setButtonInactive = (button: HTMLButtonElement) => {
+      button.classList.remove(...activeClasses)
+      button.classList.add(...inactiveClasses)
+    }
+
+    buttons.forEach(button => {
+      const buttonSlug = button.getAttribute('data-tab')!
+      if (buttonSlug == activeTab.currentTab.id) {
+        setButtonActive(button)
+      } else {
+        setButtonInactive(button)
+      }
+    })
+
+    let prevButton = buttons[0]
+    buttons.forEach(button => {
+      button.addEventListener('click', e => {
+        const newButton = e.target as HTMLButtonElement
+        const newSlug = newButton.getAttribute('data-tab')!
+        newButton.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
+        activeTab.set(newSlug)
+        if (newButton !== prevButton) {
+          setButtonInactive(prevButton)
+          setButtonActive(newButton)
+          prevButton = newButton
+        }
+      })
+    })
+  }
+</script>

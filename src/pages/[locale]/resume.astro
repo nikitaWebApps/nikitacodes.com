@@ -3,10 +3,7 @@ import Layout from '../../layouts/Layout.astro'
 import Head from '../../components/Head.astro'
 import { getCollection } from 'astro:content'
 import { translation } from '../../i18n/translations'
-import ResumeTabs from '../../components/resumeTabs.vue'
-import WorkExpTab from '../../components/workExpTab.astro'
-import EducationTab from '../../components/educationTab.astro'
-import SkillsTab from '../../components/skillsTab.astro'
+import ResumeTabs from '../../components/resumeTabs.astro'
 const currentLang = Astro.currentLocale as 'ru' | 'en'
 export async function getStaticPaths() {
   const pages = await getCollection('projects')
@@ -21,9 +18,5 @@ export async function getStaticPaths() {
 
 <Layout pageTitle={translation[currentLang].resume}>
   <Head lang={currentLang} transition:persist />
-  <ResumeTabs client:load currentLocale={currentLang}>
-    <WorkExpTab lang={currentLang} slot='work-exp-tab' />
-    <SkillsTab lang={currentLang} slot='skills-tab' />
-    <EducationTab lang={currentLang} slot='education-tab' />
-  </ResumeTabs>
+  <ResumeTabs />
 </Layout>
