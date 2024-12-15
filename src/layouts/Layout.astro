@@ -1,14 +1,14 @@
 ---
-import Header from '../components/Header.vue'
+import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro'
 import {translation} from '../i18n/translations'
+import { ClientRouter } from 'astro:transitions';
 const isDev = import.meta.env.DEV
 const lang = Astro.currentLocale as keyof typeof translation || 'en'
 const currentPath = Astro.url.pathname
 const {pageTitle} = Astro.props
 const title = pageTitle ? pageTitle + " | " + translation[lang].index_title : translation.en.index_title
 ---
-
 <html lang={lang} class='font-body scroll-smooth'>
 	<head>
 		<meta charset='utf-8' />
@@ -42,7 +42,7 @@ const title = pageTitle ? pageTitle + " | " + translation[lang].index_title : tr
 		<title>{title}</title>
 	</head>
 	<body>
-		<Header client:load currentLocale={lang} currentPath={currentPath} />
+		<Header />
 		<main class='max-w-screen-lg mx-auto mb-16'>
 			<slot />
 		</main>

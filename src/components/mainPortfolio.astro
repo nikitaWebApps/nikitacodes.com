@@ -1,5 +1,4 @@
 ---
-import Image from 'astro/components/Image.astro'
 import { getCollection } from 'astro:content'
 import ProjectCard from './ProjectCard.astro'
 import { translation } from '../i18n/translations'
@@ -8,9 +7,8 @@ const projectsData = await getCollection('projects')
 let projects = projectsData
   .filter(project => project.id.split('/')[1] == currentLang)
   .sort((a, b) => {
-    return a.data.publishedDate.getTime() - b.data.publishedDate.getTime()
-  })
-const pathname = Astro.url.pathname.replaceAll('/', '')
+    return b.data.publishedDate.getTime() - a.data.publishedDate.getTime()
+  }) as typeof projectsData
 ---
 
 <section id='cases__front-page' class='mx-auto px-4 sm:px-8 scroll-mt-24'>
