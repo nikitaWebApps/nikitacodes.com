@@ -1,90 +1,18 @@
 ---
-import { translation } from '../i18n/translations'
+import IconHome from '../icons/IconHome.astro'
+import HeaderMenu from './HeaderMenu.astro'
 
 let currentLang = (Astro.currentLocale as 'ru' | 'en') || 'en'
 const homepageUrl = `/${currentLang}`
-const resumeLink = `/${currentLang}/resume`
-const portfolioLink = `/${currentLang}#cases__front-page`
-function changeSiteLanguageTo(to: string) {
-  let newLocation = Astro.url.pathname
-  const currentPath = Astro.url.pathname
-  if (currentLang == to) {
-    return newLocation
-  }
-  if (currentLang !== to) {
-    newLocation = currentPath.replace(currentLang, to)
-  }
-  return newLocation
-}
 ---
 
 <header class='bg-white grid grid-rows-1 max-h-screen fixed w-full top-0 z-10 border-b border-gray-200'>
   <nav class='container max-w-screen-lg mx-auto py-2 px-4 md:px-8 flex flex-row justify-between items-center text-base'>
     <div class='relative -left-3'>
       <a href={homepageUrl} aria-label='Home Page' class='transition duration-500 trangray-x-0'>
-        <svg width='48' height='48' viewBox='0 0 48 48' fill='none' xmlns='http://www.w3.org/2000/svg'>
-          <path
-            class='fill-gray-900'
-            d='M16.0003 33.3333H20.923V25.488H27.0777V33.3333H32.0003V21.3333L24.0003 15.2826L16.0003 21.3333V33.3333ZM14.667 34.6666V20.6666L24.0003 13.616L33.3337 20.6666V34.6666H25.7443V26.8213H22.2563V34.6666H14.667Z'
-          ></path>
-        </svg>
+        <IconHome />
       </a>
     </div>
-    <div class='flex flex-row gap-2'>
-      <div class='flex flex-row items-center sm:gap-4 gap-2'>
-        <a class='text-sm md:text-base' href={portfolioLink}>{translation[currentLang].projects}</a>
-        <a class='text-sm md:text-base' href={resumeLink}>{translation[currentLang].resume}</a>
-        <div class='relative'>
-          <button
-            type='button'
-            aria-label='Change Language'
-            class='current-lang text-sm md:text-base border border-gray-400 rounded py-1 px-2 w-max flex flex-row items-center gap-1'
-            >{currentLang.toUpperCase()}</button
-          >
-          <nav
-            class='change-lang hidden flex flex-col gap-2 absolute -bottom-16 sm:-bottom-20 -right-0 left-0 border border-blue-500 rounded py-1 px-2 bg-white shadow z-20'>
-            <a href={changeSiteLanguageTo('ru')} class='block w-full'>RU</a>
-            <a href={changeSiteLanguageTo('en')} class='block w-full'>EN</a>
-          </nav>
-        </div>
-      </div>
-    </div>
+    <HeaderMenu currentLang={currentLang} />
   </nav>
 </header>
-
-<script>
-  const languageSelect = document.querySelector<HTMLElement>('.current-lang')!
-  const selectorPopup = document.querySelector<HTMLElement>('.change-lang')!
-
-  let isSelectorPopupOpened = false
-  languageSelect?.addEventListener('click', e => {
-    toggleLanguageSelect()
-  })
-
-  function toggleLanguageSelect() {
-    languageSelect.classList.toggle('border-gray-400')
-    languageSelect.classList.toggle('bg-blue-100')
-    languageSelect.classList.toggle('border-blue-500')
-    selectorPopup?.classList.toggle('hidden')
-    isSelectorPopupOpened = !isSelectorPopupOpened
-  }
-
-  hideOnClickOutside(selectorPopup)
-
-  function hideOnClickOutside(element: HTMLElement) {
-    //
-    const outsideClickListener = (event: Event) => {
-      const isSelectorButtonClicked = event.target == languageSelect
-
-      if (!element.contains(event.target as Node) && isSelectorPopupOpened && !isSelectorButtonClicked) {
-        toggleLanguageSelect()
-        removeClickListener()
-      }
-    }
-
-    const removeClickListener = () => {
-      document.body.removeEventListener('click', outsideClickListener)
-    }
-    document.body.addEventListener('click', outsideClickListener)
-  }
-</script>
