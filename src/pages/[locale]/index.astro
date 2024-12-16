@@ -7,10 +7,9 @@ import { translation } from '../../i18n/translations'
 const currentLang = Astro.currentLocale as keyof typeof translation
 
 export async function getStaticPaths() {
-  const pages = await getCollection('cases')
+  const pages = await getCollection('projects')
   return pages.map(page => {
-    const locale = page.id.split('/')[0]
-
+    const locale = page.id.split('/')[1]
     return {
       params: { locale },
     }

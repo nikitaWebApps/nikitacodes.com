@@ -1,12 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro'
 import Head from '../components/Head.astro'
-import AstroResumeTabs from '../components/AstroResumeTabs.astro'
+import ResumeTabs from '../components/resumeTabs.astro'
 import { translation } from '../i18n/translations'
-const currentLang = 'en'
+const defaultLang = 'en'
 ---
 
-<Layout pageTitle={translation[currentLang].resume}>
+<Layout pageTitle={translation[defaultLang].resume}>
   <Head />
-  <AstroResumeTabs />
+  <ResumeTabs />
 </Layout>

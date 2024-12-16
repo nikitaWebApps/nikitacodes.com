@@ -1,0 +1,99 @@
+---
+import Image from 'astro/components/Image.astro'
+import type { CollectionEntry } from 'astro:content'
+import { translation } from '../i18n/translations'
+import { getImage } from 'astro:assets'
+
+interface Props {
+  project: CollectionEntry<'projects'>
+}
+
+const currentLang = (Astro.currentLocale as 'ru' | 'en') || 'en'
+
+const { project } = Astro.props
+const images = import.meta.glob<{ string: ImageMetadata }>('/src/img/*.{jpg,png}')
+const coverImageSrc = Object.keys(images).find(
+  key => key.includes(project.data.imageKey) && key.includes('cover')
+) as string
+
+const projectImages = Object.keys(images).filter(imageSrc => imageSrc.includes(project.data.imageKey))
+async function optimizeImages() {
+  const imageObjects = []
+  for (const [key, imageGetter] of Object.entries(images)) {
+    if (key.includes(project.data.imageKey)) {
+      const imageObject = await getImage({ src: imageGetter(), format: 'webp', quality: 80 })
+      imageObjects.push(imageObject)
+    }
+  }
+  return imageObjects
+}
+const optimizedImages = await optimizeImages()
+---
+
+<section class='project flex flex-col gap-4 md:grid grid-cols-[35%_1fr] md:gap-6' data-imglinks={projectImages}>
+  <a
+    class='venobox block overflow-clip'
+    href={coverImageSrc}
+    data-gall={project.id.split('/')[2]}
+    aria-label='Open project gallery'>
+    <img
+      src={optimizedImages[0].src}
+      alt={''}
+      class='block h-full object-cover hover:scale-110 transition-transform duration-300'
+      loading='lazy'
+    />
+  </a>
+  {
+    optimizedImages.slice(1).map((img, index) => (
+      <a class='venobox hidden' href={img.src} data-gall={project.id.split('/')[2]} aria-label='Open project gallery'>
+        <img src={'#'} alt='' loading='lazy' />
+      </a>
+    ))
+  }
+  <div class='flex flex-col gap-6 justify-between md:-order-1'>
+    <div class='flex flex-col'>
+      <p class='text-blue-600 text-sm mb-2'>{project.data.techStack.join(' • ')}</p>
+      <h3 class='text-xl md:text-2xl transition duration-300 mb-3'>
+        {project.data.title}
+      </h3>
+      <ul class='flex flex-col gap-1 list-disc pl-4'>
+        {project.data.keyFeatures?.map(feature => <li class='text-gray-700'>{feature}</li>)}
+      </ul>
+    </div>
+    <div class='flex w-max h-min'>
+      {
+        project.data.siteLink ? (
+          <a
+            href={project.data.siteLink}
+            rel='nofollow'
+            target='_blank'
+            class='text-center px-4 py-2 bg-blue-600 hover:bg-blue-500 transition text-white rounded  min-w-48'>
+            {translation[currentLang].projectCard.link}
+          </a>
+        ) : (
+          <p class='bg-gray-200 text-gray-800 px-4 py-2 rounded min-w-48'>
+            {translation[currentLang].projectCard.inDevelopment}
+          </p>
+        )
+      }
+    </div>
+  </div>
+</section>
+<style is:global>
+  .vbox-close {
+    top: 16px !important;
+    right: 16px !important;
+  }
+  .vbox-next {
+    right: 32px !important;
+  }
+</style>
+<script>
+  import '../../node_modules/venobox/src/venobox.css'
+  import Venobox from '../../node_modules/venobox/src/venobox.esm'
+  new Venobox({
+    infinigall: true,
+    numeration: true,
+    fitView: true,
+  })
+</script>

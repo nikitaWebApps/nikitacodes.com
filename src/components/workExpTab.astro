@@ -1,69 +1,23 @@
 ---
-import useIsLangRu from '../composables/useIsLangRu'
-import type { translation } from '../i18n/translations'
-const isLangRu = useIsLangRu(Astro.props.lang)
+import { getCollection } from 'astro:content'
+import { translation } from '../i18n/translations'
 const lang = (Astro.currentLocale as keyof typeof translation) || 'en'
-const myWorkExp = {
-  ru: [
-    {
-      position: 'Frontend-разработчик',
-      company: 'ООО «Фармацевтикал Косметик»',
-      date: 'Полная занятость, Ноябрь 2022 — н.в.',
-      resp: [
-        'Полное техническое сопровождение разработки WEB-проектов компании (анализ бизнес-задач, поиск оптимально стека, составление ТЗ, декомпозиция, разработка, внедрение, документирование).',
-        'Поддержка, рефакторинг и добавление новых функций в текущие проекты компании.',
-        'Интеграции проектов с внешними системами: Битрикс24, 1С, ЮКасса и другими.',
-        'UX/UI-дизайн, продумывание и улучшение пользовательского опыта основываясь на данных аналитики.',
-        'Взаимодействие с командой маркетинга: PM, SMM-менеджер, маркетолог, контент-менеджер.',
-      ],
-    },
-    {
-      position: 'Frontend-разработчик',
-      company: 'ООО «АЧЕ-РУ»',
-      date: 'Проектная работа, Апрель 2024 — Июнь 2024',
-      resp: [
-        'Полное ведение проекта: интервью с заказчиком, понимание задачи, брифинг UX/UI-дизайнера и составление ТЗ, презентация дизайна и финального сайта.',
-        'Адаптивная кроссбраузерная вёрстка сайта с исспользованием WordPress в качестве CMS.',
-      ],
-    },
-  ],
-  en: [
-    {
-      position: 'Front-end Developer',
-      company: 'Pharmaceutical Cosmetic LLC',
-      date: 'Full-time, Nov 2022 — Present',
-      resp: [
-        `Full technical support for the company's web project development (analyzing business tasks, selecting the optimal tech stack, creating technical specifications, decomposition, development, implementation, and documentation).`,
-        `Support, refactoring, and adding new features to the company's existing projects.`,
-        `Integration of projects with external systems such as Bitrix24, 1C, YooMoney, and others.`,
-        `UX/UI design, including planning and enhancing user experience based on web analytics data.`,
-        `Collaboration with the marketing team: PM, SMM manager, marketer, and content manager.`,
-      ],
-    },
-    {
-      position: 'Front-end Developer',
-      company: 'ACE-RU LLC',
-      date: 'Contract, Apr 2024 — Jun 2024',
-      resp: [
-        'Full project management: client interviews, understanding the requirements, briefing the UX/UI designer and creating technical specifications, presenting the design and the final website.',
-        'Responsive, cross-browser website layout using WordPress as the CMS.',
-      ],
-    },
-  ],
-}
+const resume = await getCollection('resume')
 ---
 
-<section class=''>
-  <h2 class='lg:mb-6 mb-3 text-2xl'>{isLangRu ? 'Опыт работы' : 'Work experience'}</h2>
+<section id='work-exp-tab' class='tab lg:max-w-screen-md'>
+  <h2 class='lg:mb-6 mb-3 text-2xl'>{translation[lang].tab_workexp}</h2>
   <div class='flex flex-col gap-6 lg:gap-8'>
     {
-      myWorkExp[lang].map(workItem => (
+      resume.map(resumeItem => (
         <>
           <div class=''>
-            <h3 class='text-xl'>{workItem.company}</h3>
-            <p class='text-slate-500 mb-4 text-sm lg:text-base'>{workItem.position + ' | ' + workItem.date}</p>
+            <h3 class='text-xl'>{resumeItem.data[lang].position}</h3>
+            <p class='text-gray-500 mb-4 text-sm lg:text-base'>
+              {resumeItem.data[lang].company + ' | ' + resumeItem.data[lang].dates}
+            </p>
             <ul class='list-disc pl-4 flex flex-col gap-2'>
-              {workItem.resp.map(respItem => (
+              {resumeItem.data[lang].responsibilities.map(respItem => (
                 <li set:html={respItem} />
               ))}
             </ul>

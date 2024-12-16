@@ -1,39 +1,21 @@
 ---
-import useIsLangRu from '../composables/useIsLangRu'
-const isLangRu = useIsLangRu(Astro.props.lang)
-const mySkills: string[] = [
-  'JavaScript',
-  'TypeScript',
-  'Sass',
-  'BEM',
-  'TailwindCSS',
-  'Vue',
-  'Nuxt',
-  'Pinia',
-  'Astro',
-  'GSAP',
-  'VS Code',
-  'PHP',
-  'Wordpress',
-  'Git',
-  'GitHub',
-  'Figma',
-  'Tilda',
-  'English — B2',
-  'German — B2',
-]
-const heading = Astro.props.heading as string
+import { getCollection } from 'astro:content'
+import { translation } from '../i18n/translations'
+const lang = (Astro.currentLocale as 'en' | 'ru') || 'en'
+const skills = await getCollection('skills')
 ---
 
-<section class=''>
-  <h2 class='lg:mb-4 mb-2 text-2xl'>{isLangRu ? 'Навыки' : 'Skills'}</h2>
+<section id='skills-tab' class='tab'>
+  <h2 class='lg:mb-4 mb-2 text-2xl'>{translation[lang].tab_skills}</h2>
   <div class='flex flex-col gap-8'>
     <div>
       <ul class='flex flex-row gap-3 flex-wrap'>
         {
-          mySkills.map(skill => (
-            <li class='text-center text-sm px-3 py-2 bg-blue-50 rounded text-slate-900'>{skill}</li>
-          ))
+          skills.map(skillsArr =>
+            skillsArr.data.data.map(skill => (
+              <li class='text-center text-sm px-3 py-2 bg-blue-50 rounded text-gray-900'>{skill}</li>
+            ))
+          )
         }
       </ul>
     </div>

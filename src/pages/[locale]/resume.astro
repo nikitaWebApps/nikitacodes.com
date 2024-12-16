@@ -1,14 +1,14 @@
 ---
 import Layout from '../../layouts/Layout.astro'
 import Head from '../../components/Head.astro'
-import AstroResumeTabs from '../../components/AstroResumeTabs.astro'
 import { getCollection } from 'astro:content'
 import { translation } from '../../i18n/translations'
+import ResumeTabs from '../../components/resumeTabs.astro'
 const currentLang = Astro.currentLocale as 'ru' | 'en'
 export async function getStaticPaths() {
-  const pages = await getCollection('cases')
+  const pages = await getCollection('projects')
   return pages.map(page => {
-    const locale = page.id.split('/')[0]
+    const locale = page.id.split('/')[1]
     return {
       params: { locale },
     }
@@ -18,5 +18,5 @@ export async function getStaticPaths() {
 
 <Layout pageTitle={translation[currentLang].resume}>
   <Head lang={currentLang} transition:persist />
-  <AstroResumeTabs />
+  <ResumeTabs />
 </Layout>
