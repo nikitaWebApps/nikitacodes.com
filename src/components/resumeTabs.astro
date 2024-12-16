@@ -93,7 +93,7 @@ const currentLocale = (Astro.currentLocale as 'ru' | 'en') || 'en'
   function tabButtonsInit() {
     const buttons = document.querySelectorAll<HTMLButtonElement>('.tab-select')
     const activeClasses = ['text-blue-600', 'border-blue-600', 'border-b-2']
-    const inactiveClasses = ['border-b-1', 'border-gray-500', 'text-gray-600']
+    const inactiveClasses = ['border-b-2', 'border-gray-400', 'text-gray-600']
 
     const setButtonActive = (button: HTMLButtonElement) => {
       button.classList.remove(...inactiveClasses)
