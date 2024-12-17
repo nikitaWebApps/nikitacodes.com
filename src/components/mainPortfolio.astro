@@ -15,7 +15,7 @@ let projects = projectsData
   <h2 class='text-2xl mb-6 md:mb-8 lg:text-3xl'>
     {translation[currentLang].projects}
   </h2>
-  <div class='flex flex-col gap-8 lg:gap-16'>
+  <div class='flex flex-col gap-12 lg:gap-16'>
     {projects.map(project => <ProjectCard project={project} />)}
   </div>
 </section>

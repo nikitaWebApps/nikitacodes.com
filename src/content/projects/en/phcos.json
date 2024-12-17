@@ -1,0 +1,14 @@
+{
+  "imageKey": "phcos",
+  "publishedDate": "2024-08-01",
+  "techStack": ["Vue", "Nuxt", "TypeScript", "Tailwind CSS", "Headless Wordpress"],
+  "siteLink": "https://phcos.ru",
+  "title": "E-commerce site made with Nuxt and Headless Wordpress",
+  "keyFeatures": [
+    "Moved Site from classic Wordpress theme to Nuxt SSR frontend",
+    "Provided up to 3 times faster page loading speeds and clean new look",
+    "Wrote multiple custom components for better UX and sell conversion rates",
+    "Set up Github Actions CI/CD workflow for smooth developer experience"
+  ]
+}
+

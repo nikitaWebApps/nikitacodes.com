@@ -35,9 +35,9 @@ function changeSiteLanguageTo(to: string) {
         >{currentLang.toUpperCase()}</button
       >
       <nav
-        class='change-lang hidden flex flex-col gap-2 absolute -bottom-16 sm:-bottom-20 -right-0 left-0 border border-blue-500 rounded py-1 px-2 bg-white shadow z-20'>
-        <a href={changeSiteLanguageTo('ru')} class='block w-full'>RU</a>
-        <a href={changeSiteLanguageTo('en')} class='block w-full'>EN</a>
+        class='change-lang hidden flex flex-col gap-2 absolute -bottom-16 md:-bottom-20 -right-0 left-0 border border-blue-500 rounded py-1 px-2 bg-white shadow z-20'>
+        <a href={changeSiteLanguageTo('ru')} class='block w-full text-sm md:text-base'>RU</a>
+        <a href={changeSiteLanguageTo('en')} class='block w-full text-sm md:text-base'>EN</a>
       </nav>
     </div>
   </div>
@@ -47,7 +47,7 @@ function changeSiteLanguageTo(to: string) {
   const selectorPopup = document.querySelector<HTMLElement>('.change-lang')!
 
   let isSelectorPopupOpened = false
-  languageSelect?.addEventListener('click', e => {
+  languageSelect?.addEventListener('click', () => {
     toggleLanguageSelect()
   })
 

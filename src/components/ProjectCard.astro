@@ -1,5 +1,4 @@
 ---
-import Image from 'astro/components/Image.astro'
 import type { CollectionEntry } from 'astro:content'
 import { translation } from '../i18n/translations'
 import { getImage } from 'astro:assets'
@@ -12,16 +11,17 @@ const currentLang = (Astro.currentLocale as 'ru' | 'en') || 'en'
 
 const { project } = Astro.props
 const images = import.meta.glob<{ string: ImageMetadata }>('/src/img/*.{jpg,png}')
-const coverImageSrc = Object.keys(images).find(
-  key => key.includes(project.data.imageKey) && key.includes('cover')
-) as string
 
 const projectImages = Object.keys(images).filter(imageSrc => imageSrc.includes(project.data.imageKey))
 async function optimizeImages() {
   const imageObjects = []
   for (const [key, imageGetter] of Object.entries(images)) {
     if (key.includes(project.data.imageKey)) {
-      const imageObject = await getImage({ src: imageGetter(), format: 'webp', quality: 80 })
+      const imageObject = await getImage({
+        src: imageGetter() as unknown as ImageMetadata,
+        format: 'webp',
+        quality: 80,
+      })
       imageObjects.push(imageObject)
     }
   }
@@ -32,21 +32,21 @@ const optimizedImages = await optimizeImages()
 
 <section class='project flex flex-col gap-4 md:grid grid-cols-[35%_1fr] md:gap-6' data-imglinks={projectImages}>
   <a
-    class='venobox block overflow-clip'
-    href={coverImageSrc}
+    class='venobox flex overflow-clip'
+    href={optimizedImages[0].src}
     data-gall={project.id.split('/')[2]}
     aria-label='Open project gallery'>
     <img
       src={optimizedImages[0].src}
       alt={''}
-      class='block h-full object-cover hover:scale-110 transition-transform duration-300'
+      class='block object-cover h-full hover:scale-110 transition-transform duration-300'
       loading='lazy'
     />
   </a>
   {
-    optimizedImages.slice(1).map((img, index) => (
+    optimizedImages.slice(1).map(img => (
       <a class='venobox hidden' href={img.src} data-gall={project.id.split('/')[2]} aria-label='Open project gallery'>
-        <img src={'#'} alt='' loading='lazy' />
+        <img src={img.src} alt='' loading='lazy' />
       </a>
     ))
   }
@@ -90,6 +90,7 @@ const optimizedImages = await optimizeImages()
 </style>
 <script>
   import '../../node_modules/venobox/src/venobox.css'
+  // @ts-ignore
   import Venobox from '../../node_modules/venobox/src/venobox.esm'
   new Venobox({
     numeration: true,

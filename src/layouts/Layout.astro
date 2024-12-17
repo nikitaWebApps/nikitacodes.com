@@ -2,10 +2,8 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro'
 import {translation} from '../i18n/translations'
-import { ClientRouter } from 'astro:transitions';
 const isDev = import.meta.env.DEV
 const lang = Astro.currentLocale as keyof typeof translation || 'en'
-const currentPath = Astro.url.pathname
 const {pageTitle} = Astro.props
 const title = pageTitle ? pageTitle + " | " + translation[lang].index_title : translation.en.index_title
 ---
