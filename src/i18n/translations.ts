@@ -1,50 +1,58 @@
-export const languages = {
+export const Languages = {
   en: 'English',
   ru: 'Russian',
 }
 
 export const defaultLang = 'en'
 
-export const translation = {
+export const translations = {
   en: {
     index_title: 'Nikita Golovlev, frontend-developer',
-    head_hello: 'Hello! My name is',
+    hello: 'Hello',
     resume: 'CV',
+    links: 'Links',
     projects: 'Projects',
     homepage: 'Homepage',
-    tab_workexp: 'Work Experience',
+    experience: 'Experience',
     tab_skills: 'Skills',
-    tab_education: 'Education',
-    tab_education_courses: 'Courses',
+    education: 'Education',
+    higher_education: 'Higher Education',
+    courses: 'Courses',
     tab_summary: 'Summary',
     open_pdf: 'Open PDF',
     projectCard: {
       details: 'Details',
-      link: 'See live',
+      see_live: 'See live',
       inDevelopment: 'In deveplopment',
     },
-    check_resume: 'Go to CV',
-    check_portfolio: 'Go to Portfolio',
+    last_updated: 'Last updated',
+    next_slide: 'Next slide →',
+    prev_slide: '← Previous slide',
+    get_in_touch: 'Get in touch',
   },
   ru: {
     index_title: 'Никита Головлев, фронтенд-разработчик',
-    head_hello: 'Привет! Меня зовут',
+    hello: 'Привет',
     resume: 'Резюме',
+    links: 'Ссылки',
     projects: 'Проекты',
     homepage: 'Главная страница',
-    tab_workexp: 'Опыт работы',
+    experience: 'Опыт работы',
     tab_skills: 'Навыки',
-    tab_education: 'Образование',
-    tab_education_courses: 'Курсы',
+    education: 'Образование',
+    higher_education: 'Высшее образование',
+    courses: 'Курсы',
     tab_summary: 'Саммари',
     open_pdf: 'Открыть PDF',
     projectCard: {
       details: 'Подробнее',
-      link: 'Посмотреть сайт',
+      see_live: 'Посмотреть сайт',
       inDevelopment: 'В разработке',
     },
-    check_resume: 'Посмотреть резюме',
-    check_portfolio: 'Перейти к портфолио',
+    last_updated: 'Последнее обновление',
+    next_slide: 'Следующий слайд →',
+    prev_slide: '← Предыдущий слайд',
+    get_in_touch: 'Связаться',
   },
 }
 

@@ -1,0 +1,36 @@
+{
+  "description": {
+    "en": "For the last 2 years I have worked at Pharmaceutical Cosmetics. Worked in b2B and B2C segments of the site. Engaged in support and development of existing systems.",
+    "ru": "За последние 2 года я работала в компании Pharmaceutical Cosmetics. Работала в сегментах B2B и B2C сайта. Занималась поддержкой и развитием существующих систем."
+  },
+  "jobs": [
+    {
+      "id": 1,
+      "en": {
+        "position": "Frontend Developer",
+        "company": "Pharmaceutical Cosmetic LLC",
+        "dates": "Full-time, Nov 2022 — Present",
+        "responsibilities": [
+          "Full technical development and optimization for company websites, including analysis, tech stack selection, and implementation.",
+          "Support, refactoring, and adding new features to the company/'s existing projects.",
+          "Integration of projects with external systems via APIs",
+          "UX/UI design, including planning and enhancing user experience based on web analytics data.",
+          "Collaborated with cross-functional teams, including marketing, content and sale team."
+        ]
+      },
+      "ru": {
+        "position": "Front-end Разработчик",
+        "company": "ООО «Фармацевтикал Косметик»",
+        "dates": "Полная занятость, Ноябрь 2022 — н.в.",
+        "responsibilities": [
+          "Полное техническое сопровождение разработки web-проектов компании (анализ бизнес-задач, поиск оптимально стека, составление ТЗ, декомпозиция, разработка, внедрение, документирование).",
+          "Поддержка, рефакторинг и добавление новых функций в текущие проекты компании.",
+          "Интеграции проектов с внешними системами: Битрикс24, 1С, ЮКасса и другими.",
+          "UX/UI-дизайн, продумывание и улучшение пользовательского опыта основываясь на данных аналитики.",
+          "Взаимодействие с командой маркетинга: PM, SMM-менеджер, маркетолог, контент-менеджер."
+        ]
+      }
+    }
+  ]
+}
+

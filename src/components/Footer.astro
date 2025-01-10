@@ -1,7 +1,10 @@
 ---
-const currentLocale = Astro.currentLocale
+import { translations } from '../i18n/translations'
+import BigCtaButton from './BigCtaButton.astro'
+
+const lang = (Astro.currentLocale as 'ru' | 'en') || 'en'
 let date
-if (currentLocale == 'ru') {
+if (lang == 'ru') {
   date = new Date()
     .toLocaleString('ru-RU', { year: 'numeric', month: 'long', localeMatcher: 'best fit' })
     .replace('г.', '')
@@ -12,45 +15,20 @@ if (currentLocale == 'ru') {
 }
 ---
 
-<footer class='container max-w-screen-lg px-4 sm:px-8 mx-auto mb-4'>
-  <div class='py-6 border-t border-gray-200'>
-    {currentLocale == 'ru' ? <h2 class='text-2xl mb-4'>Мои контакты</h2> : <h2 class='text-2xl mb-4'>My contacts</h2>}
-    <div class='flex flex-row flex-wrap gap-2'>
-      <a
-        class='px-4 py-2 text-center rounded-full border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition'
-        href='https://t.me/n_golovlev'
-        target='_blank'>Telegram</a
-      >
-      <a
-        class='px-4 py-2 text-center rounded-full border border-red-600 text-red-600 hover:bg-red-600 hover:text-white transition'
-        href='mailto:nikitagolovlev.design@gmail.com'
-        target='_blank'>Email</a
-      >
-      <a
-        class='px-4 py-2 text-center rounded-full border border-sky-800 text-sky-800 hover:bg-sky-800 hover:text-white transition'
-        href='https://www.linkedin.com/in/nikita-golovlev-3b7673237'
-        target='_blank'>LinkedIn</a
-      >
-      <a
-        class='px-4 py-2 text-center rounded-full border border-gray-800 text-gray-800 hover:bg-gray-900 hover:text-white transition'
-        href='https://github.com/nikitaWebApps'
-        target='_blank'>GitHub</a
-      >
+<footer class='px-4 lg:px-8 mb-8'>
+  <div class='max-w-screen-xl mx-auto flex flex-col items-start justify-start gap-6'>
+    <div class='w-full mb-20'>
+      <BigCtaButton isBig={true} />
+    </div>
+    <div class='flex flex-col gap-2'>
+      <p class='text-grey'>
+        {translations[lang].last_updated}: <span class='capitalize'>{date}</span>
+      </p>
+      <p class='text-grey'>
+        Design: <a href='#' target='_blank' class='hover:text-accent transition'>Irina Krylova</a>
+      </p>
     </div>
   </div>
-  {
-    currentLocale == 'ru' ? (
-      <h2 class='text-2xl mb-4'>
-        <p class='text-gray-400 text-sm lg:text-right'>
-          Последнее обновление: <span class='capitalize'>{date}</span>
-        </p>
-      </h2>
-    ) : (
-      <p class='text-gray-400 text-sm lg:text-right'>
-        Last updated: <span class='capitalize'>{date}</span>
-      </p>
-    )
-  }
 </footer>
 
 <script></script>

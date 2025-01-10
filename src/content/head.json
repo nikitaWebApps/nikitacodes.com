@@ -1,11 +1,11 @@
 {
-  "name": {
-    "ru": "Никита Головлёв",
-    "en": "Nikita Golovlev"
+  "title": {
+    "en": "I am a frontend-developer",
+    "ru": "Я фронтенд-разработчик"
   },
   "description": {
-    "en": "Frontend developer with 2+ years of experience creating Websites and E-commerce solutions. My stack includes: Vue, Nuxt, TypeScript, JavaScript. I also bring expertise in UX/UI design, focusing on enhancing user experiences to drive business results.",
-    "ru": "Frontend-разработчик с опытом работы более двух лет на стеке JavaScript, TypeScript, Vue и Nuxt. В разработке мне интересно создание сложных интерфейсов с приятной анимацией."
+    "en": "My experience is 2+ years in creating Websites and E-commerce solutions. I bring expertise in UX/UI design, focusing on enhancing user experiences to drive business results",
+    "ru": "Мой опыт включает более 2 лет в создании веб-сайтов и решений для электронной коммерции. Я обладаю экспертными знаниями в области UX/UI-дизайна, с акцентом на улучшение пользовательского опыта для достижения бизнес-результатов."
   },
   "resume_link": {
     "en": "/Nikita_Golovlev_Front-End_Developer.pdf",

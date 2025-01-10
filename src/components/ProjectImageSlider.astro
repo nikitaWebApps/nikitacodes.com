@@ -1,0 +1,102 @@
+---
+import type { GetImageResult } from 'astro'
+import SwiperArrow from '../icons/SwiperArrow.astro'
+import { translations } from '../i18n/translations'
+
+type Props = {
+  images: GetImageResult[]
+}
+const { images } = Astro.props
+const lang = (Astro.currentLocale as 'ru' | 'en') || 'en'
+---
+
+<div class='swiper mt-3 md:col-span-2 rounded-md lg:rounded-xl'>
+  <!-- Additional required wrapper -->
+  <div class='swiper-wrapper'>
+    {
+      images.map(image => (
+        <div class='swiper-slide'>
+          <div class='swiper-zoom-container'>
+            <img src={image.src} alt='' class='object-cover w-full' loading='lazy' />
+          </div>
+          <div class='swiper-lazy-preloader-white' />
+        </div>
+      ))
+    }
+  </div>
+
+  <button
+    type='button'
+    aria-label={translations[lang].prev_slide}
+    class='swiper-button swiper-button-prev swiper-overlay overlay-prev absolute top-0 bottom-0 left-0 [@media(pointer:coarse)]:right-[calc(100%-32px)] right-1/2 z-10 cursor-default mix-blend-difference group'>
+    <SwiperArrow />
+  </button>
+
+  <button
+    type='button'
+    aria-label={translations[lang].next_slide}
+    class='swiper-button swiper-button-next swiper-overlay overlay-next absolute top-0 bottom-0 right-0 [@media(pointer:coarse)]:left-[calc(100%-32px)] left-1/2 z-10 cursor-default mix-blend-difference group'>
+    <SwiperArrow isNext={true} />
+  </button>
+</div>
+
+<script>
+  // import Swiper JS
+  import { Swiper } from 'swiper'
+  import { Navigation, Zoom } from 'swiper/modules'
+
+  // import Swiper styles
+  import 'swiper/css'
+  import 'swiper/css/zoom'
+
+  const swiper = new Swiper('.swiper', {
+    modules: [Navigation, Zoom],
+    loop: true,
+
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    zoom: {
+      maxRatio: 2,
+    },
+  })
+
+  const buttons = document.querySelectorAll<HTMLDivElement>('.swiper-button')
+  const textContainer = document.querySelector<HTMLDivElement>('.text-container')
+
+  buttons.forEach(button => {
+    button.addEventListener('mouseleave', e => {
+      textContainer?.style.setProperty('opacity', '0')
+    })
+    button.addEventListener('mouseenter', () => {
+      textContainer?.style.setProperty('opacity', '1')
+    })
+    button.addEventListener('mousemove', e => {
+      const target = e.target as HTMLDivElement
+      if (target.classList.contains('overlay-next')) {
+        addCursorText(e, 'next')
+      } else {
+        addCursorText(e, 'prev')
+      }
+    })
+  })
+
+  function addCursorText(event: MouseEvent, text: 'next' | 'prev') {
+    //element is appended to body in layout
+    const [mouseX, mouseY] = [event.clientX, event.clientY]
+    const textContainer = document.querySelector<HTMLDivElement>('.text-container')
+    const button = event.currentTarget as HTMLButtonElement
+    if (!textContainer) {
+      return
+    }
+    textContainer!.innerText = button.getAttribute('aria-label') || 'Change Slide'
+    textContainer.style.setProperty('top', `${mouseY + 16}px`)
+    textContainer.style.setProperty('left', `${mouseX + 16}px`)
+  }
+</script>
+<style>
+  .swiper {
+    width: 100%;
+  }
+</style>

@@ -1,0 +1,63 @@
+{
+  "description": {
+    "en": "I regularly undergo training to stay up to date. I take courses, study new software, read books on development.",
+    "ru": "Я регулярно прохожу обучение, чтобы быть в курсе новейших тенденций. Я посещаю курсы, изучаю новое программное обеспечение, читаю книги по развитию."
+  },
+  "education": [
+    {
+      "icon_key": "fhdortmund",
+      "en": {
+        "profession": "Creative Audio Director (MA)",
+        "dates": "2020 – 2022",
+        "place": "Fachochschule Dortmund"
+      },
+      "ru": {
+        "profession": "Creative Audio Director (Магистратура)",
+        "dates": "2020 – 2022",
+        "place": "Fachochschule Dortmund (Дортмунд, Германия)"
+      }
+    },
+    {
+      "icon_key": "gitr",
+      "en": {
+        "profession": "Sound Designer",
+        "dates": "2012 – 2017",
+        "place": "Litovchin Institute of Film and TV"
+      },
+      "ru": {
+        "profession": "Звукорежиссёр (Бакалавриат)",
+        "dates": "2012 – 2017",
+        "place": "ГИТР"
+      }
+    }
+  ],
+  "courses": [
+    {
+      "icon_key": "practicum",
+      "en": {
+        "profession": "Interface Designer",
+        "dates": "Jun 2022 — Feb 2023",
+        "place": "Yandex Practicum"
+      },
+      "ru": {
+        "profession": "Interface Designer",
+        "dates": "Jun 2022 — Feb 2023",
+        "place": "Yandex Practicum"
+      }
+    },
+    {
+      "icon_key": "coursera",
+      "en": {
+        "profession": "Google UX Design Certificate",
+        "dates": "Apr 2022 — Jun 2022",
+        "place": "Coursera"
+      },
+      "ru": {
+        "profession": "Google UX Design Certificate",
+        "dates": "Апрель 2022 — Июнь 2022",
+        "place": "Coursera"
+      }
+    }
+  ]
+}
+

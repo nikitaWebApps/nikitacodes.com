@@ -1,0 +1,17 @@
+---
+import Arrow from '../icons/Arrow.astro'
+---
+
+<button
+  class='hero-button hidden md:flex justify-center items-center absolute bottom-8 h-16 w-16 bg-accent rounded-full [@media(max-height:700px)]:hidden'
+  type='button'
+  aria-label='Move to next section'>
+  <Arrow />
+</button>
+<script>
+  const button = document.querySelector('.hero-button')
+  const nextSection = document.querySelector('.projects-section')
+  button?.addEventListener('click', () => {
+    nextSection?.scrollIntoView({ behavior: 'smooth' })
+  })
+</script>

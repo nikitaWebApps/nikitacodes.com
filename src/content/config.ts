@@ -15,7 +15,7 @@ const projects = defineCollection({
 const head = defineCollection({
   loader: glob({ pattern: 'head.json', base: './src/content/' }),
   schema: z.object({
-    name: z.object({
+    title: z.object({
       en: z.string(),
       ru: z.string(),
     }),
@@ -38,25 +38,28 @@ const jobItem = z.object({
 })
 
 const resume = defineCollection({
-  loader: file('src/content/resume/resume.json', { parser: text => JSON.parse(text).resume }),
+  loader: glob({ pattern: 'resume.json', base: './src/content/' }),
   schema: z.object({
-    en: jobItem,
-    ru: jobItem,
+    description: z.object({
+      en: z.string(),
+      ru: z.string(),
+    }),
+    jobs: z
+      .object({
+        en: jobItem,
+        ru: jobItem,
+      })
+      .array(),
   }),
 })
 
 const skills = defineCollection({
-  loader: file('src/content/resume/resume.json', {
-    parser: text => {
-      return JSON.parse(text).skills
-    },
-  }),
-  schema: z.object({
-    data: z.string().array(),
-  }),
+  loader: glob({ pattern: 'skills.json', base: './src/content/' }),
+  schema: z.string().array(),
 })
 
 const educationObject = z.object({
+  icon_key: z.string(),
   ru: z.object({
     profession: z.string(),
     place: z.string(),
@@ -70,21 +73,15 @@ const educationObject = z.object({
 })
 
 const education = defineCollection({
-  loader: file('src/content/resume/resume.json', {
-    parser: text => {
-      return JSON.parse(text).education
-    },
+  loader: glob({ pattern: 'education.json', base: './src/content/' }),
+  schema: z.object({
+    description: z.object({
+      ru: z.string(),
+      en: z.string(),
+    }),
+    education: educationObject.array(),
+    courses: educationObject.array(),
   }),
-  schema: educationObject,
-})
-
-const courses = defineCollection({
-  loader: file('src/content/resume/resume.json', {
-    parser: text => {
-      return JSON.parse(text).courses
-    },
-  }),
-  schema: educationObject,
 })
 
 export const collections = {
@@ -93,6 +90,5 @@ export const collections = {
   resume,
   skills,
   education,
-  courses,
 }
 

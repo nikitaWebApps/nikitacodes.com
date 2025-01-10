@@ -1,0 +1,53 @@
+---
+import { Image } from 'astro:assets'
+import myPic from '../img/myPic_square.jpg'
+import HandEmoji from '../img/handwave_emoji.png'
+import { getCollection } from 'astro:content'
+import { translations } from '../i18n/translations'
+import Chips from './Chips.astro'
+import HeroButton from './HeroButton.astro'
+
+const lang = (Astro.currentLocale as 'en' | 'ru') || 'en'
+const head = await getCollection('head')
+const skillsCollection = await getCollection('skills')
+const skills = skillsCollection[0].data
+---
+
+<section
+  class='px-4 lg:px-8 mt-24 md:h-dvh md:-mb-24 [@media(max-height:700px)]:mb-0 [@media(max-height:700px)]:h-full'>
+  <div class='grid grid-cols-1 lg:auto-cols-auto lg:gap-8 w-full max-w-screen-xl mx-auto'>
+    <Image
+      class='w-full max-w-56 rounded-full object-contain aspect-square justify-self-center md:justify-self-start lg:col-start-2'
+      src={myPic}
+      alt=''
+    />
+    <div class='lg:row-start-1 lg:max-w-4xl'>
+      <h1 class='text-2xl lg:text-4xl lg:leading-tight group'>
+        {translations[lang].hello}
+        <Image
+          src={HandEmoji}
+          alt=''
+          class='inline-block aspect-square w-8 h-8 lg:w-10 lg:h-10 align-baseline group-hover:animate-[shake_0.5s_ease-in-out_infinite]'
+        />
+        <br />
+        {head[0].data.title[lang]}
+      </h1>
+      <p class='text-2xl lg:text-4xl lg:leading-tight text-grey mb-8'>
+        {head[0].data.description[lang]}
+      </p>
+      <Chips chips={skills} />
+    </div>
+    <HeroButton />
+  </div>
+</section>
+<style>
+  @keyframes shake {
+    0%,
+    100% {
+      transform: rotate(0);
+    }
+    50% {
+      transform: rotate(45deg);
+    }
+  }
+</style>

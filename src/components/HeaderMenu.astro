@@ -1,80 +1,56 @@
 ---
-import { translation } from '../i18n/translations'
-type Props = {
-  currentLang: 'en' | 'ru'
-}
-const { currentLang } = Astro.props
-const resumeLink = `/${currentLang}/resume`
-const portfolioLink = `/${currentLang}#cases__front-page`
-
-function changeSiteLanguageTo(to: string) {
-  let newLocation = Astro.url.pathname
-  let currentPath = Astro.url.pathname
-  if (Astro.url.pathname == '/') {
-    currentPath += to
-  }
-  if (currentLang == to) {
-    return newLocation
-  }
-  if (currentLang !== to) {
-    newLocation = currentPath.replace(currentLang, to)
-  }
-  return newLocation
-}
+import { translations } from '../i18n/translations'
+import { getCollection } from 'astro:content'
+import { links } from '../content/links'
+type LangOptions = 'en' | 'ru'
+let currentLang = (Astro.currentLocale as LangOptions) || 'en'
+const head = await getCollection('head')
 ---
 
-<div class='flex flex-row gap-2'>
-  <div class='flex flex-row items-center sm:gap-4 gap-2'>
-    <a class='text-sm md:text-base' href={portfolioLink}>{translation[currentLang].projects}</a>
-    <a class='text-sm md:text-base' href={resumeLink}>{translation[currentLang].resume}</a>
-    <div class='relative'>
-      <button
-        type='button'
-        aria-label='Change Language'
-        class='current-lang w-12 flex justify-center text-sm md:text-base border border-gray-400 rounded py-1 px-2 flex-row items-center gap-1'
-        >{currentLang.toUpperCase()}</button
-      >
-      <nav
-        class='change-lang hidden flex flex-col justify-center gap-3 absolute -bottom-16 md:-bottom-20 -right-0 left-0 border border-blue-500 rounded py-1 px-2 bg-white shadow z-20'>
-        <a href={changeSiteLanguageTo('ru')} class='block w-full text-sm md:text-base text-center'>RU</a>
-        <a href={changeSiteLanguageTo('en')} class='block w-full text-sm md:text-base text-center'>EN</a>
-      </nav>
-    </div>
+<nav class='flex gap-8 absolute left-0 right-0 justify-center'>
+  <a class='hidden lg:block text-xl hover:text-accent transition' href='#projects'
+    >{translations[currentLang].projects}</a
+  >
+  <a class='hidden lg:block text-xl hover:text-accent transition' href='#resume'
+    >{translations[currentLang].experience}</a
+  >
+  <a class='hidden lg:block text-xl hover:text-accent transition' href='#education'
+    >{translations[currentLang].education}</a
+  >
+  <a class='hidden lg:block text-xl hover:text-accent transition' href={head[0].data.resume_link[currentLang]}
+    >{translations[currentLang].resume}</a
+  >
+  <div class='relative hidden lg:block'>
+    <button class='links-list-button text-xl hover:text-accent transition' type='button'
+      >{translations[currentLang].links} +</button
+    >
+    <ul class='links-list hidden absolute top-12 flex flex-col gap-4 p-3 border border-grey rounded-2xl bg-black'>
+      {
+        links.map(link => (
+          <li>
+            <a class='text-xl hover:text-accent transition' href={link.href}>
+              {link.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
   </div>
-</div>
+</nav>
 <script>
-  const languageSelect = document.querySelector<HTMLElement>('.current-lang')!
-  const selectorPopup = document.querySelector<HTMLElement>('.change-lang')!
-
-  let isSelectorPopupOpened = false
-  languageSelect?.addEventListener('click', () => {
-    toggleLanguageSelect()
+  import { hideOnClickOutside } from '../js/utils'
+  const button = document.querySelector<HTMLElement>('.links-list-button')!
+  const list = document.querySelector<HTMLElement>('.links-list')!
+  const links = list.querySelectorAll('li')
+  button?.addEventListener('click', () => {
+    hideOnClickOutside(button, list)
+    list?.classList.toggle('hidden')
   })
 
-  function toggleLanguageSelect() {
-    languageSelect.classList.toggle('border-gray-400')
-    languageSelect.classList.toggle('bg-blue-100')
-    languageSelect.classList.toggle('border-blue-500')
-    selectorPopup?.classList.toggle('hidden')
-    isSelectorPopupOpened = !isSelectorPopupOpened
-  }
-
-  hideOnClickOutside(selectorPopup)
-
-  function hideOnClickOutside(element: HTMLElement) {
-    //
-    const outsideClickListener = (event: Event) => {
-      const isSelectorButtonClicked = event.target == languageSelect
-
-      if (!element.contains(event.target as Node) && isSelectorPopupOpened && !isSelectorButtonClicked) {
-        toggleLanguageSelect()
-        removeClickListener()
-      }
-    }
-
-    const removeClickListener = () => {
-      document.body.removeEventListener('click', outsideClickListener)
-    }
-    document.body.addEventListener('click', outsideClickListener)
-  }
+  //hide popup on link click
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      list?.classList.add('hidden')
+    })
+  })
 </script>

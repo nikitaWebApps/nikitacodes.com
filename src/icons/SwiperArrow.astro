@@ -1,0 +1,14 @@
+---
+const { isNext } = Astro.props
+---
+
+<svg
+  class='group-hover:opacity-100 -translate-y-1/2 fill-smoke-white opacity-70 transition-all absolute [@media(pointer:fine)_and_(width_>_1024px)]:hidden'
+  class:list={isNext ? 'right-1' : 'left-1 rotate-180'}
+  width='24'
+  height='25'
+  viewBox='0 0 24 25'
+  fill='none'
+  xmlns='http://www.w3.org/2000/svg'>
+  <path d='M8.025 22.8545L6.25 21.0795L14.475 12.8545L6.25 4.62949L8.025 2.85449L18.025 12.8545L8.025 22.8545Z'></path>
+</svg>

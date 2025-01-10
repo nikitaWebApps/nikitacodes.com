@@ -1,0 +1,29 @@
+---
+import Rubricator from './Rubricator.astro'
+import { translations } from '../i18n/translations'
+import { getCollection } from 'astro:content'
+import Project from './Project.astro'
+import EducationList from './EducationList.astro'
+const lang = (Astro.currentLocale as 'ru' | 'en') || 'en'
+const educationData = await getCollection('education')
+const description = educationData[0].data.description
+const education = educationData[0].data.education
+const courses = educationData[0].data.courses
+---
+
+<section id='education' class='px-4 lg:px-8 scroll-mt-20'>
+  <div class='max-w-screen-xl mx-auto'>
+    <Rubricator text={translations[lang].education} />
+    <p class='text-2xl lg:text-4xl lg:leading-snug mb-8 max-w-4xl mt-6 lg:mt-8'>{description[lang]}</p>
+    <div class='flex flex-col lg:grid grid-cols-2 gap-8 lg:gap-16'>
+      <div>
+        <Rubricator text={translations[lang].courses} />
+        <EducationList items={courses} />
+      </div>
+      <div class='flex flex-col'>
+        <Rubricator text={translations[lang].higher_education} />
+        <EducationList items={education} />
+      </div>
+    </div>
+  </div>
+</section>

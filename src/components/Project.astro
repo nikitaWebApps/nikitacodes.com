@@ -1,0 +1,45 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { translations } from '../i18n/translations'
+import { getImage, Image } from 'astro:assets'
+import ProjectImageSlider from './ProjectImageSlider.astro'
+import Chips from './Chips.astro'
+
+interface Props {
+  project: CollectionEntry<'projects'>
+}
+
+const lang = (Astro.currentLocale as 'ru' | 'en') || 'en'
+
+const { project } = Astro.props
+const images = import.meta.glob<{ string: ImageMetadata }>('/src/img/projects/*.{jpg,png}')
+async function optimizeImages() {
+  const imageObjects = []
+  for (const [key, imageGetter] of Object.entries(images)) {
+    if (key.includes(`${lang}_${project.data.imageKey}`)) {
+      const imageObject = await getImage({
+        src: imageGetter() as unknown as ImageMetadata,
+        format: 'webp',
+        quality: 90,
+      })
+      imageObjects.push(imageObject)
+    }
+  }
+  return imageObjects
+}
+const optimizedImages = await optimizeImages()
+---
+
+<div class='grid grid-cols-1 gap-5 md:auto-cols-auto'>
+  <div class='md:max-w-xl lg:max-w-4xl'>
+    <h3 class='text-2xl lg:text-4xl mb-2'>{project.data.title}</h3>
+    <p class='text-xl lg:text-2xl text-grey mb-4'>{project.data.keyFeatures?.join('. ')}</p>
+    <Chips chips={project.data.techStack} />
+  </div>
+  <a
+    class='flex justify-center p-2 border-2 border-accent leading-none bg-accent rounded-full text-lg lg:text-xl w-max h-max'
+    href={project.data.siteLink}
+    target='_blank'>{translations[lang].projectCard.see_live} →</a
+  >
+  <ProjectImageSlider images={optimizedImages} />
+</div>
