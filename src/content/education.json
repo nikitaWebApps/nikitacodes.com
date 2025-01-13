@@ -33,6 +33,19 @@
   ],
   "courses": [
     {
+      "icon_key": "udemy",
+      "en": {
+        "profession": "Learn JavaScript: Full-Stack from Scratch",
+        "dates": "Feb 2023 — Apr 2023",
+        "place": "Brad Schiff, Udemy"
+      },
+      "ru": {
+        "profession": "Learn JavaScript: Full-Stack from Scratch",
+        "dates": "Февраль 2023 — Апрель 2023",
+        "place": "Brad Schiff, Udemy"
+      }
+    },
+    {
       "icon_key": "practicum",
       "en": {
         "profession": "Interface Designer",
@@ -40,9 +53,22 @@
         "place": "Yandex Practicum"
       },
       "ru": {
-        "profession": "Interface Designer",
-        "dates": "Jun 2022 — Feb 2023",
-        "place": "Yandex Practicum"
+        "profession": "Дизайнер интерфейсов",
+        "dates": "Июнь 2022 — Февраль 2023",
+        "place": "Яндекс Практикум"
+      }
+    },
+    {
+      "icon_key": "udemy",
+      "en": {
+        "profession": "Become a WordPress Developer: Unlocking Power With Code",
+        "dates": "Aug 2022 — Oct 2022",
+        "place": "Brad Schiff, Udemy"
+      },
+      "ru": {
+        "profession": "Become a WordPress Developer: Unlocking Power With Code",
+        "dates": "Август 2022 — Октябрь 2022",
+        "place": "Brad Schiff, Udemy"
       }
     },
     {

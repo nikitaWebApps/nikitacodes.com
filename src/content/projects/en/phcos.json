@@ -7,7 +7,7 @@
   "keyFeatures": [
     "Moved Site from classic Wordpress theme to Nuxt SSR frontend",
     "Provided up to 3 times faster page loading speeds and clean new look",
-    "Wrote multiple custom components for better UX and sell conversion rates",
+    "Wrote multiple custom components for tailored UX based on user needs",
     "Set up Github Actions CI/CD workflow for smooth developer experience"
   ]
 }
