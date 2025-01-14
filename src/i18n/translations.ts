@@ -29,6 +29,7 @@ export const translations = {
     next_slide: 'Next slide →',
     prev_slide: '← Previous slide',
     get_in_touch: 'Get in touch',
+    irina_designer: 'Irina Vasyuk',
   },
   ru: {
     index_title: 'Никита Головлев, фронтенд-разработчик',
@@ -53,6 +54,7 @@ export const translations = {
     next_slide: 'Следующий слайд →',
     prev_slide: '← Предыдущий слайд',
     get_in_touch: 'Связаться',
+    irina_designer: 'Ирина Васюк',
   },
 }
 
