@@ -1,11 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import MainPortfolio from '../components/mainPortfolio.astro'
-import Head from '../components/Head.astro'
-const currentLang = 'en'
+import Hero from '../components/Hero.astro'
+import SectionProjects from '../components/SectionProjects.astro'
+import SectionEducation from '../components/SectionEducation.astro'
+import SectionResume from '../components/SectionResume.astro'
 ---
 
 <Layout>
-  <Head lang={currentLang} transition:persist />
-  <MainPortfolio />
+  <main class='flex flex-col gap-24'>
+    <Hero />
+    <SectionProjects />
+    <SectionResume />
+    <SectionEducation />
+  </main>
 </Layout>

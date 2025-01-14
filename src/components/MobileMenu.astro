@@ -1,0 +1,43 @@
+---
+import { links } from '../content/links'
+import { getCollection } from 'astro:content'
+import { translations } from '../i18n/translations'
+import Rubricator from './Rubricator.astro'
+const head = await getCollection('head')
+const lang = Astro.currentLocale as 'ru' | 'en'
+---
+
+<div
+  class='mobile-menu flex hidden flex-col justify-between w-dvw h-dvh pt-24 px-4 fixed top-0 bottom-0 left-0 right-0 bg-black z-40'>
+  <nav class='flex flex-col gap-6 pb-4 overflow-y-auto'>
+    <a class='text-2xl' target='_blank' href={head[0].data.resume_link[lang]}>CV</a>
+    <a class='text-2xl' href='#projects'>{translations[lang].projects}</a>
+    <a class='text-2xl' href='#resume'>{translations[lang].experience}</a>
+    <a class='text-2xl' href='#education'>{translations[lang].education}</a>
+    <a class='text-2xl' href={head[0].data.resume_link[lang]}>{translations[lang].resume}</a>
+  </nav>
+  <div class='relative pb-8 flex flex-col'>
+    <!--TODO: CHANGE TO RUBRICATOR?? -->
+    <Rubricator text={translations[lang].links} />
+    <div class='flex gap-1 overflow-x-auto mt-4'>
+      {
+        links.map(link => (
+          <a
+            class='px-4 py-2 border-2 border-accent flex justify-center text-lg text-smoke-white rounded-full bg-accent'
+            href={link.href}
+            target='_blank'>
+            {link.name}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<script>
+  const menu = document.querySelector('.mobile-menu')!
+  const navigationLinks = menu.querySelector('nav')!
+  navigationLinks?.addEventListener('click', () => {
+    menu.classList.add('hidden')
+  })
+</script>

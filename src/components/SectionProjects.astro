@@ -1,0 +1,23 @@
+---
+import Rubricator from './Rubricator.astro'
+import { translations } from '../i18n/translations'
+import { getCollection } from 'astro:content'
+import Project from './Project.astro'
+
+const lang = (Astro.currentLocale as 'ru' | 'en') || 'en'
+const projectsData = await getCollection('projects')
+let projects = projectsData
+  .filter(project => project.id.split('/')[1] == lang)
+  .sort((a, b) => {
+    return b.data.publishedDate.getTime() - a.data.publishedDate.getTime()
+  }) as typeof projectsData
+---
+
+<section id='projects' class='projects-section px-4 lg:px-8 scroll-mt-20'>
+  <div class='max-w-screen-xl mx-auto'>
+    <Rubricator text={translations[lang].projects} />
+    <div class='flex flex-col gap-16 lg:gap-24 mt-6 lg:mt-8'>
+      {projects.map(project => <Project project={project} />)}
+    </div>
+  </div>
+</section>

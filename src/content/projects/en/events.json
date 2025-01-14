@@ -7,7 +7,7 @@
   "keyFeatures": [
     "Implemented responsive UX/UI design",
     "Integrated the application with a REST API",
-    "Integrated the registration form with the CRM via API"
+    "Integrated the registration form with CRM and Email marketing service"
   ]
 }
 

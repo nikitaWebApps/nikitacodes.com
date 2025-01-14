@@ -1,0 +1,38 @@
+---
+
+---
+
+<button type='button' class='mobile-menu-trigger relative lg:hidden group'>
+  <svg aria-hidden='true' width='50' height='50' viewBox='0 0 50 50' fill='none' xmlns='http://www.w3.org/2000/svg'>
+    <rect width='50' height='50' rx='25' fill='#0038FF'></rect>
+    <circle
+      class='fill-[#194CFF] stroke-[#0335E9] group-active:fill-accent group-active:stroke-accent transition-all duration-1'
+      cx='25'
+      cy='25.5'
+      r='16.1282'
+      stroke-width='1.74359'></circle>
+    <div class='icon absolute top-0 bottom-0 left-0 right-0 flex justify-center items-center'>
+      <svg
+        class='icon-plus transition-all duration-300'
+        width='14'
+        height='13'
+        viewBox='0 0 14 13'
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'>
+        <path
+          d='M5.97767 5.4505L0.509765 5.4505L0.509765 7.40332L5.97767 7.40332L5.97767 12.8712L7.93049 12.8712L7.93049 7.40332L13.3705 7.40332L13.3705 5.45049L7.93049 5.45049L7.93049 0.010492L5.97767 0.0104921L5.97767 5.4505Z'
+          fill='white'></path>
+      </svg>
+    </div>
+  </svg>
+</button>
+
+<script>
+  const trigger = document.querySelector('.mobile-menu-trigger')
+  const mobileMenu = document.querySelector('.mobile-menu')
+  trigger?.addEventListener('click', () => {
+    trigger.querySelector('.icon-plus')?.classList.toggle('-rotate-45')
+    mobileMenu?.classList.toggle('hidden')
+    document.body.classList.toggle('noscroll')
+  })
+</script>

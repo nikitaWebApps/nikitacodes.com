@@ -1,18 +1,22 @@
 ---
-import IconHome from '../icons/IconHome.astro'
 import HeaderMenu from './HeaderMenu.astro'
+import LanguageSelector from './LanguageSelector.astro'
+import MobileMenuTrigger from './MobileMenuTrigger.astro'
 
 let currentLang = (Astro.currentLocale as 'ru' | 'en') || 'en'
 const homepageUrl = `/${currentLang}`
 ---
 
-<header class='bg-white grid grid-rows-1 max-h-screen fixed w-full top-0 z-10 border-b border-gray-200'>
-  <nav class='container max-w-screen-lg mx-auto py-2 px-4 md:px-8 flex flex-row justify-between items-center text-base'>
-    <div class='relative -left-3'>
-      <a href={homepageUrl} aria-label='Home Page' class='transition duration-500 trangray-x-0'>
-        <IconHome />
-      </a>
+<header class='px-4 lg:px-8 flex fixed top-0 left-0 right-0 z-50 bg-black'>
+  <nav
+    class='mx-auto max-w-screen-xl py-1.5 lg:py-4 flex flex-row w-full justify-between items-center text-base border-b border-stroke'>
+    <a href={homepageUrl} aria-label='Home Page' class='text-xl transition duration-500 trangray-x-0 relative z-50'
+      >Nikita Golovlev</a
+    >
+    <HeaderMenu />
+    <div class='flex flex-row gap-4 md:gap-6 items-center'>
+      <LanguageSelector />
+      <MobileMenuTrigger />
     </div>
-    <HeaderMenu currentLang={currentLang} />
   </nav>
 </header>

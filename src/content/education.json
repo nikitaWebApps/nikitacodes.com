@@ -1,0 +1,89 @@
+{
+  "description": {
+    "en": "I regularly undergo training to stay up to date. I take courses, study new software, read books on development.",
+    "ru": "Я регулярно прохожу обучение, чтобы быть в курсе новейших тенденций. Я посещаю курсы, изучаю новое программное обеспечение, читаю книги по развитию."
+  },
+  "education": [
+    {
+      "icon_key": "fhdortmund",
+      "en": {
+        "profession": "Creative Audio Director (MA)",
+        "dates": "2020 – 2022",
+        "place": "Fachochschule Dortmund"
+      },
+      "ru": {
+        "profession": "Creative Audio Director (Магистратура)",
+        "dates": "2020 – 2022",
+        "place": "Fachochschule Dortmund (Дортмунд, Германия)"
+      }
+    },
+    {
+      "icon_key": "gitr",
+      "en": {
+        "profession": "Sound Designer",
+        "dates": "2012 – 2017",
+        "place": "Litovchin Institute of Film and TV"
+      },
+      "ru": {
+        "profession": "Звукорежиссёр (Бакалавриат)",
+        "dates": "2012 – 2017",
+        "place": "ГИТР"
+      }
+    }
+  ],
+  "courses": [
+    {
+      "icon_key": "udemy",
+      "en": {
+        "profession": "Learn JavaScript: Full-Stack from Scratch",
+        "dates": "Feb 2023 — Apr 2023",
+        "place": "Brad Schiff, Udemy"
+      },
+      "ru": {
+        "profession": "Learn JavaScript: Full-Stack from Scratch",
+        "dates": "Февраль 2023 — Апрель 2023",
+        "place": "Brad Schiff, Udemy"
+      }
+    },
+    {
+      "icon_key": "practicum",
+      "en": {
+        "profession": "Interface Designer",
+        "dates": "Jun 2022 — Feb 2023",
+        "place": "Yandex Practicum"
+      },
+      "ru": {
+        "profession": "Дизайнер интерфейсов",
+        "dates": "Июнь 2022 — Февраль 2023",
+        "place": "Яндекс Практикум"
+      }
+    },
+    {
+      "icon_key": "udemy",
+      "en": {
+        "profession": "Become a WordPress Developer: Unlocking Power With Code",
+        "dates": "Aug 2022 — Oct 2022",
+        "place": "Brad Schiff, Udemy"
+      },
+      "ru": {
+        "profession": "Become a WordPress Developer: Unlocking Power With Code",
+        "dates": "Август 2022 — Октябрь 2022",
+        "place": "Brad Schiff, Udemy"
+      }
+    },
+    {
+      "icon_key": "coursera",
+      "en": {
+        "profession": "Google UX Design Certificate",
+        "dates": "Apr 2022 — Jun 2022",
+        "place": "Coursera"
+      },
+      "ru": {
+        "profession": "Google UX Design Certificate",
+        "dates": "Апрель 2022 — Июнь 2022",
+        "place": "Coursera"
+      }
+    }
+  ]
+}
+

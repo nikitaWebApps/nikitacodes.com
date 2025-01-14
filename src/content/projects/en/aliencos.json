@@ -7,6 +7,7 @@
   "keyFeatures": [
     "Made custom responsive UX/UI-design",
     "Extended Theme with custom templates and shortcodes",
+    "Made dynamic product templates and set up relations between post types",
     "Wrote frontend filtering and displaying logic"
   ]
 }

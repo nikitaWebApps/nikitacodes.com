@@ -4,7 +4,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        'hh-red': '#D6001C',
+        'smoke-white': '#F3F3F3',
+        black: '#131313',
+        grey: '#828282',
+        stroke: '#454545',
+        accent: '#0038FF',
       },
       aspectRatio: {
         photo: '4 / 3',
@@ -20,9 +24,10 @@ export default {
       },
     },
     fontFamily: {
-      body: 'Inter, system-ui, sans-serif',
+      body: 'Golos Text, system-ui, sans-serif',
     },
   },
+  //safelist: ['transform-x-4', 'transform-y-4'],
   plugins: [],
 }
 

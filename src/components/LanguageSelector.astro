@@ -1,0 +1,48 @@
+---
+let currentLang = Astro.currentLocale || 'en'
+
+function changeSiteLanguageTo(to: string) {
+  let newLocation = Astro.url.pathname
+  let currentPath = Astro.url.pathname
+  if (Astro.url.pathname == '/') {
+    currentPath += to
+  }
+  if (currentLang == to) {
+    return newLocation
+  }
+  if (currentLang !== to) {
+    newLocation = currentPath.replace(currentLang, to)
+  }
+  return newLocation
+}
+---
+
+<div class='relative'>
+  <button
+    type='button'
+    aria-label='Change Language'
+    class='current-lang flex justify-center text-xl flex-row items-center gap-1'>{currentLang.toUpperCase()}</button
+  >
+  <nav
+    class='change-lang hidden flex flex-col justify-center gap-1.5 absolute top-12 right-0 w-max border border-grey rounded p-2 bg-black z-20'>
+    <a href={changeSiteLanguageTo('ru')} class='block w-full text-xl text-center'>RU</a>
+    <a href={changeSiteLanguageTo('en')} class='block w-full text-xl text-center'>EN</a>
+  </nav>
+</div>
+
+<script>
+  import { hideOnClickOutside } from '../js/utils'
+  const languageSelect = document.querySelector<HTMLElement>('.current-lang')!
+  const selectorPopup = document.querySelector<HTMLElement>('.change-lang')!
+
+  let isSelectorPopupOpened = false
+  languageSelect?.addEventListener('click', () => {
+    toggleLanguageSelect()
+    hideOnClickOutside(languageSelect, selectorPopup)
+  })
+
+  function toggleLanguageSelect() {
+    selectorPopup?.classList.toggle('hidden')
+    isSelectorPopupOpened = !isSelectorPopupOpened
+  }
+</script>
