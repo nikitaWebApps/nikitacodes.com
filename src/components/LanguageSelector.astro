@@ -21,12 +21,13 @@ function changeSiteLanguageTo(to: string) {
   <button
     type='button'
     aria-label='Change Language'
-    class='current-lang flex justify-center text-xl flex-row items-center gap-1'>{currentLang.toUpperCase()}</button
+    class='current-lang flex justify-center text-xl flex-row items-center gap-1 hover:text-accent transition'
+    >{currentLang.toUpperCase()}</button
   >
   <nav
-    class='change-lang hidden flex flex-col justify-center gap-1.5 absolute top-12 right-0 w-max border border-grey rounded p-2 bg-black z-20'>
-    <a href={changeSiteLanguageTo('ru')} class='block w-full text-xl text-center'>RU</a>
-    <a href={changeSiteLanguageTo('en')} class='block w-full text-xl text-center'>EN</a>
+    class='change-lang group hidden flex flex-col justify-center gap-1.5 absolute top-12 right-0 w-max border border-grey rounded p-2 bg-black z-20'>
+    <a href={changeSiteLanguageTo('ru')} class='block w-full text-xl text-center hover:text-accent transition'>RU</a>
+    <a href={changeSiteLanguageTo('en')} class='block w-full text-xl text-center hover:text-accent transition'>EN</a>
   </nav>
 </div>
 

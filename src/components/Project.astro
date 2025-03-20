@@ -37,7 +37,7 @@ const optimizedImages = await optimizeImages()
     <Chips chips={project.data.techStack} />
   </div>
   <a
-    class='flex justify-center p-2 border-2 border-accent leading-none bg-accent rounded-full text-lg lg:text-xl w-max h-max'
+    class='flex justify-center hover:shadow-accent shadow-lg shadow-accent/0 transition-all duration-700 p-2 border-2 border-accent leading-none bg-accent rounded-full text-lg lg:text-xl w-max h-max'
     href={project.data.siteLink}
     target='_blank'>{translations[lang].projectCard.see_live} →</a
   >
