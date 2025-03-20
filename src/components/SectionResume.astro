@@ -12,7 +12,10 @@ const jobs = resumeCollection[0].data.jobs
 <section id='resume' class='px-4 lg:px-8 scroll-mt-20'>
   <div class='max-w-screen-xl mx-auto'>
     <Rubricator text={translations[lang].experience} />
-    <p class='text-2xl lg:text-4xl lg:leading-tight mb-8 lg:max-w-4xl mt-6 lg:mt-8'>{description[lang]}</p>
+    <p
+      class='resume-description text-2xl lg:text-4xl lg:leading-tight mb-8 lg:max-w-4xl mt-6 lg:mt-8'
+      set:html={description[lang]}
+    />
     <div class='flex flex-col gap-8'>
       {
         jobs.map(job => (
@@ -33,3 +36,9 @@ const jobs = resumeCollection[0].data.jobs
     </div>
   </div>
 </section>
+
+<style is:global>
+  .resume-description a {
+    @apply hover:text-accent transition-colors duration-300;
+  }
+</style>
