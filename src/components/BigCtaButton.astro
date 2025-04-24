@@ -10,13 +10,13 @@ const lang = (Astro.currentLocale as 'ru' | 'en') || 'en'
 <button
   type='button'
   class:list={isBig ? 'big-cta-button' : 'small-cta-button'}
-  class='relative flex flex-col gap-4 lg:gap-8 items-center justify-center w-full max-h-40 disabled:max-h-80 lg:max-h-64 lg:h-64 p-8 lg:px-8 lg:py-12 rounded-[80px] disabled:rounded-[48px] lg:disabled:rounded-full lg:rounded-full bg-accent overflow-clip transition-all duration-500 ease-in-out group hover:scale-95 hover:duration-[8s] hover:ease-in'>
+  class='relative flex flex-col gap-4 lg:gap-8 items-center justify-center w-full max-h-40 disabled:max-h-80 lg:max-h-64 lg:h-64 p-8 lg:px-8 lg:py-12 rounded-[80px] disabled:rounded-[48px] lg:disabled:rounded-full lg:rounded-full bg-accent overflow-clip transition-all duration-700 ease-out group'>
   <span
-    class='button-text text-5xl leading-none md:text-7xl lg:text-9xl lg:w-full xl:text-[10rem] text-smoke-white transition-all duration-500 ease-out group-hover:duration-[6s] group-hover:ease-in group-hover:scale-125'
+    class='button-text text-5xl leading-none md:text-7xl lg:text-9xl lg:w-full xl:text-[10rem] text-smoke-white transition-all duration-700 ease-out'
     >{translations[lang].get_in_touch}</span
   >
   <div
-    class='links hidden flex max-sm:flex-col gap-2 lg:gap-4 opacity-0 translate-y-12 transition-all duration-500 delay-200'>
+    class='links hidden flex max-sm:flex-col gap-2 lg:gap-4 opacity-0 translate-y-12 transition-all duration-700 delay-200'>
     {
       links.map(link => (
         <a
@@ -32,23 +32,54 @@ const lang = (Astro.currentLocale as 'ru' | 'en') || 'en'
 
 <script>
   const button = document.querySelector<HTMLButtonElement>('.big-cta-button')!
-  const links = button.querySelector('.links')
-  const text = button.querySelector('.button-text')
+  const links = button.querySelector<HTMLDivElement>('.links')
+  const text = button.querySelector<HTMLDivElement>('.button-text')
+
+  const controller = new AbortController()
+
+  function scaleOnHover() {
+    button.style.scale = '0.95'
+    button.style.transitionDuration = '8s'
+    text!.style.scale = '1.15'
+    text!.style.transitionDuration = '16s'
+  }
+
+  function revertButtonSize() {
+    button.style.scale = '1'
+    button.style.transitionDuration = '1s'
+    text!.style.scale = '1'
+    text!.style.transitionDuration = '1s'
+  }
+
+  function removeInlineStyles() {
+    button.style.removeProperty('scale')
+    button.style.removeProperty('transition-duration')
+    text!.style.removeProperty('transition-duration')
+    text!.style.removeProperty('scale')
+  }
+
+  button.addEventListener('mouseover', scaleOnHover)
+  button.addEventListener('mouseleave', revertButtonSize)
 
   button?.addEventListener('click', () => {
+    removeInlineStyles()
+    button.removeEventListener('mouseover', scaleOnHover)
+    button.removeEventListener('mouseleave', revertButtonSize)
     button.setAttribute('disabled', 'true')
     button.classList.remove('group')
     links?.classList.remove('hidden')
     text?.classList.add('animate-text')
 
     setTimeout(() => {
-      links?.classList.add('animate-links')
-    }, 10)
-    setTimeout(() => {
       button.scrollIntoView({
         block: 'start',
+        behavior: 'smooth',
       })
     }, 300)
+
+    setTimeout(() => {
+      links?.classList.add('animate-links')
+    }, 400)
   })
 </script>
 
