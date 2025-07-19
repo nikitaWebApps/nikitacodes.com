@@ -6,10 +6,6 @@ export const links = [
     href: 'https://t.me/n_golovlev',
   },
   {
-    name: 'Email',
-    href: 'mailto:nikitagolovlev.design@gmail.com',
-  },
-  {
     name: 'LinkedIn',
     href: 'https://www.linkedin.com/in/nikita-golovlev-3b7673237',
   },
