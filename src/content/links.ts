@@ -7,7 +7,7 @@ export const links = [
   },
   {
     name: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/nikita-golovlev-3b7673237',
+    href: 'https://www.linkedin.com/in/nikita-golovlev',
   },
   {
     name: 'GitHub',
