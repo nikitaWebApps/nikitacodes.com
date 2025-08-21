@@ -17,15 +17,12 @@ const head = defineCollection({
   schema: z.object({
     title: z.object({
       en: z.string(),
-      ru: z.string(),
     }),
     description: z.object({
       en: z.string(),
-      ru: z.string(),
     }),
     resume_link: z.object({
       en: z.string(),
-      ru: z.string(),
     }),
   }),
 })
@@ -42,7 +39,6 @@ const resume = defineCollection({
   schema: z.object({
     description: z.object({
       en: z.string(),
-      ru: z.string(),
     }),
     jobs: z
       .object({
@@ -76,7 +72,6 @@ const education = defineCollection({
   loader: glob({ pattern: 'education.json', base: './src/content/' }),
   schema: z.object({
     description: z.object({
-      ru: z.string(),
       en: z.string(),
     }),
     education: educationObject.array(),
