@@ -4,7 +4,7 @@ import { translations } from '../i18n/translations'
 import { getCollection } from 'astro:content'
 import Project from './Project.astro'
 import EducationList from './EducationList.astro'
-const lang = (Astro.currentLocale as 'ru' | 'en') || 'en'
+const lang = 'en'
 const educationData = await getCollection('education')
 const description = educationData[0].data.description
 const education = educationData[0].data.education

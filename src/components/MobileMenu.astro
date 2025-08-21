@@ -4,7 +4,7 @@ import { getCollection } from 'astro:content'
 import { translations } from '../i18n/translations'
 import Rubricator from './Rubricator.astro'
 const head = await getCollection('head')
-const lang = Astro.currentLocale as 'ru' | 'en'
+const lang = 'en'
 ---
 
 <div
