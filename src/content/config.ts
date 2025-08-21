@@ -43,7 +43,6 @@ const resume = defineCollection({
     jobs: z
       .object({
         en: jobItem,
-        ru: jobItem,
       })
       .array(),
   }),
@@ -56,11 +55,6 @@ const skills = defineCollection({
 
 const educationObject = z.object({
   icon_key: z.string(),
-  ru: z.object({
-    profession: z.string(),
-    place: z.string(),
-    dates: z.string(),
-  }),
   en: z.object({
     profession: z.string(),
     place: z.string(),
