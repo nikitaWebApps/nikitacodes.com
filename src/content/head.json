@@ -4,12 +4,10 @@
     "ru": "Я фронтенд-разработчик"
   },
   "description": {
-    "en": "I have over two years of experience in creating websites and e-commerce solutions. In my work, I strive for simplicity and improving user experience. When making decisions, I rely on analytics and business metrics.",
-    "ru": "У меня более двух лет опыта в создании сайтов и интернет-магазинов. В работе я стремлюсь к простоте, улучшению пользовательского опыта. При принятии решений опираюсь на аналитику и бизнес-метрики."
+    "en": "I have over %yearsCount% years of experience in creating websites and e-commerce solutions. In my work, I strive for simplicity and improving user experience. When making decisions, I rely on analytics and business metrics."
   },
   "resume_link": {
-    "en": "/Nikita_Golovlev_Front-End_Developer.pdf",
-    "ru": "/Никита_Головлев_Frontend-разработчик.pdf"
+    "en": "/Nikita_Golovlev_Front-End_Developer.pdf"
   }
 }
 

@@ -3,7 +3,7 @@ import { translations } from '../i18n/translations'
 import { getCollection } from 'astro:content'
 import { links } from '../content/links'
 type LangOptions = 'en' | 'ru'
-let currentLang = (Astro.currentLocale as LangOptions) || 'en'
+let currentLang: LangOptions = 'en'
 const head = await getCollection('head')
 ---
 
