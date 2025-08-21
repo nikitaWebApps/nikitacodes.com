@@ -1,7 +1,6 @@
 {
   "description": {
-    "en": "I currently work as a Frontend Developer at <a href='https://yournextagency.com/'>Your Next Agency. </a>My current tech stack includes Craft CMS, Vue, TypeScript, and Twig",
-    "ru": "В настоящиее время я работаю Frontend-разработчиком в Your Next Agency. Мой текущий стек: Craft CMS, Vue, Typescript, Twig"
+    "en": "I currently work as a Frontend Developer at <a href='https://yournextagency.com/'>Your Next Agency. </a>My current tech stack includes Craft CMS, Vue, TypeScript, and Twig"
   },
   "jobs": [
     {
@@ -15,17 +14,6 @@
           "Maintaining, refactoring, and adding new features to existing projects.",
           "Optimizing websites for SEO and performance.",
           "Participating in code reviews and improving overall development workflows."
-        ]
-      },
-      "ru": {
-        "position": "Frontend-разработчик / Разработчик Craft CMS",
-        "company": "Your Next Agency",
-        "dates": "Полная занятость, Февраль 2025 — настоящее время",
-        "responsibilities": [
-          "Разработка веб-сайтов и e-commerce платформ с использованием Vue, Twig и PHP.",
-          "Поддержка, рефакторинг и добавление новых функций в существующие проекты.",
-          "Оптимизация сайтов для SEO и повышения производительности.",
-          "Участие в код-ревью и улучшении рабочих процессов разработки."
         ]
       }
     },
@@ -41,18 +29,6 @@
           "Integration of projects with external systems via APIs",
           "UX/UI design, including planning and enhancing user experience based on web analytics data.",
           "Collaborated with cross-functional teams, including marketing, content and sale team."
-        ]
-      },
-      "ru": {
-        "position": "Front-end Разработчик",
-        "company": "ООО «Фармацевтикал Косметик»",
-        "dates": "Полная занятость, Ноябрь 2022 — Февраль 2025",
-        "responsibilities": [
-          "Полное техническое сопровождение разработки web-проектов компании (анализ бизнес-задач, поиск оптимально стека, составление ТЗ, декомпозиция, разработка, внедрение, документирование).",
-          "Поддержка, рефакторинг и добавление новых функций в текущие проекты компании.",
-          "Интеграции проектов с внешними системами: Битрикс24, 1С, ЮКасса и другими.",
-          "UX/UI-дизайн, продумывание и улучшение пользовательского опыта основываясь на данных аналитики.",
-          "Взаимодействие с командой маркетинга: PM, SMM-менеджер, маркетолог, контент-менеджер."
         ]
       }
     }
