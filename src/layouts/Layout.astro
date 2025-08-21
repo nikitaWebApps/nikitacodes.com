@@ -3,8 +3,7 @@ import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 import { translations } from '../i18n/translations'
 import MobileMenu from '../components/MobileMenu.astro'
-const isDev = import.meta.env.DEV
-const lang = (Astro.currentLocale as keyof typeof translations) || 'en'
+const lang = 'en'
 const { pageTitle } = Astro.props
 const title = pageTitle ? pageTitle + ' | ' + translations[lang].index_title : translations.en.index_title
 ---
@@ -17,28 +16,6 @@ const title = pageTitle ? pageTitle + ' | ' + translations[lang].index_title : t
     <link rel='preconnect' href='https://fonts.googleapis.com' />
     <link rel='canonical' href='https://nikitacodes.com' />
     <style>
-      /* cyrillic-ext */
-      @font-face {
-        font-family: 'Golos Text';
-        font-style: normal;
-        font-weight: 400 900;
-        font-display: swap;
-        src:
-          local('Golos Text'),
-          url(https://fonts.gstatic.com/s/golostext/v4/q5uCsoe9Lv5t7Meb31EcEx58hK5SAMqbpw.woff2) format('woff2');
-        unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-      }
-      /* cyrillic */
-      @font-face {
-        font-family: 'Golos Text';
-        font-style: normal;
-        font-weight: 400 900;
-        font-display: swap;
-        src:
-          local('Golos Text'),
-          url(https://fonts.gstatic.com/s/golostext/v4/q5uCsoe9Lv5t7Meb31EcExd8hK5SAMqbpw.woff2) format('woff2');
-        unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-      }
       /* latin-ext */
       @font-face {
         font-family: 'Golos Text';
