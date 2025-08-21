@@ -1,6 +1,6 @@
 {
   "description": {
-    "en": "I currently work as a Frontend Developer at <a href='https://yournextagency.com/'>Your Next Agency. </a>My current tech stack includes Craft CMS, Vue, TypeScript, and Twig"
+    "en": "I currently work as a Frontend Developer </br> at <a href='https://yournextagency.com/'><span class='text-yna-pink'>Your </span><span class='text-yna-purple'>Next</span> Agency. </a> My tech stack includes Craft CMS, Vue, TypeScript, and Twig."
   },
   "jobs": [
     {

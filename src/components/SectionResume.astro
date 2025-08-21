@@ -2,7 +2,7 @@
 import Rubricator from './Rubricator.astro'
 import { translations } from '../i18n/translations'
 import { getCollection } from 'astro:content'
-const lang = (Astro.currentLocale as 'ru' | 'en') || 'en'
+const lang = 'en'
 const resumeCollection = await getCollection('resume')
 const description = resumeCollection[0].data.description
 
@@ -39,6 +39,6 @@ const jobs = resumeCollection[0].data.jobs
 
 <style is:global>
   .resume-description a {
-    @apply hover:text-accent transition-colors duration-300;
+    @apply inline-block hover:scale-95 transition-all duration-300 ease-in;
   }
 </style>
