@@ -1,6 +1,5 @@
 ---
 import HeaderMenu from './HeaderMenu.astro'
-import LanguageSelector from './LanguageSelector.astro'
 import MobileMenuTrigger from './MobileMenuTrigger.astro'
 
 let currentLang = (Astro.currentLocale as 'ru' | 'en') || 'en'
@@ -17,7 +16,6 @@ const homepageUrl = `/${currentLang}`
     >
     <HeaderMenu />
     <div class='flex flex-row gap-4 md:gap-6 items-center'>
-      <LanguageSelector />
       <MobileMenuTrigger />
     </div>
   </nav>
