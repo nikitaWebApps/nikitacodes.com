@@ -2,7 +2,7 @@
 
 ---
 
-<button type='button' class='mobile-menu-trigger relative lg:hidden group'>
+<button type='button' aria-label='Open Menu' class='mobile-menu-trigger relative lg:hidden group'>
   <svg aria-hidden='true' width='50' height='50' viewBox='0 0 50 50' fill='none' xmlns='http://www.w3.org/2000/svg'>
     <rect width='50' height='50' rx='25' fill='#0038FF'></rect>
     <circle
@@ -13,6 +13,7 @@
       stroke-width='1.74359'></circle>
     <div class='icon absolute top-0 bottom-0 left-0 right-0 flex justify-center items-center'>
       <svg
+        aria-hidden='true'
         class='icon-plus transition-all duration-300'
         width='14'
         height='13'
@@ -28,11 +29,43 @@
 </button>
 
 <script>
-  const trigger = document.querySelector('.mobile-menu-trigger')
-  const mobileMenu = document.querySelector('.mobile-menu')
+  const trigger = document.querySelector('.mobile-menu-trigger') as HTMLDivElement
+  const mobileMenu = document.querySelector('.mobile-menu') as HTMLButtonElement
+
+  function openMenu() {
+    mobileMenu?.classList.remove('hidden')
+    requestAnimationFrame(() => {
+      mobileMenu?.classList.remove('translate-x-full')
+    })
+    document.querySelector('main')?.setAttribute('inert', '')
+    mobileMenu.setAttribute('tabindex', '-1')
+    trigger.setAttribute('aria-label', 'Close menu')
+    mobileMenu.focus()
+  }
+
+  function closeMenu() {
+    mobileMenu?.classList.add('translate-x-full')
+    mobileMenu?.addEventListener(
+      'transitionend',
+      () => {
+        mobileMenu?.classList.add('hidden')
+      },
+      { once: true }
+    )
+    document.querySelector('main')?.removeAttribute('inert')
+    mobileMenu.removeAttribute('tabindex')
+    trigger.setAttribute('aria-label', 'Open menu')
+  }
+
   trigger?.addEventListener('click', () => {
     trigger.querySelector('.icon-plus')?.classList.toggle('-rotate-45')
-    mobileMenu?.classList.toggle('hidden')
+    const isClosed = mobileMenu?.classList.contains('hidden')
     document.body.classList.toggle('noscroll')
+
+    if (isClosed) {
+      openMenu()
+    } else {
+      closeMenu()
+    }
   })
 </script>
