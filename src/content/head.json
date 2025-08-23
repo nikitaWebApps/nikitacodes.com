@@ -1,10 +1,9 @@
 {
   "title": {
-    "en": "I am a frontend-developer",
-    "ru": "Я фронтенд-разработчик"
+    "en": "I am Nikita, a front-end developer"
   },
   "description": {
-    "en": "I have over %yearsCount% years of experience creating websites and e-commerce solutions. I focus on simplicity and delivering a positive impact on user experience."
+    "en": "I build fast websites and e-commerce solutions with Vue, Nuxt, TypeScript, and Craft CMS, focusing on performance, maintainability, and user experience"
   },
   "resume_link": {
     "en": "/Nikita_Golovlev_Front-End_Developer.pdf"
