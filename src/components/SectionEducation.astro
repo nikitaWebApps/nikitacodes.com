@@ -9,6 +9,20 @@ const educationData = await getCollection('education')
 const description = educationData[0].data.description
 const education = educationData[0].data.education
 const courses = educationData[0].data.courses
+
+function sortByDate(a: string, b: string) {
+  const parsedEndDate = (string: string) => string.match(/[A-z]{3}\s\d{4}$/) || ''
+
+  if (!parsedEndDate(a)[0] && !parsedEndDate(b)[0]) {
+    return 0
+  }
+
+  const dateA = new Date(parsedEndDate(a)[0])
+  const dateB = new Date(parsedEndDate(b)[0])
+
+  if (dateA == dateB) return 0
+  return dateA < dateB ? 1 : -1
+}
 ---
 
 <section id='education' class='px-4 lg:px-8 scroll-mt-20'>
@@ -18,7 +32,7 @@ const courses = educationData[0].data.courses
     <div class='flex flex-col lg:grid grid-cols-2 gap-8 lg:gap-16'>
       <div>
         <Rubricator text={translations[lang].courses} />
-        <EducationList items={courses} />
+        <EducationList items={courses.sort((a, b) => sortByDate(a.en.dates, b.en.dates))} />
       </div>
       <div class='flex flex-col'>
         <Rubricator text={translations[lang].higher_education} />
