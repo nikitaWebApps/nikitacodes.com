@@ -6,12 +6,12 @@ export const links = [
     href: 'https://t.me/n_golovlev',
   },
   {
-    name: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/nikita-golovlev',
-  },
-  {
     name: 'GitHub',
     href: 'https://github.com/nikitaWebApps',
+  },
+  {
+    name: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/nikita-golovlev',
   },
 ]
 

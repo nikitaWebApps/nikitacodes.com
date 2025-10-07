@@ -1,5 +1,9 @@
 ---
+import { links } from '../content/links'
 import { translations } from '../i18n/translations'
+import Github from '../icons/Github.astro'
+import LinkedIn from '../icons/LinkedIn.astro'
+import Telegram from '../icons/Telegram.astro'
 import BigCtaButton from './BigCtaButton.astro'
 
 const lang = (Astro.currentLocale as 'ru' | 'en') || 'en'
@@ -20,15 +24,30 @@ if (lang == 'ru') {
     <div class='w-full mb-20'>
       <BigCtaButton isBig={true} />
     </div>
-    <div class='flex flex-col gap-2'>
-      <p class='text-grey'>
-        {translations[lang].last_updated}: <span class='capitalize'>{date}</span>
-      </p>
-      <p class='text-grey'>
-        Design: <a href='https://t.me/irakariochi' target='_blank' class='hover:text-accent transition'
-          >{translations[lang].irina_designer}</a
-        >
-      </p>
+
+    <div class='flex flex-col gap-6 lg:flex-row lg:items-center justify-between w-full'>
+      <div class='flex flex-col gap-2 max-lg:order-2'>
+        <p class='text-grey'>
+          {translations[lang].last_updated}: <span class='capitalize'>{date}</span>
+        </p>
+        <p class='text-grey'>
+          Design: <a href='https://t.me/irakariochi' target='_blank' class='hover:text-accent transition'
+            >{translations[lang].irina_designer}</a
+          >
+        </p>
+      </div>
+
+      <div class='flex gap-4 lg:gap-6 items-center'>
+        {
+          links.map(link => (
+            <a href={link.href} title={link.name} class='fill-grey hover:fill-accent transition ease-in'>
+              {link.name === 'Telegram' ? <Telegram aria-hidden='true' /> : ''}
+              {link.name === 'LinkedIn' ? <LinkedIn /> : ''}
+              {link.name === 'GitHub' ? <Github /> : ''}
+            </a>
+          ))
+        }
+      </div>
     </div>
   </div>
 </footer>
