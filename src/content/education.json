@@ -22,6 +22,14 @@
   ],
   "courses": [
     {
+      "icon_key": "hexlet",
+      "en": {
+        "profession": "OOP in PHP",
+        "dates": "Feb 2024 - Mar 2025",
+        "place": "Hexlet"
+      }
+    },
+    {
       "icon_key": "udemy",
       "en": {
         "profession": "Learn JavaScript: Full-Stack from Scratch",
