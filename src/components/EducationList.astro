@@ -15,18 +15,73 @@ const lang = 'en'
 const { items } = Astro.props
 ---
 
-<ul class='flex flex-col gap-6 mt-6 lg:mt-8'>
-  {
-    items.map(item => (
-      <li class='flex gap-4 items-start'>
-        <img class='max-w-16 object-contain aspect-square rounded-2xl' src={`/logos/${item.icon_key}.jpg`} alt='' />
-        <div class='flex flex-col gap-2'>
-          <p class='text-xl'>{item[lang].profession}</p>
-          <p class='text-grey'>
-            {item[lang].place} | {item[lang].dates}
-          </p>
-        </div>
-      </li>
-    ))
+<div class='list-wrapper relative'>
+  <div
+    class='gradient-top pointer-events-none opacity-0 transition-opacity ease-in absolute z-10 top-0 left-0 right-0 h-12 bg-gradient-to-b from-black to-transparent'>
+  </div>
+  <ul class='education-list flex flex-col gap-6 mt-6 lg:mt-8 lg:max-h-[15rem] overflow-y-auto overscroll-contain'>
+    {
+      items.map(item => (
+        <li class='flex gap-4 items-start'>
+          <img class='max-w-16 object-contain aspect-square rounded-2xl' src={`/logos/${item.icon_key}.jpg`} alt='' />
+          <div class='flex flex-col gap-2'>
+            <p class='text-xl'>{item[lang].profession}</p>
+            <p class='text-grey'>
+              {item[lang].place} | {item[lang].dates}
+            </p>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+  <div
+    class='gradient-bottom pointer-events-none opacity-0 transition-opacity ease-in absolute z-10 bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-black to-transparent'>
+  </div>
+</div>
+
+<script>
+  const hasScrollBar = (list: HTMLUListElement) => list.scrollHeight > list.clientHeight
+  const hasReachedTop = (el: HTMLElement) => el.scrollTop === 0
+  const hasReachedBottom = (el: HTMLElement) => el.scrollHeight - el.scrollTop <= el.clientHeight + 5
+
+  function toggleGradientVisibility(wrapper: HTMLDivElement, forceHide = false) {
+    const list = wrapper.querySelector('.education-list') as HTMLUListElement
+    const topGradient = wrapper.querySelector('.gradient-top')
+    const bottomGradient = wrapper.querySelector('.gradient-bottom')
+
+    if (forceHide) {
+      topGradient?.classList.add('opacity-0')
+      bottomGradient?.classList.add('opacity-0')
+      return
+    }
+
+    if (!hasScrollBar(list)) return
+
+    topGradient?.classList.toggle('opacity-0', hasReachedTop(list))
+    bottomGradient?.classList.toggle('opacity-0', hasReachedBottom(list))
   }
-</ul>
+
+  function init() {
+    const listWrappers = document.querySelectorAll<HTMLDivElement>('.list-wrapper')
+    if (!listWrappers.length) return
+
+    const desktopMatch = matchMedia('(min-width: 1023px)')
+    let isDesktop = desktopMatch.matches
+
+    desktopMatch.addEventListener('change', () => {
+      isDesktop = desktopMatch.matches
+      listWrappers.forEach(listWrapper => {
+        const forceHide = !isDesktop
+        toggleGradientVisibility(listWrapper, forceHide)
+      })
+    })
+
+    listWrappers.forEach(listWrapper => {
+      const list = listWrapper.querySelector('.education-list') as HTMLUListElement
+      toggleGradientVisibility(listWrapper)
+      list.addEventListener('scroll', () => toggleGradientVisibility(listWrapper))
+    })
+  }
+
+  init()
+</script>
