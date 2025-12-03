@@ -1,6 +1,7 @@
 [
   "JavaScript",
   "TypeScript",
+  "React",
   "Vue",
   "Craft CMS",
   "Tailwind CSS",
@@ -9,11 +10,8 @@
   "Pinia",
   "Astro",
   "GSAP",
-  "VS Code",
   "PHP",
-  "Wordpress",
   "Git",
-  "GitHub",
   "Figma"
 ]
 
