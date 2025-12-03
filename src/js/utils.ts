@@ -15,3 +15,14 @@ export function hideOnClickOutside(trigger: HTMLElement, elementToHide: HTMLElem
   document.body.addEventListener('click', outsideClickListener)
 }
 
+export function getResumePath() {
+  return Object.keys(
+    import.meta.glob('/public/*.pdf', {
+      query: '?url',
+      eager: true,
+    })
+  )
+    .find((key: string) => key.toLowerCase().includes('developer'))
+    ?.replace('/public', '')
+}
+

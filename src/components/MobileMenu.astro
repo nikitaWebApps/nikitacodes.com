@@ -1,9 +1,9 @@
 ---
 import { links } from '../content/links'
-import { getCollection } from 'astro:content'
 import { translations } from '../i18n/translations'
 import Rubricator from './Rubricator.astro'
-const head = await getCollection('head')
+import { getResumePath } from '../js/utils'
+const resumePath = getResumePath()
 const lang = 'en'
 ---
 
@@ -11,11 +11,10 @@ const lang = 'en'
   class='mobile-menu flex hidden flex-col justify-between w-dvw h-dvh pt-24 px-4 fixed top-0 bottom-0 left-0 right-0 bg-black z-40
   translate-x-full transition-all ease-in duration-300'>
   <nav class='flex flex-col gap-6 pb-4 overflow-y-auto'>
-    <a class='text-2xl' target='_blank' href={head[0].data.resume_link[lang]}>CV</a>
+    <a class='text-2xl' href={resumePath}>{translations[lang].resume}</a>
     <a class='text-2xl' href='#projects'>{translations[lang].projects}</a>
     <a class='text-2xl' href='#resume'>{translations[lang].experience}</a>
     <a class='text-2xl' href='#education'>{translations[lang].education}</a>
-    <a class='text-2xl' href={head[0].data.resume_link[lang]}>{translations[lang].resume}</a>
   </nav>
   <div class='relative pb-8 flex flex-col'>
     <Rubricator text={translations[lang].links} />

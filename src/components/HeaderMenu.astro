@@ -1,7 +1,10 @@
 ---
 import { translations } from '../i18n/translations'
 import { getCollection } from 'astro:content'
+import { getResumePath } from '../js/utils'
 import { links } from '../content/links'
+const resumePath = getResumePath()
+
 type LangOptions = 'en' | 'ru'
 let currentLang: LangOptions = 'en'
 const head = await getCollection('head')
@@ -17,7 +20,7 @@ const head = await getCollection('head')
   <a class='hidden lg:block text-xl hover:text-accent transition' href='#education'
     >{translations[currentLang].education}</a
   >
-  <a class='hidden lg:block text-xl hover:text-accent transition' href={head[0].data.resume_link[currentLang]}
+  <a class='hidden lg:block text-xl hover:text-accent transition' href={resumePath}
     >{translations[currentLang].resume}</a
   >
   <div class='relative hidden lg:block'>

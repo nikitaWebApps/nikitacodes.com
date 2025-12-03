@@ -21,9 +21,6 @@ const head = defineCollection({
     description: z.object({
       en: z.string(),
     }),
-    resume_link: z.object({
-      en: z.string(),
-    }),
   }),
 })
 
