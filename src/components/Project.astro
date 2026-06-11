@@ -6,13 +6,13 @@ import ProjectImageSlider from './ProjectImageSlider.astro'
 import Chips from './Chips.astro'
 
 interface Props {
-  project: CollectionEntry<'projects'>
+  project: CollectionEntry<'focusArea'>
 }
 
 const lang = (Astro.currentLocale as 'ru' | 'en') || 'en'
 
 const { project } = Astro.props
-const images = import.meta.glob<{ string: ImageMetadata }>('/src/img/projects/*.{jpg,png}')
+const images = import.meta.glob<{ string: ImageMetadata }>('/src/img/focusAreas/*.{jpg,png}')
 async function optimizeImages() {
   const imageObjects = []
   for (const [key, imageGetter] of Object.entries(images)) {
