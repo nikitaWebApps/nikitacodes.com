@@ -25,7 +25,7 @@ const jobs = resumeCollection[0].data.jobs
                     <p class='text-xl pb-1'>{job[lang].company}</p>
                     <p class='text-grey mt-1 text-xl'>{job[lang].dates}</p>
                   </div>
-                  <ul class='list-disc pl-4 flex flex-col gap-2'>
+                  <ul class='list-disc pl-4 flex flex-col gap-2 max-w-screen-md'>
                       {job[lang].responsibilities.map(respItem => (
                           <li class='text-xl text-grey' set:html={respItem}/>
                       ))}
