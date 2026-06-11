@@ -3,6 +3,7 @@ import {links} from '../content/links'
 import {translations} from '../i18n/translations'
 import Rubricator from './Rubricator.astro'
 import {getResumePath} from '../js/utils'
+import {siteAnchors} from "../content/siteAnchors.ts";
 const resumePath = getResumePath()
 const lang = 'en'
 ---
@@ -11,10 +12,9 @@ const lang = 'en'
     class='mobile-menu flex hidden flex-col justify-between w-dvw h-dvh pt-24 px-4 fixed top-0 bottom-0 left-0 right-0 bg-black z-40
   translate-x-full transition-all ease-in duration-300'>
   <nav class='flex flex-col gap-6 pb-4 overflow-y-auto'>
-    <a class='text-2xl' href={resumePath}>{translations[lang].resume}</a>
-    <a class='text-2xl' href='#projects'>{translations[lang].selectedProjects}</a>
-    <a class='text-2xl' href='#resume'>{translations[lang].experience}</a>
-    <a class='text-2xl' href='#education'>{translations[lang].education}</a>
+      {siteAnchors.map(anchor => (
+          <a class='text-2xl' href={anchor.href}>{anchor.label(lang)}</a>
+      ))}
   </nav>
   <div class='relative pb-8 flex flex-col'>
     <Rubricator text={translations[lang].links}/>
