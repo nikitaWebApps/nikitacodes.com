@@ -1,0 +1,21 @@
+---
+import { getCollection } from 'astro:content'
+import Project from './Project.astro'
+import Rubricator from './Rubricator.astro'
+import { translations } from '../i18n/translations'
+
+const lang = 'en'
+const projectsCollection = await getCollection('projects')
+const projects = projectsCollection[0].data.projects.sort((a, b) => a.order - b.order)
+---
+
+<section id='projects' class='projects-section px-4 lg:px-8 scroll-mt-20'>
+  <div class='max-w-screen-xl mx-auto'>
+    <Rubricator text={translations[lang].selectedProjects} />
+    <div class='flex flex-col mt-6'>
+      {
+        projects.map(project => <Project project={project} />)
+      }
+    </div>
+  </div>
+</section>

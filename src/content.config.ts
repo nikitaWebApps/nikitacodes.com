@@ -1,14 +1,18 @@
-import { defineCollection, z } from 'astro:content'
-import { glob, file } from 'astro/loaders'
+import { defineCollection } from 'astro:content'
+import { z } from 'astro/zod'
+import { glob } from 'astro/loaders'
+
 const projects = defineCollection({
-  loader: glob({ pattern: 'projects/{en,ru}/*.json', base: './src/content/' }),
+  loader: glob({ pattern: 'projects.json', base: './src/content/' }),
   schema: z.object({
-    imageKey: z.string(),
-    publishedDate: z.coerce.date(),
-    techStack: z.string().array(),
-    siteLink: z.string().optional(),
-    title: z.string(),
-    keyFeatures: z.string().array().optional(),
+    projects: z
+      .object({
+        order: z.number(),
+        title: z.string(),
+        description: z.string(),
+        tags: z.string().array(),
+      })
+      .array(),
   }),
 })
 
@@ -77,4 +81,3 @@ export const collections = {
   skills,
   education,
 }
-

@@ -3,6 +3,7 @@ import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 import { translations } from '../i18n/translations'
 import MobileMenu from '../components/MobileMenu.astro'
+import '../styles/global.css'
 const lang = 'en'
 const { pageTitle } = Astro.props
 const title = pageTitle ? pageTitle + ' | ' + translations[lang].index_title : translations.en.index_title

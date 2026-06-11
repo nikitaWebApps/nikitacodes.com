@@ -1,17 +1,13 @@
 [
-  "JavaScript",
-  "TypeScript",
   "React",
+  "Next.js",
+  "TypeScript",
   "Vue",
-  "Craft CMS",
-  "Tailwind CSS",
   "Nuxt",
-  "Sass",
-  "Pinia",
+  "Tailwind CSS",
+  "Craft CMS",
   "Astro",
-  "GSAP",
-  "PHP",
-  "Git",
-  "Figma"
+  "Supabase",
+  "PHP"
 ]
 

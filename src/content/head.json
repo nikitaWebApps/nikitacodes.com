@@ -1,9 +1,9 @@
 {
   "title": {
-    "en": "I am Nikita, a front-end developer"
+    "en": "I am Nikita"
   },
   "description": {
-    "en": "I build fast websites and e-commerce solutions with Vue, Nuxt, TypeScript, and Craft CMS, focusing on performance, maintainability, and user experience"
+    "en": "Frontend Developer with %yearsCount%+ years of experience delivering web applications and digital products across 20+ international projects. Focused on performance, accessibility, maintainable architecture and user experience."
   }
 }
 

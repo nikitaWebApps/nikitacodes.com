@@ -1,59 +1,50 @@
 ---
-import { translations } from '../i18n/translations'
-import { getCollection } from 'astro:content'
-import { getResumePath } from '../js/utils'
-import { links } from '../content/links'
-const resumePath = getResumePath()
+import {translations} from '../i18n/translations'
+import {links} from '../content/links'
+import {siteAnchors} from "../content/siteAnchors.ts";
 
 type LangOptions = 'en' | 'ru'
 let currentLang: LangOptions = 'en'
-const head = await getCollection('head')
 ---
 
 <nav class='flex gap-8 absolute left-0 right-0 justify-center'>
-  <a class='hidden lg:block text-xl hover:text-accent transition' href='#projects'
-    >{translations[currentLang].projects}</a
-  >
-  <a class='hidden lg:block text-xl hover:text-accent transition' href='#resume'
-    >{translations[currentLang].experience}</a
-  >
-  <a class='hidden lg:block text-xl hover:text-accent transition' href='#education'
-    >{translations[currentLang].education}</a
-  >
-  <a class='hidden lg:block text-xl hover:text-accent transition' href={resumePath}
-    >{translations[currentLang].resume}</a
-  >
+    {siteAnchors.map(anchor => (
+        <a class='hidden lg:block text-xl hover:text-accent transition'
+           href={anchor.href}>{anchor.label(currentLang)}</a>
+    ))}
   <div class='relative hidden lg:block'>
     <button class='links-list-button text-xl hover:text-accent transition' type='button'
-      >{translations[currentLang].links} +</button
+    >{translations[currentLang].links} +
+    </button
     >
     <ul class='links-list hidden absolute top-12 flex flex-col gap-4 p-3 border border-grey rounded-2xl bg-black'>
-      {
-        links.map(link => (
-          <li>
-            <a class='text-xl hover:text-accent transition' href={link.href}>
-              {link.name}
-            </a>
-          </li>
-        ))
-      }
+        {
+            links.map(link => (
+                <li>
+                  <a class='text-xl hover:text-accent transition' href={link.href}>
+                      {link.name}
+                  </a>
+                </li>
+            ))
+        }
     </ul>
   </div>
 </nav>
 <script>
-  import { hideOnClickOutside } from '../js/utils'
-  const button = document.querySelector<HTMLElement>('.links-list-button')!
-  const list = document.querySelector<HTMLElement>('.links-list')!
-  const links = list.querySelectorAll('li')
-  button?.addEventListener('click', () => {
-    hideOnClickOutside(button, list)
-    list?.classList.toggle('hidden')
-  })
+    import {hideOnClickOutside} from '../js/utils'
 
-  //hide popup on link click
-  links.forEach(link => {
-    link.addEventListener('click', () => {
-      list?.classList.add('hidden')
+    const button = document.querySelector<HTMLElement>('.links-list-button')!
+    const list = document.querySelector<HTMLElement>('.links-list')!
+    const links = list.querySelectorAll('li')
+    button?.addEventListener('click', () => {
+        hideOnClickOutside(button, list)
+        list?.classList.toggle('hidden')
     })
-  })
+
+    //hide popup on link click
+    links.forEach(link => {
+        link.addEventListener('click', () => {
+            list?.classList.add('hidden')
+        })
+    })
 </script>
