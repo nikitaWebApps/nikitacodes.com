@@ -4,7 +4,7 @@ import {getResumePath} from "../js/utils.ts";
 export const siteAnchors = [
     {
         href: getResumePath(),
-        label: (lang: 'en') => translations[lang].resume
+        label: (lang: 'en') => translations[lang].download_cv
     },
     /*    {
             href: '#projects',

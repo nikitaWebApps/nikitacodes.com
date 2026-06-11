@@ -8,7 +8,6 @@ export const defaultLang = 'en'
 const en = {
     index_title: 'Nikita Golovlev, frontend-developer',
     hello: 'Hello',
-    resume: 'CV',
     download_cv: 'Download CV',
     links: 'Links',
     selectedProjects: 'Selected Projects',
