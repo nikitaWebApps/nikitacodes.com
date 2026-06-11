@@ -11,12 +11,12 @@ const jobs = resumeCollection[0].data.jobs
 
 <section id='resume' class='px-4 lg:px-8 scroll-mt-20'>
   <div class='max-w-screen-xl mx-auto'>
-    <Rubricator text={translations[lang].experience} />
     <p
       class='resume-description text-2xl lg:text-4xl lg:leading-tight mb-8 lg:max-w-4xl mt-6 lg:mt-8'
       set:html={description[lang]}
     />
-    <div class='flex flex-col gap-8'>
+    <Rubricator text={translations[lang].experience} />
+    <div class='flex flex-col gap-8 mt-4'>
       {
         jobs.map(job => (
           <div class='flex flex-col gap-5'>

@@ -6,14 +6,16 @@
     {
       "id": 2,
       "en": {
-        "position": "Frontend Developer / Craft CMS Developer",
+        "position": "Frontend Developer",
         "company": "Your Next Agency",
         "dates": "Full-time, Feb 2025 — present",
         "responsibilities": [
-          "Developing websites and e-commerce platforms using Vue, Twig, and PHP.",
-          "Maintaining, refactoring, and adding new features to existing projects.",
-          "Optimizing websites for SEO and performance.",
-          "Participating in code reviews and improving overall development workflows."
+          "Delivered frontend solutions across 20+ international projects in e-commerce, media, tourism and public sector domains.",
+          "Owned implementation of business-critical user journeys including registration systems, donation platforms, multilingual websites and e-commerce experiences.",
+          "Built accessible interfaces compliant with European accessibility requirements.",
+          "Modernized legacy Vue codebases through Composition API and TypeScript migrations.",
+          "Improved performance across multiple production applications through bundle optimization, caching and rendering improvements, achieving measurable PageSpeed gains and faster user experiences.",
+          "Collaborated directly with clients and stakeholders to define requirements and deliver production-ready solutions."
         ]
       }
     },
@@ -24,14 +26,12 @@
         "company": "Pharmaceutical Cosmetic LLC",
         "dates": "Full-time, Nov 2022 — Feb 2025",
         "responsibilities": [
-          "Full technical development and optimization for company websites, including analysis, tech stack selection, and implementation.",
-          "Support, refactoring, and adding new features to the company's existing projects.",
-          "Integration of projects with external systems via APIs",
-          "UX/UI design, including planning and enhancing user experience based on web analytics data.",
-          "Collaborated with cross-functional teams, including marketing, content and sale team."
+          "Migrated the company’s primary website to Nuxt and Headless WordPress, improving performance, SEO and maintainability.",
+          "Built and launched a new brand website with configurable marketing pages.",
+          "Replaced a SaaS-based training platform with Astro, improving performance and introducing Git-based development workflows.",
+          "Established a shared frontend architecture and design system across multiple company web projects."
         ]
       }
     }
   ]
 }
-
