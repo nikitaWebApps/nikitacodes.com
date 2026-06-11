@@ -12,7 +12,7 @@ const jobs = resumeCollection[0].data.jobs
 <section id='resume' class='px-4 lg:px-8 scroll-mt-20'>
   <div class='max-w-screen-xl mx-auto'>
     <p
-        class='resume-description text-2xl lg:text-4xl lg:leading-tight mb-8 lg:max-w-4xl'
+        class='resume-description text-2xl lg:text-4xl lg:leading-tight mb-10 lg:mb-16 lg:max-w-4xl'
         set:html={description[lang]}
     />
     <Rubricator text={translations[lang].experience}/>
@@ -22,7 +22,7 @@ const jobs = resumeCollection[0].data.jobs
                 <div class='flex flex-col gap-5'>
                   <div>
                     <h3 class='text-2xl mb-1'>{job[lang].position}</h3>
-                    <p class='text-xl border-b pb-1 border-stroke'>{job[lang].company}</p>
+                    <p class='text-xl pb-1'>{job[lang].company}</p>
                     <p class='text-grey mt-1 text-xl'>{job[lang].dates}</p>
                   </div>
                   <ul class='list-disc pl-4 flex flex-col gap-2'>
