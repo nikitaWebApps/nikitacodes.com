@@ -16,6 +16,8 @@ const calculateYears = () => {
     const now = new Date(Date.now()).getFullYear()
     return Math.round(now - dateStart).toString()
 }
+
+const quizScript = import.meta.env.QUIZ_SCRIPT
 ---
 
 <section
@@ -42,6 +44,9 @@ const calculateYears = () => {
       </p>
       <Chips chips={skills}/>
     </div>
+
+      {quizScript &&
+          <div class="max-w-screen-sm mt-8" set:html={quizScript}></div>}
   </div>
 </section>
 <style>
