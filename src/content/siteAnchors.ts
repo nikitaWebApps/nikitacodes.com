@@ -6,10 +6,6 @@ export const siteAnchors = [
         href: getResumePath(),
         label: (lang: 'en') => translations[lang].download_cv
     },
-    /*    {
-            href: '#projects',
-            label: (lang: 'en') => translations[lang].selectedProjects
-        },*/
     {
         href: '#resume',
         label: (lang: 'en') => translations[lang].experience
