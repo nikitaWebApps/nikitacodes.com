@@ -1,13 +1,14 @@
-# Hello! It's the repo for my personal portfolio site
+# nikitacodes.com
 
-My name is Nikita Golovlev, I am frontend developer working mostly with Vue and Nuxt. 
+Source code for [nikitacodes.com](https://nikitacodes.com), my personal site as a Frontend Engineer.
 
-Here's the repo for my personal site: [https://nikitacodes.com](nikitacodes.com)
+The site is built with [Astro](https://astro.build/) and Tailwind CSS.
 
-The site is build with [Astro](https://astro.build/), Vue and TailwindCSS.
+## Development
 
+```sh
+npm install
+npm run dev
+```
 
-
-
-
-
+Run `npm run build` to check the Astro project and create the production build.
