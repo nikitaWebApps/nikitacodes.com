@@ -8,39 +8,50 @@ const {isBig} = Astro.props
 const lang = (Astro.currentLocale as 'ru' | 'en') || 'en'
 ---
 
-<button
-    type='button'
+<div
+    data-expanded='false'
     class:list={isBig ? 'big-cta-button' : 'small-cta-button'}
-    class='relative flex flex-col gap-4 lg:gap-8 items-center justify-center w-full max-h-40 disabled:max-h-80 lg:max-h-64 lg:h-64 p-8 lg:px-8 lg:py-12 rounded-[80px] disabled:rounded-[48px] lg:disabled:rounded-full lg:rounded-full bg-accent overflow-clip transition-all duration-700 ease-out group'>
+    class='relative flex flex-col gap-4 lg:gap-8 items-center justify-center w-full max-h-40 lg:max-h-64 lg:h-64 p-8 lg:px-8 lg:py-12 rounded-[80px] lg:rounded-full bg-accent overflow-clip transition-all duration-700 ease-out group'>
   <span
-      class='button-text text-5xl leading-none md:text-7xl lg:text-9xl lg:w-full xl:text-[10rem] text-smoke-white transition-all duration-700 ease-out'
+      id='big-cta-button-label'
+      class='button-text text-5xl leading-none md:text-7xl lg:text-9xl lg:w-full xl:text-[10rem] text-smoke-white transition-all duration-700 ease-out text-center tracking-tighter'
   >{translations[lang].get_in_touch}</span
   >
-  <span
+  <div
+      id='big-cta-button-links'
       class='links hidden flex max-sm:flex-col gap-2 lg:gap-4 opacity-0 translate-y-12 transition-all duration-700 delay-200'>
-        <a
-            class='px-4 py-2 lg:px-8 lg:py-4 border-2 border-smoke-white flex justify-center text-xl lg:text-2xl text-accent hover:text-smoke-white rounded-full bg-smoke-white hover:bg-transparent transition-all transition-200 ease-in'
-            href={getResumePath()}
-            target='_blank'>
+    <a
+        class='px-4 py-2 lg:px-8 lg:py-4 border-2 border-smoke-white flex justify-center text-xl lg:text-2xl text-accent hover:text-smoke-white rounded-full bg-smoke-white hover:bg-transparent transition-all transition-200 ease-in'
+        href={getResumePath()}
+        target='_blank'
+        rel='noopener noreferrer'>
         {translations[lang].download_cv}
-      </a>
+    </a>
       {
           links.map(link => (
               <a
                   class='px-4 py-2 lg:px-8 lg:py-4 border-2 border-smoke-white flex justify-center text-xl lg:text-2xl text-accent hover:text-smoke-white rounded-full bg-smoke-white hover:bg-transparent transition-all transition-200 ease-in'
                   href={link.href}
-                  target='_blank'>
+                  target='_blank'
+                  rel='noopener noreferrer'>
                   {link.name}
               </a>
           ))
       }
-  </span>
-</button>
+  </div>
+  <button
+      type='button'
+      class='cta-trigger absolute inset-0 z-10 w-full rounded-[inherit]'
+      aria-labelledby='big-cta-button-label'
+      aria-controls='big-cta-button-links'
+      aria-expanded='false'></button>
+</div>
 
 <script>
-    const button = document.querySelector<HTMLButtonElement>('.big-cta-button')!
-    const links = button.querySelector<HTMLDivElement>('.links')
-    const text = button.querySelector<HTMLDivElement>('.button-text')
+    const button = document.querySelector<HTMLElement>('.big-cta-button')!
+    const trigger = button.querySelector<HTMLButtonElement>('.cta-trigger')!
+    const links = button.querySelector<HTMLElement>('.links')
+    const text = button.querySelector<HTMLElement>('.button-text')
 
     function scaleOnHover() {
         button.style.scale = '0.95'
@@ -66,12 +77,14 @@ const lang = (Astro.currentLocale as 'ru' | 'en') || 'en'
     button.addEventListener('mouseover', scaleOnHover)
     button.addEventListener('mouseleave', revertButtonSize)
 
-    button?.addEventListener('click', () => {
+    trigger.addEventListener('click', () => {
         removeInlineStyles()
         button.removeEventListener('mouseover', scaleOnHover)
         button.removeEventListener('mouseleave', revertButtonSize)
-        button.setAttribute('disabled', 'true')
+        button.dataset.expanded = 'true'
         button.classList.remove('group')
+        trigger.setAttribute('aria-expanded', 'true')
+        trigger.classList.add('hidden')
         links?.classList.remove('hidden')
         text?.classList.add('animate-text')
 
@@ -80,15 +93,19 @@ const lang = (Astro.currentLocale as 'ru' | 'en') || 'en'
                 block: 'start',
                 behavior: 'smooth',
             })
-        }, 300)
+        }, 200)
 
         setTimeout(() => {
             links?.classList.add('animate-links')
-        }, 400)
+        }, 200)
     })
 </script>
 
 <style>
+    .big-cta-button[data-expanded='true'] {
+        @apply max-h-80 rounded-[48px] lg:max-h-64 lg:rounded-full;
+    }
+
     .animate-links {
         @apply opacity-100 translate-y-0 lg:translate-y-1/3;
     }
