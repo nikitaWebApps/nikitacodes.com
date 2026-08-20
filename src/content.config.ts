@@ -36,17 +36,14 @@ const jobItem = z.object({
 })
 
 const resume = defineCollection({
-  loader: glob({ pattern: 'resume.json', base: './src/content/' }),
-  schema: z.object({
-    description: z.object({
-      en: z.string(),
+    loader: glob({pattern: 'resume.json', base: './src/content/'}),
+    schema: z.object({
+        jobs: z
+            .object({
+                en: jobItem,
+            })
+            .array(),
     }),
-    jobs: z
-      .object({
-        en: jobItem,
-      })
-      .array(),
-  }),
 })
 
 const skills = defineCollection({

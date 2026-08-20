@@ -1,22 +1,12 @@
 {
-  "description": {
-    "en": "I currently work as a Frontend Developer <br>at <a href='https://yournextagency.com/'><span class='text-yna-pink'>Your </span><span class='text-yna-purple'>Next</span> Agency</a>, creating efficient, user-focused interfaces for content-heavy web platforms."
-  },
   "jobs": [
     {
       "id": 2,
       "en": {
-        "position": "Frontend Developer",
+        "position": "Frontend Engineer",
         "company": "Your Next Agency",
         "dates": "Full-time, Feb 2025 — present",
-        "responsibilities": [
-          "Delivered frontend solutions across 20+ international projects in e-commerce, media, tourism and public sector domains.",
-          "Owned implementation of business-critical user journeys including registration systems, donation platforms, multilingual websites and e-commerce experiences.",
-          "Built accessible interfaces compliant with European accessibility requirements.",
-          "Modernized legacy Vue codebases through Composition API and TypeScript migrations.",
-          "Improved performance across multiple production applications through bundle optimization, caching and rendering improvements, achieving measurable PageSpeed gains and faster user experiences.",
-          "Collaborated directly with clients and stakeholders to define requirements and deliver production-ready solutions."
-        ]
+        "description": "Built and maintained frontends across 20+ international projects: e-commerce, critical user flows, multilingual platforms."
       }
     },
     {
@@ -25,12 +15,7 @@
         "position": "Frontend Developer",
         "company": "Pharmaceutical Cosmetic LLC",
         "dates": "Full-time, Nov 2022 — Feb 2025",
-        "responsibilities": [
-          "Migrated the company’s primary website to Nuxt and Headless WordPress, improving performance, SEO and maintainability.",
-          "Built and launched a new brand website with configurable marketing pages.",
-          "Replaced a SaaS-based training platform with Astro, improving performance and introducing Git-based development workflows.",
-          "Established a shared frontend architecture and design system across multiple company web projects."
-        ]
+        "description": "Built e-commerce and brand websites, internal web tools and a design system for the company's digital products."
       }
     }
   ]
