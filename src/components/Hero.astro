@@ -4,12 +4,9 @@ import myPic from '../img/myPic_square.jpg'
 import HandEmoji from '../img/handwave_emoji.png'
 import {getCollection} from 'astro:content'
 import {translations} from '../i18n/translations'
-import Chips from './Chips.astro'
 
 const lang = 'en'
 const head = await getCollection('head')
-const skillsCollection = await getCollection('skills')
-const skills = skillsCollection[0].data
 
 const calculateYears = () => {
     const dateStart = new Date('01-10-2022').getFullYear()
@@ -22,31 +19,32 @@ const quizScript = import.meta.env.QUIZ_SCRIPT
 
 <section
     class='px-4 lg:px-8 mt-24'>
-  <div class='grid grid-cols-1 lg:auto-cols-auto gap-8 xl:gap-16 w-full max-w-screen-xl mx-auto'>
-    <Image
-        class='w-full max-w-56 rounded-full object-contain aspect-square justify-self-center md:justify-self-start lg:col-start-2'
-        src={myPic}
-        alt=''
-    />
-    <div class='flex flex-col gap-2 lg:row-start-1 lg:max-w-4xl'>
-      <h1 class='text-2xl lg:text-4xl lg:leading-tight group'>
-          {translations[lang].hello}
-        <Image
-            src={HandEmoji}
-            alt=''
-            class='inline-block aspect-square w-8 h-8 lg:w-10 lg:h-10 align-baseline group-hover:animate-[shake_0.5s_ease-in-out_infinite]'
-        />
-        <br/>
-          {head[0].data.title[lang]}
-      </h1>
-      <p class='text-2xl lg:text-4xl lg:leading-tight text-grey mb-8'>
-          {head[0].data.description[lang].replace('%yearsCount%', calculateYears())}
-      </p>
-      <Chips chips={skills}/>
+  <div class='flex flex-col gap-4 md:gap-8 w-full max-w-screen-xl mx-auto'>
+    <div class='grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_14rem] gap-4 md:gap-8 xl:gap-16'>
+      <Image
+          class='w-full max-w-32 md:max-w-48 lg:max-w-56 rounded-full object-contain aspect-square lg:col-start-2'
+          src={myPic}
+          alt=''
+      />
+      <div class='flex flex-col gap-2 lg:row-start-1 lg:max-w-4xl'>
+        <h1 class='text-2xl lg:text-4xl lg:leading-tight group'>
+            {translations[lang].hello}
+          <Image
+              src={HandEmoji}
+              alt=''
+              class='inline-block aspect-square w-8 h-8 lg:w-10 lg:h-10 align-baseline group-hover:animate-[shake_0.5s_ease-in-out_infinite]'
+          />
+          <br/>
+            {head[0].data.title[lang]}
+        </h1>
+        <p class='text-2xl lg:text-4xl lg:leading-tight text-grey mb-8'>
+            {head[0].data.description[lang].replace('%yearsCount%', calculateYears())}
+        </p>
+      </div>
     </div>
 
       {quizScript &&
-          <div class="max-w-screen-sm mt-8" set:html={quizScript}></div>}
+          <div class='max-w-screen-sm mt-8' set:html={quizScript}></div>}
   </div>
 </section>
 <style>
