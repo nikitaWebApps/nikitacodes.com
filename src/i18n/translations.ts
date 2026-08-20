@@ -1,16 +1,9 @@
-export const Languages = {
-    en: 'English',
-    ru: 'Russian',
-}
-
-export const defaultLang = 'en'
-
 const en = {
-    index_title: 'Nikita Golovlev, frontend-developer',
+    index_title: 'Nikita Golovlev | Frontend Engineer',
     hello: 'Hello',
     download_cv: 'Download CV',
     links: 'Links',
-    selectedProjects: 'Selected Projects',
+    selectedProjects: 'Selected Work',
     homepage: 'Homepage',
     experience: 'Experience',
     tab_skills: 'Skills',
@@ -31,7 +24,7 @@ const en = {
     irina_designer: 'Irina Vasyuk',
 }
 
-export const translations = {
+export const t = {
     en,
     ru: en,
 }
