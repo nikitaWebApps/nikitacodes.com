@@ -1,10 +1,8 @@
 ---
 import {links} from '../content/links'
-import {translations} from '../i18n/translations'
+import {t} from '../i18n/translations'
 import Rubricator from './Rubricator.astro'
-import {getResumePath} from '../js/utils'
 import {siteAnchors} from "../content/siteAnchors.ts";
-const resumePath = getResumePath()
 const lang = 'en'
 ---
 
@@ -17,7 +15,7 @@ const lang = 'en'
       ))}
   </nav>
   <div class='relative pb-8 flex flex-col'>
-    <Rubricator text={translations[lang].links}/>
+    <Rubricator text={t[lang].links}/>
     <div class='flex gap-1 overflow-x-auto mt-4'>
         {
             links.map(link => (

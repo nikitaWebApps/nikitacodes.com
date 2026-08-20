@@ -3,7 +3,7 @@ import {Image} from 'astro:assets'
 import myPic from '../img/myPic_square.jpg'
 import HandEmoji from '../img/handwave_emoji.png'
 import {getCollection} from 'astro:content'
-import {translations} from '../i18n/translations'
+import {t} from '../i18n/translations'
 
 const lang = 'en'
 const head = await getCollection('head')
@@ -28,7 +28,7 @@ const quizScript = import.meta.env.QUIZ_SCRIPT
       />
       <div class='flex flex-col gap-2 lg:row-start-1 lg:max-w-4xl'>
         <h1 class='text-2xl lg:text-4xl lg:leading-tight group'>
-            {translations[lang].hello}
+            {t[lang].hello}
           <Image
               src={HandEmoji}
               alt=''

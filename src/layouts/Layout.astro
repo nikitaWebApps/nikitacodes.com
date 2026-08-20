@@ -1,63 +1,68 @@
 ---
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
-import { translations } from '../i18n/translations'
+import {t} from '../i18n/translations'
 import MobileMenu from '../components/MobileMenu.astro'
 import '../styles/global.css'
 const lang = 'en'
-const { pageTitle } = Astro.props
-const title = pageTitle ? pageTitle + ' | ' + translations[lang].index_title : translations.en.index_title
+const {pageTitle} = Astro.props
+const title = pageTitle ? pageTitle + ' | ' + t[lang].index_title : t.en.index_title
+const description = 'Frontend Engineer working with React, Next.js, Vue and TypeScript on web applications and digital products.'
 ---
 
 <html lang={lang} class='font-body scroll-smooth'>
-  <head>
-    <meta charset='utf-8' />
-    <meta name='viewport' content='width=device-width, initial-scale=1' />
-    <link rel='icon' type='image/svg+xml' href='/favicon.png' />
-    <link rel='preconnect' href='https://fonts.googleapis.com' />
-    <link rel='canonical' href='https://nikitacodes.com' />
-    <style>
+<head>
+  <meta charset='utf-8'/>
+  <meta name='viewport' content='width=device-width, initial-scale=1'/>
+  <link rel='icon' type='image/png' href='/favicon.png'/>
+  <link rel='preconnect' href='https://fonts.googleapis.com'/>
+  <link rel='canonical' href='https://nikitacodes.com'/>
+  <meta name='description' content={description}/>
+  <meta property='og:title' content={title}/>
+  <meta property='og:description' content={description}/>
+  <meta property='og:type' content='website'/>
+  <meta property='og:url' content='https://nikitacodes.com'/>
+  <style>
       /* latin-ext */
       @font-face {
-        font-family: 'Golos Text';
-        font-style: normal;
-        font-weight: 400 900;
-        font-display: swap;
-        src:
-          local('Golos Text'),
+          font-family: 'Golos Text';
+          font-style: normal;
+          font-weight: 400 900;
+          font-display: swap;
+          src: local('Golos Text'),
           url(https://fonts.gstatic.com/s/golostext/v4/q5uCsoe9Lv5t7Meb31EcEx18hK5SAMqbpw.woff2) format('woff2');
-        unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
+          unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
           U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
       }
+
       /* latin */
       @font-face {
-        font-family: 'Golos Text';
-        font-style: normal;
-        font-weight: 400 900;
-        font-display: swap;
-        src:
-          local('Golos Text'),
+          font-family: 'Golos Text';
+          font-style: normal;
+          font-weight: 400 900;
+          font-display: swap;
+          src: local('Golos Text'),
           url(https://fonts.gstatic.com/s/golostext/v4/q5uCsoe9Lv5t7Meb31EcExN8hK5SAMo.woff2) format('woff2');
-        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+          unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
           U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
       }
-    </style>
-    <title>{title}</title>
-  </head>
-  <body class='bg-black text-smoke-white' data-lang={Astro.currentLocale || 'en'}>
-    <MobileMenu />
-    <Header />
-    <div class='mx-auto mb-16 lg:mb-28'>
-      <slot />
-    </div>
-    <Footer />
-    <div
-      class='text-container fixed z-30 cursor-default text-accent px-2 py-1 bg-white bg-opacity-50 rounded-md w-max [@media(pointer:coarse)]:hidden'>
-    </div>
-  </body>
+  </style>
+  <title>{title}</title>
+</head>
+<body class='bg-black text-smoke-white' data-lang={Astro.currentLocale || 'en'}>
+<MobileMenu/>
+<Header/>
+<div class='mx-auto mb-16 lg:mb-28'>
+  <slot/>
+</div>
+<Footer/>
+<div
+    class='text-container fixed z-30 cursor-default text-accent px-2 py-1 bg-white bg-opacity-50 rounded-md w-max [@media(pointer:coarse)]:hidden'>
+</div>
+</body>
 </html>
 <style is:global>
-  .noscroll {
-    overflow: hidden;
-  }
+    .noscroll {
+        overflow: hidden;
+    }
 </style>

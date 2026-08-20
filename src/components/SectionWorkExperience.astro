@@ -1,6 +1,6 @@
 ---
 import Rubricator from './Rubricator.astro'
-import {translations} from '../i18n/translations'
+import {t} from '../i18n/translations'
 import {getCollection} from 'astro:content'
 const lang = 'en'
 const resumeCollection = await getCollection('resume')
@@ -10,7 +10,7 @@ const jobs = resumeCollection[0].data.jobs
 
 <section id='resume' class='px-4 lg:px-8 scroll-mt-20'>
   <div class='max-w-screen-xl mx-auto'>
-    <Rubricator text={translations[lang].experience}/>
+    <Rubricator text={t[lang].experience}/>
     <div class='flex flex-col gap-10 mt-4 lg:mt-6'>
         {
             jobs.map((job) => (

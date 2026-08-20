@@ -1,34 +1,31 @@
 {
   "projects": [
     {
-      "order": 1,
-      "title": "Quiz Builder Platform",
-      "description": "SaaS-style form and quiz platform built with Next.js App Router and Supabase. Focused on pleasant UX, scalable application architecture, reusable UI system and best React/Next.js practices.",
+      "title": "PvdD",
+      "description": "Dutch political party portal with 80+ subsites. Solved performance problems. Developed registration, donation and e-commerce flows.",
       "tags": [
-        "Next.js App Router",
-        "Supabase",
-        "React",
-        "Shadcn"
-      ]
-    },
-    {
-      "order": 2,
-      "title": "YNA Client",
-      "description": "Delivered a large-scale visual and technical refresh of business-critical registration, donation and e-commerce journeys across a multi-site platform powering 80+ websites. Implemented frontend architecture improvements and performance optimizations supporting both end users and content editors.",
-      "tags": [
-        "JavaScript",
         "Craft CMS",
-        "Performance"
+        "Performance",
+        "Accessibility"
       ]
     },
     {
-      "order": 3,
-      "title": "Craft CMS Export Feeds Plugin",
-      "description": "Designed and implemented UI for an extensible export plugin supporting Google Merchant, Facebook and Channable integrations.",
+      "title": "Export Feeds Plugin",
+      "description": "Implemented the UI for a multi-step feed generation flow.",
       "tags": [
-        "TypeScript",
         "Vue",
+        "TypeScript",
         "Nuxt UI"
+      ]
+    },
+    {
+      "title": "EQ — Embeddable Quizzes",
+      "description": "Embeddable quiz platform. Building a product for practising traditional problem-solving in the AI era.",
+      "tags": [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Supabase"
       ]
     }
   ]

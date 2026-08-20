@@ -1,5 +1,5 @@
 ---
-import {translations} from '../i18n/translations'
+import {t} from '../i18n/translations'
 import {links} from '../content/links'
 import {siteAnchors} from "../content/siteAnchors.ts";
 
@@ -14,7 +14,7 @@ let currentLang: LangOptions = 'en'
     ))}
   <div class='relative hidden lg:block'>
     <button class='links-list-button text-xl hover:text-accent transition' type='button'
-    >{translations[currentLang].links} +
+    >{t[currentLang].links} +
     </button
     >
     <ul class='links-list hidden absolute top-12 flex flex-col gap-4 p-3 border border-grey rounded-2xl bg-black'>

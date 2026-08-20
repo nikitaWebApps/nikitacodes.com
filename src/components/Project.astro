@@ -2,21 +2,22 @@
 import Chips from './Chips.astro'
 
 interface Props {
-  project: {
-    title: string
-    description: string
-    tags: string[]
-  }
+    project: {
+        title: string
+        description: string
+        tags: string[]
+        url?: string
+    }
 }
 
-const { project } = Astro.props
+const {project} = Astro.props
 ---
 
 <article
-  class='grid grid-cols-1 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] gap-4 lg:gap-8 py-8 border-b border-stroke first:pt-0'>
+    class='grid grid-cols-1 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)] gap-4 lg:gap-8 py-8 border-b border-stroke first:pt-0'>
   <h3 class='text-2xl lg:text-4xl lg:leading-tight'>{project.title}</h3>
   <div class='flex flex-col gap-4'>
     <p class='text-xl lg:text-2xl text-grey lg:leading-snug'>{project.description}</p>
-    <Chips chips={project.tags} />
+    <Chips chips={project.tags}/>
   </div>
 </article>
