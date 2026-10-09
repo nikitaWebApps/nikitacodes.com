@@ -6,6 +6,7 @@ import {getResumePath} from "../js/utils.ts";
 const {isBig} = Astro.props
 
 const lang = (Astro.currentLocale as 'ru' | 'en') || 'en'
+const linkClass = 'px-4 py-2 lg:px-8 lg:py-4 border-2 border-smoke-white flex justify-center text-xl lg:text-2xl text-accent hover:text-smoke-white rounded-full bg-smoke-white hover:bg-transparent transition-all transition-200 ease-in'
 ---
 
 <div
@@ -19,18 +20,20 @@ const lang = (Astro.currentLocale as 'ru' | 'en') || 'en'
   >
   <div
       id='big-cta-button-links'
-      class='links hidden flex max-sm:flex-col gap-2 lg:gap-4 opacity-0 translate-y-12 transition-all duration-700 delay-200'>
+      class='links hidden flex max-sm:flex-col gap-2 lg:gap-4 opacity-0 translate-y-12 transition-all duration-500 delay-100'>
     <a
-        class='px-4 py-2 lg:px-8 lg:py-4 border-2 border-smoke-white flex justify-center text-xl lg:text-2xl text-accent hover:text-smoke-white rounded-full bg-smoke-white hover:bg-transparent transition-all transition-200 ease-in'
+        class={linkClass}
+        style='--index: 0'
         href={getResumePath()}
         target='_blank'
         rel='noopener noreferrer'>
         {t[lang].download_cv}
     </a>
       {
-          links.map(link => (
+          links.map((link, index) => (
               <a
-                  class='px-4 py-2 lg:px-8 lg:py-4 border-2 border-smoke-white flex justify-center text-xl lg:text-2xl text-accent hover:text-smoke-white rounded-full bg-smoke-white hover:bg-transparent transition-all transition-200 ease-in'
+                  class={linkClass}
+                  style={`--index: ${index + 1}`}
                   href={link.href}
                   target='_blank'
                   rel='noopener noreferrer'>
@@ -52,35 +55,77 @@ const lang = (Astro.currentLocale as 'ru' | 'en') || 'en'
     const trigger = button.querySelector<HTMLButtonElement>('.cta-trigger')!
     const links = button.querySelector<HTMLElement>('.links')
     const text = button.querySelector<HTMLElement>('.button-text')
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    const easeOut = 'cubic-bezier(0.22, 1, 0.36, 1)'
+    const springBack = 'cubic-bezier(0.34, 1.56, 0.64, 1)'
 
     function scaleOnHover() {
-        button.style.scale = '0.95'
-        button.style.transitionDuration = '8s'
-        text!.style.scale = '1.15'
-        text!.style.transitionDuration = '16s'
+        button.style.scale = '0.94'
+        button.style.transition = `scale 3s ${easeOut}`
+        text!.style.scale = '1.2'
+        text!.style.transition = `scale 6s ${easeOut}, translate 600ms ${easeOut}`
     }
 
     function revertButtonSize() {
         button.style.scale = '1'
-        button.style.transitionDuration = '1s'
+        button.style.transition = `scale 900ms ${springBack}`
         text!.style.scale = '1'
-        text!.style.transitionDuration = '1s'
+        text!.style.translate = '0 0'
+        text!.style.transition = `scale 900ms ${springBack}, translate 900ms ${springBack}`
+    }
+
+    // Pulls the label slightly towards the cursor
+    function followPointer(event: PointerEvent) {
+        const rect = button.getBoundingClientRect()
+        const offsetX = (event.clientX - rect.left) / rect.width - 0.5
+        const offsetY = (event.clientY - rect.top) / rect.height - 0.5
+        text!.style.translate = `${offsetX * 48}px ${offsetY * 24}px`
     }
 
     function removeInlineStyles() {
         button.style.removeProperty('scale')
-        button.style.removeProperty('transition-duration')
-        text!.style.removeProperty('transition-duration')
+        button.style.removeProperty('transition')
+        text!.style.removeProperty('transition')
         text!.style.removeProperty('scale')
+        text!.style.removeProperty('translate')
     }
 
     button.addEventListener('mouseover', scaleOnHover)
     button.addEventListener('mouseleave', revertButtonSize)
+    if (!reduceMotion) {
+        button.addEventListener('pointermove', followPointer)
+    }
+
+    // Squishes the button on click and springs it back while it expands
+    function pulseOnPress() {
+        const pressedScale = getComputedStyle(button).scale
+
+        // Drops the running hover transition, otherwise it resumes and resizes the button after the pulse ends
+        button.style.transition = 'none'
+        button.style.removeProperty('scale')
+        void getComputedStyle(button).scale
+        button.style.removeProperty('transition')
+
+        button.animate(
+            [
+                {scale: pressedScale === 'none' ? '1' : pressedScale},
+                {scale: '0.88', offset: 0.3},
+                {scale: '1.03', offset: 0.7},
+                {scale: '1'},
+            ],
+            {duration: 650, easing: 'ease-out'},
+        )
+    }
 
     trigger.addEventListener('click', () => {
+        if (!reduceMotion) {
+            pulseOnPress()
+        }
         removeInlineStyles()
         button.removeEventListener('mouseover', scaleOnHover)
         button.removeEventListener('mouseleave', revertButtonSize)
+        button.removeEventListener('pointermove', followPointer)
         button.dataset.expanded = 'true'
         button.classList.remove('group')
         trigger.setAttribute('aria-expanded', 'true')
@@ -97,13 +142,15 @@ const lang = (Astro.currentLocale as 'ru' | 'en') || 'en'
 
         setTimeout(() => {
             links?.classList.add('animate-links')
-        }, 200)
+        }, 120)
     })
 </script>
 
 <style>
     .big-cta-button[data-expanded='true'] {
         @apply max-h-80 rounded-[48px] lg:max-h-64 lg:rounded-full;
+        transition-duration: 500ms;
+        transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .animate-links {
@@ -112,5 +159,25 @@ const lang = (Astro.currentLocale as 'ru' | 'en') || 'en'
 
     .animate-text {
         @apply text-3xl lg:text-5xl lg:absolute lg:-translate-y-[64px];
+        transition-duration: 450ms;
+        transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        .animate-links > a {
+            animation: link-pop 500ms cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+            animation-delay: calc(var(--index) * 60ms + 80ms);
+        }
+    }
+
+    @keyframes link-pop {
+        from {
+            opacity: 0;
+            transform: translateY(1.5rem) scale(0.8);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
     }
 </style>
