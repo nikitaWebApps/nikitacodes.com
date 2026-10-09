@@ -4,10 +4,11 @@
   "TypeScript",
   "Vue",
   "Nuxt",
-  "Tailwind CSS",
+  "Tailwind CSS",
+  "Payload CMS",
   "Craft CMS",
-  "Astro",
   "Supabase",
+  "Playwright",
+  "Astro",
   "PHP"
 ]
-

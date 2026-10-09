@@ -15,7 +15,6 @@ const en = {
     projectCard: {
         details: 'Details',
         see_live: 'See live',
-        inDevelopment: 'In deveplopment',
     },
     last_updated: 'Last updated',
     next_slide: 'Next slide →',

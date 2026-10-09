@@ -1,8 +1,36 @@
 {
   "projects": [
     {
-      "title": "PvdD",
-      "description": "Dutch political party portal with 80+ subsites. Solved performance problems. Developed registration, donation and e-commerce flows.",
+      "title": "EQ — Embeddable Quizzes",
+      "description": "Quizzes you can embed on any website. A side project about practising problem-solving before asking AI. Supabase auth with row-level security, drafts that survive a closed tab, and one widget shared by the editor preview and the embed.",
+      "tags": [
+        "Next.js",
+        "TypeScript",
+        "Supabase",
+        "Turborepo"
+      ]
+    },
+    {
+      "title": "Museum Planning Tool",
+      "description": "Group planning for a museum: create a poll, invite people, vote together. I built the backend with Next.js and Payload CMS: permissions, simultaneous votes, WhatsApp notifications. About 100 polls are created each month.",
+      "tags": [
+        "Next.js",
+        "Payload CMS",
+        "TypeScript"
+      ]
+    },
+    {
+      "title": "Healthcare Checkout",
+      "description": "A checkout that keeps working when things break: payment retries, form data that survives errors, a fallback when the address service is down. Conversion went up 15%, and it stayed up through two Cloudflare outages.",
+      "tags": [
+        "Checkout",
+        "Payments",
+        "Error handling"
+      ]
+    },
+    {
+      "title": "Political Party Website",
+      "description": "Political party portal with 80+ subsites. Built the registration, donation, petition and shop flows, and made the pages fast again.",
       "tags": [
         "Craft CMS",
         "Performance",
@@ -10,8 +38,8 @@
       ]
     },
     {
-      "title": "Export Feeds Plugin",
-      "description": "Implemented the UI for a multi-step feed generation flow.",
+      "title": "Product Feeds Plugin",
+      "description": "A CMS plugin that turns a product catalogue into Meta and Google feeds. I designed and built the interface: field mapping, live preview, and progress while the feed generates.",
       "tags": [
         "Vue",
         "TypeScript",
@@ -19,13 +47,12 @@
       ]
     },
     {
-      "title": "EQ — Embeddable Quizzes",
-      "description": "Embeddable quiz platform. Building a product for practising traditional problem-solving in the AI era.",
+      "title": "Shared Payload Plugins",
+      "description": "Moved 5+ plugins that were being copied between projects into npm packages. Updates now reach every project up to 3x faster.",
       "tags": [
-        "Next.js",
-        "React",
-        "TypeScript",
-        "Supabase"
+        "Payload CMS",
+        "npm",
+        "TypeScript"
       ]
     }
   ]
