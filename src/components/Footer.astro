@@ -6,17 +6,17 @@ import LinkedIn from '../icons/LinkedIn.astro'
 import Telegram from '../icons/Telegram.astro'
 import BigCtaButton from './BigCtaButton.astro'
 
-const lang = (Astro.currentLocale as 'ru' | 'en') || 'en'
-let date
-if (lang == 'ru') {
-    date = new Date()
-        .toLocaleString('ru-RU', {year: 'numeric', month: 'long', localeMatcher: 'best fit'})
-        .replace('г.', '')
-} else {
-    date = new Date()
-        .toLocaleString('en-EN', {year: 'numeric', month: 'long', localeMatcher: 'best fit'})
-        .replace('г.', '')
+const icons = {
+    Telegram,
+    LinkedIn,
+    GitHub: Github,
 }
+
+const lang = (Astro.currentLocale as 'ru' | 'en') || 'en'
+
+const date = new Date()
+    .toLocaleString('en-EN', {year: 'numeric', month: 'long', localeMatcher: 'best fit'})
+    .replace('г.', '')
 ---
 
 <footer class='px-4 lg:px-8 mb-8'>
@@ -39,16 +39,18 @@ if (lang == 'ru') {
 
       <div class='flex gap-4 lg:gap-6 items-center'>
           {
-              links.map(link => (
-                  <a href={link.href} title={link.name} class='fill-grey hover:fill-accent transition ease-in'>
-                      {link.name === 'Telegram' ?
-                          <Telegram aria-hidden='true'/> : ''}
-                      {link.name === 'LinkedIn' ?
-                          <LinkedIn/> : ''}
-                      {link.name === 'GitHub' ?
-                          <Github/> : ''}
-                  </a>
-              ))
+              links.map(link => {
+                  const Icon = icons[link.name as keyof typeof icons]
+                  return Icon && (
+                      <a
+                          href={link.href}
+                          title={link.name}
+                          aria-label={link.name}
+                          class='fill-grey hover:fill-accent transition ease-in'>
+                        <Icon/>
+                      </a>
+                  )
+              })
           }
       </div>
     </div>
