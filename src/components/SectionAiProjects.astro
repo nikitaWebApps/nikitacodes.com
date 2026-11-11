@@ -1,0 +1,186 @@
+---
+import {getCollection} from 'astro:content'
+import Rubricator from './Rubricator.astro'
+import Chips from './Chips.astro'
+import Sparkles from './Sparkles.astro'
+import ArrowUpRight from '../icons/ArrowUpRight.astro'
+import {t} from '../i18n/translations'
+
+const lang = 'en'
+const aiProjectsCollection = await getCollection('aiProjects')
+const {description, projects} = aiProjectsCollection[0].data
+
+const sectionSparkles = [
+    {x: 4, y: 6, size: 12, delay: 0, duration: 3.2, shape: 'star'},
+    {x: 22, y: 2, size: 5, delay: 1.8, duration: 2.8, shape: 'dot'},
+    {x: 58, y: 10, size: 10, delay: 0.8, duration: 3.4, shape: 'star'},
+    {x: 84, y: 4, size: 14, delay: 2.4, duration: 3, shape: 'star'},
+    {x: 97, y: 22, size: 5, delay: 0.4, duration: 2.6, shape: 'dot'},
+    {x: 72, y: 26, size: 8, delay: 1.4, duration: 3.2, shape: 'star'},
+    {x: 99, y: 58, size: 11, delay: 2, duration: 3.4, shape: 'star'},
+    {x: 50, y: 52, size: 4, delay: 2.8, duration: 2.6, shape: 'dot'},
+    {x: 1, y: 44, size: 9, delay: 1.1, duration: 3, shape: 'star'},
+    {x: 2, y: 88, size: 5, delay: 0.6, duration: 2.8, shape: 'dot'},
+    {x: 38, y: 100, size: 10, delay: 2.2, duration: 3.2, shape: 'star'},
+    {x: 88, y: 98, size: 6, delay: 1.6, duration: 2.6, shape: 'dot'},
+] as const
+
+const cardSparkles = [
+    {x: 8, y: 12, size: 10, delay: 0, duration: 2.4, shape: 'star'},
+    {x: 92, y: 8, size: 12, delay: 0.6, duration: 2.8, shape: 'star'},
+    {x: 78, y: 30, size: 4, delay: 1.2, duration: 2.2, shape: 'dot'},
+    {x: 96, y: 62, size: 8, delay: 0.3, duration: 2.6, shape: 'star'},
+    {x: 62, y: 94, size: 5, delay: 1.6, duration: 2.4, shape: 'dot'},
+    {x: 30, y: 96, size: 9, delay: 0.9, duration: 3, shape: 'star'},
+    {x: 3, y: 70, size: 4, delay: 2, duration: 2.2, shape: 'dot'},
+    {x: 46, y: 4, size: 6, delay: 1.4, duration: 2.6, shape: 'star'},
+] as const
+---
+
+<section id='ai' class='ai-section relative px-4 lg:px-8 scroll-mt-20'>
+  <Sparkles items={sectionSparkles}/>
+  <div class='max-w-screen-xl mx-auto'>
+    <Rubricator text={t[lang].aiProjects}/>
+    <p data-ai-glow class='ai-intro text-xl lg:text-3xl lg:leading-tight mt-6 mb-8 lg:mb-12 lg:max-w-3xl'>
+        {description}
+    </p>
+    <div class='grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6'>
+        {
+            projects.map(project => (
+                <a
+                    data-ai-glow
+                    class='ai-card flex flex-col gap-4 p-5 lg:p-6 rounded-2xl'
+                    href={project.url}
+                    target='_blank'
+                    rel='noopener'>
+                  <Sparkles items={cardSparkles}/>
+                  <div class='flex items-start justify-between gap-4'>
+                    <h3 class='text-xl lg:text-2xl'>{project.title}</h3>
+                    <ArrowUpRight class='ai-card-arrow shrink-0 w-5 h-5 lg:w-6 lg:h-6'/>
+                  </div>
+                  <p class='text-base lg:text-lg text-grey'>{project.description}</p>
+                  <div class='flex flex-col gap-3 mt-auto'>
+                    <Chips chips={project.tags} size='sm'/>
+                    <span class='ai-card-url text-sm break-all'>{project.url.replace(/^https?:\/\//, '')}</span>
+                  </div>
+                </a>
+            ))
+        }
+    </div>
+  </div>
+</section>
+
+<script>
+    const section = document.querySelector<HTMLElement>('.ai-section')!
+    const targets = section.querySelectorAll<HTMLElement>('[data-ai-glow]')
+    let pointer = {x: 0, y: 0}
+    let frame = 0
+
+    // Coordinates are relative to each element, so the glow also reaches borders near the cursor from outside a card
+    const updateGlow = () => {
+        frame = 0
+        targets.forEach(target => {
+            const rect = target.getBoundingClientRect()
+            target.style.setProperty('--ai-x', `${pointer.x - rect.left}px`)
+            target.style.setProperty('--ai-y', `${pointer.y - rect.top}px`)
+        })
+    }
+
+    const scheduleUpdate = () => {
+        if (!frame) frame = requestAnimationFrame(updateGlow)
+    }
+
+    section.addEventListener('pointermove', event => {
+        if (event.pointerType !== 'mouse') return
+        pointer = {x: event.clientX, y: event.clientY}
+        scheduleUpdate()
+    })
+
+    window.addEventListener('scroll', () => {
+        if (section.matches(':hover')) scheduleUpdate()
+    }, {passive: true})
+</script>
+
+<style>
+    @property --ai-spot {
+        syntax: '<number>';
+        inherits: true;
+        initial-value: 0;
+    }
+
+    .ai-section {
+        --ai-spot: 0;
+        transition: --ai-spot 500ms ease;
+    }
+
+    @media (hover: hover) {
+        .ai-section:hover {
+            --ai-spot: 1;
+        }
+    }
+
+    [data-ai-glow] {
+        --ai-x: -9999px;
+        --ai-y: -9999px;
+    }
+
+    .ai-intro {
+        background:
+            radial-gradient(270px circle at var(--ai-x) var(--ai-y), rgb(243 243 243 / var(--ai-spot)), transparent 70%),
+            linear-gradient(90deg, #a9c1ff, #7c9cff 50%, #5b7cff);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    .ai-card {
+        position: relative;
+        border: 1px solid transparent;
+        background:
+            radial-gradient(480px circle at var(--ai-x) var(--ai-y), rgb(91 124 255 / calc(var(--ai-spot) * 0.08)), transparent 70%) padding-box,
+            linear-gradient(160deg, #161427, #111426) padding-box,
+            radial-gradient(
+                360px circle at var(--ai-x) var(--ai-y),
+                rgb(208 220 255 / var(--ai-spot)),
+                rgb(139 92 246 / calc(var(--ai-spot) * 0.7)) 40%,
+                transparent 70%
+            ) border-box,
+            linear-gradient(135deg, rgb(139 92 246 / 0.45), #454545 50%, rgb(91 124 255 / 0.45)) border-box;
+        transition: transform 300ms ease, box-shadow 300ms ease;
+    }
+
+    .ai-card:hover,
+    .ai-card:focus-visible {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 32px -12px rgb(91 124 255 / 0.4);
+    }
+
+    .ai-card-arrow {
+        color: #7c9cff;
+        transition: transform 300ms ease, color 300ms ease;
+    }
+
+    .ai-card:hover .ai-card-arrow,
+    .ai-card:focus-visible .ai-card-arrow {
+        color: #f3f3f3;
+        transform: translate(2px, -2px);
+    }
+
+    .ai-card-url {
+        color: #7c9cff;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .ai-card,
+        .ai-card-arrow {
+            transition: none;
+        }
+
+        .ai-card:hover,
+        .ai-card:focus-visible,
+        .ai-card:hover .ai-card-arrow,
+        .ai-card:focus-visible .ai-card-arrow {
+            transform: none;
+        }
+    }
+</style>

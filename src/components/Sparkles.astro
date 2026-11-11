@@ -1,0 +1,94 @@
+---
+type Sparkle = {
+    x: number
+    y: number
+    size: number
+    delay: number
+    duration: number
+    shape: 'star' | 'dot'
+}
+
+type Props = {
+    items: readonly Sparkle[]
+}
+
+const {items} = Astro.props
+---
+
+<span class='sparkles' aria-hidden='true'>
+    {items.map(sparkle => (
+        <span
+            class:list={['sparkle', `sparkle-${sparkle.shape}`]}
+            style={{
+                '--x': `${sparkle.x}%`,
+                '--y': `${sparkle.y}%`,
+                '--size': `${sparkle.size}px`,
+                '--delay': `${sparkle.delay}s`,
+                '--duration': `${sparkle.duration}s`,
+            }}/>
+    ))}
+</span>
+
+<style>
+    .sparkles {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 500ms ease;
+    }
+
+    :global(:hover) > .sparkles,
+    :global(:focus-visible) > .sparkles {
+        opacity: 1;
+    }
+
+    .sparkle {
+        position: absolute;
+        left: var(--x);
+        top: var(--y);
+        width: var(--size);
+        height: var(--size);
+        opacity: 0;
+        animation: sparkle var(--duration) ease-in-out var(--delay) infinite;
+        animation-play-state: paused;
+    }
+
+    :global(:hover) > .sparkles .sparkle,
+    :global(:focus-visible) > .sparkles .sparkle {
+        animation-play-state: running;
+    }
+
+    .sparkle-star {
+        background: linear-gradient(135deg, #f3f3f3, #a9c1ff 50%, #b69bff);
+        clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+        filter: drop-shadow(0 0 4px rgb(91 124 255 / 0.8));
+    }
+
+    .sparkle-dot {
+        border-radius: 50%;
+        background: #a9c1ff;
+        box-shadow: 0 0 8px 1px rgb(91 124 255 / 0.7);
+    }
+
+    @keyframes sparkle {
+        0% {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0) rotate(0deg);
+        }
+        35% {
+            opacity: 1;
+            transform: translate(-50%, calc(-50% - 6px)) scale(1) rotate(45deg);
+        }
+        100% {
+            opacity: 0;
+            transform: translate(-50%, calc(-50% - 20px)) scale(0.3) rotate(120deg);
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .sparkles {
+            display: none;
+        }
+    }
+</style>

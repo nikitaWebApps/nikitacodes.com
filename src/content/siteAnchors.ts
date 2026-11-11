@@ -14,5 +14,9 @@ export const siteAnchors = [
         href: '#projects',
         label: (lang: 'en') => t[lang].selectedProjects
     },
+    {
+        href: '#ai',
+        label: (lang: 'en') => t[lang].aiProjects
+    },
 
 ]

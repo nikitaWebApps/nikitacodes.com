@@ -1,0 +1,25 @@
+{
+  "description": "In my free time I build projects with AI that help me live and work more efficiently.",
+  "projects": [
+    {
+      "title": "Flashcards",
+      "description": "Quizlet for me, my family and my study group. I add the features that actually help learn words, and save money on subscriptions along the way.",
+      "url": "https://flashcards.nikitacodes.com",
+      "tags": [
+        "Next.js",
+        "Supabase",
+        "Claude API"
+      ]
+    },
+    {
+      "title": "Colitop",
+      "description": "I run my projects on Colima and needed a minimal interface to keep an eye on containers. An htop-style terminal monitor for VM load, containers and volumes.",
+      "url": "https://github.com/nikitaWebApps/colitop",
+      "tags": [
+        "Python",
+        "Colima",
+        "CLI"
+      ]
+    }
+  ]
+}

@@ -15,6 +15,21 @@ const projects = defineCollection({
     }),
 })
 
+const aiProjects = defineCollection({
+    loader: glob({pattern: 'aiProjects.json', base: './src/content/'}),
+    schema: z.object({
+        description: z.string(),
+        projects: z
+            .object({
+                title: z.string(),
+                description: z.string(),
+                url: z.url(),
+                tags: z.string().array(),
+            })
+            .array(),
+    }),
+})
+
 const head = defineCollection({
     loader: glob({pattern: 'head.json', base: './src/content/'}),
     schema: z.object({
@@ -73,6 +88,7 @@ const education = defineCollection({
 export const collections = {
     head,
     projects,
+    aiProjects,
     resume,
     skills,
     education,
