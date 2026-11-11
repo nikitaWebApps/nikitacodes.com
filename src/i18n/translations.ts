@@ -4,7 +4,7 @@ const en = {
     download_cv: 'Download CV',
     links: 'Links',
     selectedProjects: 'Selected Work',
-    aiProjects: 'AI Projects',
+    aiProjects: 'AI',
     homepage: 'Homepage',
     experience: 'Experience',
     tab_skills: 'Skills',

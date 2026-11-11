@@ -11,12 +11,12 @@ export const siteAnchors = [
         label: (lang: 'en') => t[lang].experience
     },
     {
-        href: '#projects',
-        label: (lang: 'en') => t[lang].selectedProjects
-    },
-    {
         href: '#ai',
         label: (lang: 'en') => t[lang].aiProjects
+    },
+    {
+        href: '#projects',
+        label: (lang: 'en') => t[lang].selectedProjects
     },
 
 ]
