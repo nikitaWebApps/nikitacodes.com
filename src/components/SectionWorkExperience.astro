@@ -9,7 +9,7 @@ const jobs = resumeCollection[0].data.jobs
 ---
 
 <section id='resume' class='px-4 lg:px-8 scroll-mt-20'>
-  <div class='max-w-screen-xl mx-auto'>
+  <div class='max-w-(--breakpoint-xl) mx-auto'>
     <Rubricator text={t[lang].experience}/>
     <div class='flex flex-col gap-10 mt-4 lg:mt-6'>
         {
@@ -20,7 +20,7 @@ const jobs = resumeCollection[0].data.jobs
                     <p class='text-xl pb-1'>{job[lang].company}</p>
                     <p class='text-grey mt-1 text-xl'>{job[lang].dates}</p>
                   </div>
-                  <p class='text-xl text-grey max-w-screen-md' set:html={job[lang].description}/>
+                  <p class='text-xl text-grey max-w-(--breakpoint-md)' set:html={job[lang].description}/>
                 </div>
             ))
         }
@@ -29,6 +29,8 @@ const jobs = resumeCollection[0].data.jobs
 </section>
 
 <style is:global>
+    @reference '../styles/global.css';
+
     .resume-description a {
         @apply inline-block hover:scale-95 transition-all duration-300 ease-in;
     }

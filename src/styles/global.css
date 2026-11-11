@@ -1,3 +1,36 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@theme {
+  --font-*: initial;
+  --font-body: Golos Text, system-ui, sans-serif;
+
+  --color-smoke-white: #f3f3f3;
+  --color-black: #131313;
+  --color-grey: #828282;
+  --color-stroke: #454545;
+  --color-accent: #0038ff;
+  --color-yna-pink: #ff007b;
+  --color-yna-purple: #4e15ed;
+
+  --aspect-photo: 4 / 3;
+
+  --animate-slideDown: 500ms slideDown 200ms ease-in backwards;
+
+  @keyframes slideDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-2rem);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}

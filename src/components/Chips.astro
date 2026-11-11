@@ -11,8 +11,8 @@ const { chips, size = 'md' } = Astro.props
     chips.map(chip => (
       <div class:list={[
         'flex justify-center leading-none border-stroke rounded-full',
-        size === 'md' && 'p-2 border-2 text-lg lg:text-xl',
-        size === 'sm' && 'px-2.5 py-1.5 border text-sm lg:text-base',
+        size === 'md' && 'p-2 border-2 text-lg lg:text-xl/7',
+        size === 'sm' && 'px-2.5 py-1.5 border text-sm lg:text-base/6',
       ]}>
         {chip}
       </div>
