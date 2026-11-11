@@ -48,7 +48,7 @@ const description = 'Frontend Engineer working with React, Next.js, Vue and Type
           U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
       }
   </style>
-  <title>{title}</title>
+  <title>{import.meta.env.DEV ? '🚧 ' + title : title}</title>
 </head>
 <body class='bg-black text-smoke-white' data-lang={Astro.currentLocale || 'en'}>
 <Background/>
